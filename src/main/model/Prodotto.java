@@ -1,20 +1,28 @@
 package main.model;
 
+import java.util.Objects;
+
 public class Prodotto {
 
+    private int barCode;
     private String category;
     private String product;
     private String model;
     private String manufacturer;
     private double price;
 
-    public Prodotto (String category, String product, String model, String manufacturer, double price) {
+    public Prodotto (int barCode,String category, String product, String model, String manufacturer, double price) {
+        this.barCode = barCode;
         this.category = category;
         this.product = product;
         this.model = model;
         this.manufacturer = manufacturer;
         this.price = price;
     }
+
+    public int getBarCode(){return barCode;}
+
+    public void setBarCode(int barCode){this.barCode=barCode;}
 
     public String getCategory() {
         return category;
@@ -60,32 +68,24 @@ public class Prodotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Prodotto prodotto = (Prodotto) o;
-
-        if (Double.compare(prodotto.price, price) != 0) return false;
-        if (category != null ? !category.equals(prodotto.category) : prodotto.category != null) return false;
-        if (product != null ? !product.equals(prodotto.product) : prodotto.product != null) return false;
-        if (model != null ? !model.equals(prodotto.model) : prodotto.model != null) return false;
-        return manufacturer != null ? manufacturer.equals(prodotto.manufacturer) : prodotto.manufacturer == null;
+        return barCode == prodotto.barCode &&
+                Double.compare(prodotto.price, price) == 0 &&
+                Objects.equals(category, prodotto.category) &&
+                Objects.equals(product, prodotto.product) &&
+                Objects.equals(model, prodotto.model) &&
+                Objects.equals(manufacturer, prodotto.manufacturer);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = category != null ? category.hashCode() : 0;
-        result = 31 * result + (product != null ? product.hashCode() : 0);
-        result = model != null ? model.hashCode() : 0;
-        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+
+        return Objects.hash(barCode, category, product, model, manufacturer, price);
     }
 
     @Override
     public String toString() {
-        return "Category: " + category + "\nProduct: " + product + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
+        return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + product + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
 
     }
 }

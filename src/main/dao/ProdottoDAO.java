@@ -11,7 +11,7 @@ import java.util.List;
 public class ProdottoDAO {
 
     private final String QUERY_ALL = "select * from product";
-    private final String QUERY_INSERT = "insert into product (category, subcategory, model, manufacturer, price) values (?,?,?,?,?)";
+    private final String QUERY_INSERT = "insert into product (bar_code,category, subcategory, model, manufacturer, price) values (?,?,?,?,?,?)";
 
     public ProdottoDAO() {
 
@@ -25,12 +25,13 @@ public class ProdottoDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {
+               int bar_code = resultSet.getInt("bar_code");
                String category = resultSet.getString("category");
                String product = resultSet.getString("subcategory");
                String model = resultSet.getString("model");
                String manufacturer = resultSet.getString("manufacturer");
                double price = resultSet.getDouble("price");
-               prodotti.add(new Prodotto(category, product, model, manufacturer, price));
+               prodotti.add(new Prodotto(bar_code,category, product, model, manufacturer, price));
            }
         }
         catch (SQLException e) {
@@ -43,11 +44,12 @@ public class ProdottoDAO {
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
-            preparedStatement.setString(1, prodotto.getCategory());
-            preparedStatement.setString(2, prodotto.getProduct());
-            preparedStatement.setString(3, prodotto.getModel());
-            preparedStatement.setString(4, prodotto.getManufacturer());
-            preparedStatement.setDouble(5, prodotto.getPrice());
+            preparedStatement.setInt(1,prodotto.getBarCode());
+            preparedStatement.setString(2, prodotto.getCategory());
+            preparedStatement.setString(3, prodotto.getProduct());
+            preparedStatement.setString(4, prodotto.getModel());
+            preparedStatement.setString(5, prodotto.getManufacturer());
+            preparedStatement.setDouble(6, prodotto.getPrice());
             return preparedStatement.execute();
         }
         catch (SQLException e) {
@@ -56,4 +58,6 @@ public class ProdottoDAO {
         }
 
     }
+
+
 }

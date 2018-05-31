@@ -15,6 +15,9 @@ public class ProdottoController implements Controller {
             case 2:
                 request.put("mode", "all");
                 break;
+            case 3:
+                request.put("mode","insert_profit");
+                break;
         }
         MainDispatcher.getInstance().callView("Prodotto", request);
 

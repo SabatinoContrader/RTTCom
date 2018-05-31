@@ -35,6 +35,8 @@ public class ProdottoView implements View {
             case "insert":
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Inserisci i dati del nuovo prodotto:");
+                System.out.println("Codice Prodotto:");
+                int cod = Integer.parseInt(getInput());
                 System.out.println("Categoria:");
                 String category = getInput();
                 System.out.println("Prodotto:");
@@ -45,7 +47,9 @@ public class ProdottoView implements View {
                 String manufacturer = getInput();
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
-                prodottoService.insertProdotto(new Prodotto(category, product, model, manufacturer, price));
+                prodottoService.insertProdotto(new Prodotto(cod,category, product, model, manufacturer, price));
+            case "insert_profit":
+
         }
     }
 

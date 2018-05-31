@@ -26,7 +26,7 @@ public class ProdottoDAO {
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {
                String category = resultSet.getString("category");
-               String product = resultSet.getString("product");
+               String product = resultSet.getString("subcategory");
                String model = resultSet.getString("model");
                String manufacturer = resultSet.getString("manufacturer");
                double price = resultSet.getDouble("price");

@@ -17,7 +17,7 @@ public class Application {
                 MainDispatcher.getInstance().callView("Register", null);
                 break;
             case 2:
-                MainDispatcher.getInstance().callAction("Login", "doControl", null);
+                MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
                 break;
         }
     }

@@ -21,8 +21,8 @@ public class HomeView implements View {
         System.out.println("");
         System.out.println("-------MENU-------");
         System.out.println("");
-        System.out.println("1) Inserisci gomma");
-        System.out.println("2) Visualizza gomme disponibili");
+        System.out.println("1) Inserisci prodotto");
+        System.out.println("2) Visualizza prodotti disponibili");
         System.out.println("3) Logout");
         this.choice = Integer.parseInt(getInput());
     }
@@ -35,7 +35,7 @@ public class HomeView implements View {
         else {
             Request request = new Request();
             request.put("choice", choice);
-            MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
+            MainDispatcher.getInstance().callAction("Prodotto", "doControl", request);
         }
     }
 

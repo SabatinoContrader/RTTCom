@@ -1,6 +1,5 @@
 package main.service;
 
-import main.dao.GommaDAO;
 import main.model.Gomma;
 
 import java.util.List;

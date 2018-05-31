@@ -39,8 +39,7 @@ public class HomeView implements View {
         }
     }
 
-
-    public String getInput() {
+    public String getInput(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }

@@ -10,4 +10,5 @@ public class LoginController implements Controller {
     public void doControl (Request request) {
         MainDispatcher.getInstance().callView("Login", request);
     }
+
 }

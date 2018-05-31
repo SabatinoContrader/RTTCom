@@ -21,6 +21,7 @@ public class GommaDAO {
         List<Gomma> gomme = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
         try {
+
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {

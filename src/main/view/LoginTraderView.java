@@ -5,37 +5,43 @@ import main.controller.Request;
 
 import java.util.Scanner;
 
-public class LoginView implements View {
+public class LoginTraderView implements View{
 
     private String nomeUtente;
     private String password;
 
-    public void showResults (Request request) {
+    //@Override
+    public void showResults(Request request) {
 
     }
 
+    //@Override
+    public void showOptions() {
 
-    public void showOptions () {
         System.out.println("-----LOGIN----");
-        System.out.println("Nome utente trader:");
+        System.out.println("Nome TRADER utente:");
         nomeUtente = getInput();
-        System.out.println("Password trader:");
+        System.out.println("Password TRADER:");
         password = getInput();
+
     }
 
+    //@Override
+    public String getInput() {
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+
+    }
+
+    //@Override
     public void submit() {
+
         Request request = new Request();
         request.put("nomeUtente", nomeUtente);
         request.put("password", password);
         MainDispatcher.getInstance().callAction("Home", "doControl", request);
-    }
 
-    public String getInput () {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    protected void send () {
     }
 
 

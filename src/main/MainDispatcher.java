@@ -23,7 +23,7 @@ public class MainDispatcher {
     }
 
     public void callAction(String controller, String action, Request request) {
-        Controller oggettoController = (Controller) ReflectionUtils.instantiateClass("main.controller." + controller + "Controller");
+        Controller oggettoController = (Controller) ReflectionUtils.instantiateClass("main.controller." + controller + "Controller"); // stare sempre attento alla cartella CONTROLLER
         try {
              Method metodo = oggettoController.getClass().getMethod(action, Request.class);
             metodo.invoke(oggettoController, request);
@@ -33,7 +33,7 @@ public class MainDispatcher {
     }
 
     public void callView(String view, Request request) {
-        View oggettoView = (View) ReflectionUtils.instantiateClass("main.view." + view + "View");
+        View oggettoView = (View) ReflectionUtils.instantiateClass("main.view." + view + "View"); // anche nel caso di riferimenti alla VISTA DEVO GUARDARE QUI PER FARE UN RIFERIMENTO
         oggettoView.showResults(request);
         oggettoView.showOptions();
         oggettoView.submit();

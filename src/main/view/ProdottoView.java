@@ -3,6 +3,7 @@ import main.MainDispatcher;
 import main.controller.Request;
 import main.model.Prodotto;
 import main.dao.ProdottoDAO;
+import main.model.Profit;
 import main.service.ProdottoService;
 
 import java.util.List;
@@ -48,7 +49,20 @@ public class ProdottoView implements View {
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
                 prodottoService.insertProdotto(new Prodotto(cod,category, product, model, manufacturer, price));
+
+
             case "insert_profit":
+                System.out.println("Inserisci il codice del prodotto:");
+                int codice = Integer.parseInt(this.getInput());
+                System.out.println("Inserisci il nome dell'ecommerce che vuoi considerare:");
+                String ecommerceName = this.getInput();
+                System.out.println("Inserisci il margine di guadagno per il prodotto:");
+                int margin = Integer.parseInt(this.getInput());
+                if(!prodottoService.insertMargin(new Profit(codice,ecommerceName,margin))){
+                    System.out.println("Inserito margine con successo");
+                }else
+                    System.out.println("Margine non inserito");
+                break;
 
         }
     }

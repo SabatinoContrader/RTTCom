@@ -6,15 +6,15 @@ public class Prodotto {
 
     private int barCode;
     private String category;
-    private String product;
+    private String subcategory;
     private String model;
     private String manufacturer;
     private double price;
 
-    public Prodotto (int barCode,String category, String product, String model, String manufacturer, double price) {
+    public Prodotto (int barCode, String category, String subcategory, String model, String manufacturer, double price) {
         this.barCode = barCode;
         this.category = category;
-        this.product = product;
+        this.subcategory = subcategory;
         this.model = model;
         this.manufacturer = manufacturer;
         this.price = price;
@@ -32,12 +32,12 @@ public class Prodotto {
         this.category = category;
     }
 
-    public String getProduct() {
-        return product;
+    public String getSubcategory() {
+        return subcategory;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
     }
 
     public String getModel() {
@@ -72,7 +72,7 @@ public class Prodotto {
         return barCode == prodotto.barCode &&
                 Double.compare(prodotto.price, price) == 0 &&
                 Objects.equals(category, prodotto.category) &&
-                Objects.equals(product, prodotto.product) &&
+                Objects.equals(subcategory, prodotto.subcategory) &&
                 Objects.equals(model, prodotto.model) &&
                 Objects.equals(manufacturer, prodotto.manufacturer);
     }
@@ -80,12 +80,12 @@ public class Prodotto {
     @Override
     public int hashCode() {
 
-        return Objects.hash(barCode, category, product, model, manufacturer, price);
+        return Objects.hash(barCode, category, subcategory, model, manufacturer, price);
     }
 
     @Override
     public String toString() {
-        return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + product + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
+        return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + subcategory + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
 
     }
 }

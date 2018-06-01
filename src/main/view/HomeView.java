@@ -23,14 +23,15 @@ public class HomeView implements View {
         System.out.println("");
         System.out.println("1) Inserisci prodotto");
         System.out.println("2) Visualizza prodotti disponibili");
-        System.out.println("3) Logout");
+        System.out.println("3) Inserisci il margine di profitto per un prodotto");
+        System.out.println("4) Logout");
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
-        if (choice < 1 || choice > 3)
+        if (choice < 1 || choice > 4)
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 3)
+        else if (choice == 4)
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
         else {
             Request request = new Request();

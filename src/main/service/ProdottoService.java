@@ -25,6 +25,8 @@ public class ProdottoService {
     public boolean insertMargin(Profit profit) {return this.prodottoDAO.insertMargin(profit);}
 
 
+    public boolean deleteProdotto (int prodotto) { return this.prodottoDAO.deleteProdotto(prodotto);}
+
 }
 
 

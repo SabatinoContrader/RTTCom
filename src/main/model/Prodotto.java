@@ -88,4 +88,5 @@ public class Prodotto {
         return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + subcategory + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
 
     }
+
 }

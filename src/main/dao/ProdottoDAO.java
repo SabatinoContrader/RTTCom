@@ -14,6 +14,8 @@ public class ProdottoDAO {
     private final String QUERY_ALL = "select * from product";
     private final String QUERY_INSERT = "insert into product (bar_code,category, subcategory, model, manufacturer, price) values (?,?,?,?,?,?)";
     private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
+    private final String QUERY_DELETE = "delete from product (category, subcategory, model, manufacturer, price) values (?,?,?,?,?)";
+
 
     public ProdottoDAO() {
 
@@ -61,6 +63,7 @@ public class ProdottoDAO {
 
     }
 
+
     public Prodotto getProdotto(int barCode){
         Connection c = ConnectionSingleton.getInstance();
         Prodotto p;
@@ -97,5 +100,17 @@ public class ProdottoDAO {
         }
     }
 
+    public boolean deleteProdotto(int id) {
+        Connection c = ConnectionSingleton.getInstance();
+        try{
+            PreparedStatement preparedStatement = c.prepareStatement("delete from product where bar_code ="+id+"");
+            preparedStatement.executeUpdate();
+            return preparedStatement.execute();
+        }catch (SQLException e){
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+
+    }
 
 }

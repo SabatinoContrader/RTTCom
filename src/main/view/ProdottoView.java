@@ -64,6 +64,11 @@ public class ProdottoView implements View {
                     System.out.println("Margine non inserito");
                 break;
 
+            case "delete":
+                Scanner scanner2 = new Scanner(System.in);
+                System.out.println("Inserisci Id Prodotto");
+                int codProd = Integer.parseInt(getInput());
+                prodottoService.deleteProdotto(codProd);
         }
     }
 

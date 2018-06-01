@@ -49,7 +49,7 @@ public class ProdottoView implements View {
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
                 prodottoService.insertProdotto(new Prodotto(cod,category, product, model, manufacturer, price));
-
+                break;
 
             case "insert_profit":
                 System.out.println("Inserisci il codice del prodotto:");

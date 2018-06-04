@@ -127,7 +127,8 @@ public class ProdottoDAO {
     public boolean deleteProdotto(int id) {
         Connection c = ConnectionSingleton.getInstance();
         try{
-            PreparedStatement preparedStatement = c.prepareStatement("delete from product where bar_code ="+id+"");
+            PreparedStatement preparedStatement = c.prepareStatement("delete from profit where id_product="+id+"");
+                    c.prepareStatement("delete from contrader.product where bar_code ="+id+"");
             preparedStatement.executeUpdate();
             return preparedStatement.execute();
         }catch (SQLException e){

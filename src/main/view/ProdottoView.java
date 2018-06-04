@@ -69,6 +69,7 @@ public class ProdottoView implements View {
                 System.out.println("Inserisci Id Prodotto");
                 int codProd = Integer.parseInt(getInput());
                 prodottoService.deleteProdotto(codProd);
+                break;
         }
     }
 

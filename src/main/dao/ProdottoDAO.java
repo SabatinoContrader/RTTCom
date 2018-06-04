@@ -16,9 +16,34 @@ public class ProdottoDAO {
     private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
     private final String QUERY_DELETE = "delete from product (category, subcategory, model, manufacturer, price) values (?,?,?,?,?)";
 
-
     public ProdottoDAO() {
 
+    }
+
+    public List<Prodotto> search (String parameterOne, String parameterTwo) {
+        String QUERY_SEARCH = "select * from product where "+parameterOne+"=?";
+
+        List<Prodotto> listProdotto= new ArrayList<>();
+        Connection connection  = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement= connection.prepareStatement(QUERY_SEARCH);
+            preparedStatement.setString(1, parameterTwo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int bar_code = resultSet.getInt("bar_code");
+                String category = resultSet.getString("category");
+                String product = resultSet.getString("subcategory");
+                String model = resultSet.getString("model");
+                String manufacturer = resultSet.getString("manufacturer");
+                double price = resultSet.getDouble("price");
+                listProdotto.add(new Prodotto(bar_code, category, product, model, manufacturer, price));
+
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listProdotto;
     }
 
     public List<Prodotto> getAllProdotti () {
@@ -62,7 +87,6 @@ public class ProdottoDAO {
         }
 
     }
-
 
     public Prodotto getProdotto(int barCode){
         Connection c = ConnectionSingleton.getInstance();

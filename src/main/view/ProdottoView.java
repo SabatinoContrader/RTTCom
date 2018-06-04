@@ -2,7 +2,6 @@ package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
 import main.model.Prodotto;
-import main.dao.ProdottoDAO;
 import main.model.Profit;
 import main.service.ProdottoService;
 
@@ -11,6 +10,7 @@ import java.util.Scanner;
 
 public class ProdottoView implements View {
 
+    //private FilterOptRawMatService filterOptRawMatService; <--ELIMINARE NON SERVE
     private ProdottoService prodottoService;
     private String mode;
 

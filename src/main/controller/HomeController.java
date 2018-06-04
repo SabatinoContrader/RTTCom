@@ -18,7 +18,7 @@ public class HomeController implements Controller {
             if (loginService.login(nomeUtente, password))
                 MainDispatcher.getInstance().callView("Home", request);
             else
-                MainDispatcher.getInstance().callAction("Login", "doControl", request);
+                MainDispatcher.getInstance().callAction("LoginTrader", "doControl", request);
         }
         else MainDispatcher.getInstance().callView("Home", null);
 

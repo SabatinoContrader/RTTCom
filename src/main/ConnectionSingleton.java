@@ -11,9 +11,7 @@ import java.util.Properties;
 
 public class ConnectionSingleton {
 
-
     private static Connection connection = null;
-
 
     private ConnectionSingleton() {
     }

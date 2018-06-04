@@ -14,6 +14,10 @@ public class ProdottoService {
         this.prodottoDAO = new ProdottoDAO();
     }
 
+    public List<Prodotto> search (String parameterOne, String parameterTwo) {
+        return this.prodottoDAO.search(parameterOne, parameterTwo);
+    }
+
     public List<Prodotto> getAllProdotti () {
         return this.prodottoDAO.getAllProdotti();
     }
@@ -22,11 +26,12 @@ public class ProdottoService {
         return this.prodottoDAO.insertProdotto(prodotto);
     }
 
-    public boolean insertMargin(Profit profit) {return this.prodottoDAO.insertMargin(profit);}
 
+    public boolean insertMargin(Profit profit) {
+        return this.prodottoDAO.insertMargin(profit);
+    }
 
-    public boolean deleteProdotto (int prodotto) { return this.prodottoDAO.deleteProdotto(prodotto);}
-
+    public boolean deleteProdotto (int prodotto) {
+        return this.prodottoDAO.deleteProdotto(prodotto);
+    }
 }
-
-

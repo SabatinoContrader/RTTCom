@@ -79,14 +79,12 @@ public class Prodotto {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(barCode, category, subcategory, model, manufacturer, price);
     }
 
     @Override
     public String toString() {
         return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + subcategory + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
-
     }
 
 }

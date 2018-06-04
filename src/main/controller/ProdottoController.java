@@ -20,7 +20,7 @@ public class ProdottoController implements Controller {
                 break;
             case 4:
                 request.put("mode", "delete");
-            break;
+                break;
         }
         MainDispatcher.getInstance().callView("Prodotto", request);
 

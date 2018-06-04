@@ -10,12 +10,12 @@ public class LoginTraderView implements View{
     private String nomeUtente;
     private String password;
 
-    //@Override
+    @Override
     public void showResults(Request request) {
 
     }
 
-    //@Override
+    @Override
     public void showOptions() {
 
         System.out.println("-----LOGIN----");
@@ -26,7 +26,7 @@ public class LoginTraderView implements View{
 
     }
 
-    //@Override
+    @Override
     public String getInput() {
 
         Scanner scanner = new Scanner(System.in);
@@ -34,7 +34,7 @@ public class LoginTraderView implements View{
 
     }
 
-    //@Override
+    @Override
     public void submit() {
 
         Request request = new Request();

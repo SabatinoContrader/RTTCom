@@ -68,6 +68,7 @@ public class ProdottoView implements View {
                 Scanner scanner2 = new Scanner(System.in);
                 System.out.println("Inserisci Id Prodotto");
                 int codProd = Integer.parseInt(getInput());
+                prodottoService.deleteProfit(new Profit(codProd));
                 prodottoService.deleteProdotto(codProd);
                 break;
         }

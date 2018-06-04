@@ -18,10 +18,7 @@ public class Application {
             case 2:
                 MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
                 break;
-            case 3:
-                //MainDispatcher.getInstance().callAction("FilterOptRawMat", "doControl", null);
-                MainDispatcher.getInstance().callView("FilterOptRawMat", null);
-                break;
+
         }
     }
 

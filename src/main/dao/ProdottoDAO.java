@@ -127,7 +127,7 @@ public class ProdottoDAO {
     public boolean deleteProdotto(int id) {
         Connection c = ConnectionSingleton.getInstance();
         try{
-            PreparedStatement preparedStatement = c.prepareStatement("delete from profit where id_product="+id+"");
+            PreparedStatement preparedStatement = //c.prepareStatement("delete from profit where id_product="+id+"");
                     c.prepareStatement("delete from contrader.product where bar_code ="+id+"");
             preparedStatement.executeUpdate();
             return preparedStatement.execute();
@@ -136,6 +136,18 @@ public class ProdottoDAO {
             return false;
         }
 
+    }
+
+    public boolean deleteProfit(Profit p){
+        Connection c = ConnectionSingleton.getInstance();
+        try{
+            PreparedStatement ps = c.prepareStatement("delete from profit where id_product="+p.getId_product()+"");
+            ps.executeUpdate();
+            return ps.execute();
+        }catch (Exception e){
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
     }
 
 }

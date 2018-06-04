@@ -8,6 +8,10 @@ public class Profit {
     private String ecommerce_name;
     private int margin_profit;
 
+    public Profit(int id){
+        this.id_product = id;
+    }
+
     public Profit(int id,String name,int marginProfit){
         this.id_product = id;
         this.ecommerce_name = name;

@@ -34,4 +34,6 @@ public class ProdottoService {
     public boolean deleteProdotto (int prodotto) {
         return this.prodottoDAO.deleteProdotto(prodotto);
     }
+
+    public boolean deleteProfit(Profit p){ return this.prodottoDAO.deleteProfit(p);}
 }

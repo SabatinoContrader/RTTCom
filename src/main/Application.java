@@ -19,6 +19,7 @@ public class Application {
                 MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
                 break;
 
+
         }
     }
 

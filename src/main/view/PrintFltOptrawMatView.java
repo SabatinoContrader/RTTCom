@@ -18,15 +18,16 @@ public class PrintFltOptrawMatView implements View  {
     @Override
     public void showResults(Request request) {
 
+        List<Prodotto> listProdotti = (ArrayList<Prodotto>) request.get("listProdotti");
+       if  (!listProdotti.isEmpty()){
+            for (Prodotto prodotto : listProdotti) {
+                System.out.println(prodotto.toString());
+            }
+        }else {
+           System.out.println(".> Nessun elemento trovato <.");
+           System.out.println();
+       }
 
-        if (request != null){
-            List<Prodotto> listProdotti=(ArrayList<Prodotto>)request.get("listProdotti");
-            for(Prodotto prodotto:listProdotti){
-                System.out.println(prodotto.toString());}
-
-        } else {
-            System.out.println(".> Nessun elemento trovato <.");
-        }
         MainDispatcher.getInstance().callView("Home", null);
 
     }
@@ -45,4 +46,5 @@ public class PrintFltOptrawMatView implements View  {
     public void submit() {
 
     }
+
 }

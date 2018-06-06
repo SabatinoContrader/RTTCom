@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdottoDAO {
-
+int id;
     private final String QUERY_ALL = "select * from product";
     private final String QUERY_INSERT = "insert into product (bar_code,category, subcategory, model, manufacturer, price) values (?,?,?,?,?,?)";
     private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
     private final String QUERY_DELETE = "delete from product (category, subcategory, model, manufacturer, price) values (?,?,?,?,?)";
+    private final String QUERY_MODIFY = "update product set (bar_code, category, subcategory, model, manufacturer, price) values (?,?,?,?,?,?) where bar_code=?";
 
     public ProdottoDAO() {
 
@@ -150,4 +151,26 @@ public class ProdottoDAO {
         }
     }
 
+
+    public boolean modifyProdotto(Prodotto pro, int id) {
+        Connection c = ConnectionSingleton.getInstance();
+
+        try{
+            PreparedStatement preparedStatement = c.prepareStatement("update product set bar_code=?, category=?, subcategory=?, model=?, manufacturer=?,price=? where bar_code="+id+"");
+            preparedStatement.setInt(1, pro.getBarCode());
+            preparedStatement.setString(2, pro.getCategory());
+            preparedStatement.setString(3, pro.getSubcategory());
+            preparedStatement.setString(4, pro.getModel());
+            preparedStatement.setString(5, pro.getManufacturer());
+            preparedStatement.setDouble(6, pro.getPrice());
+            preparedStatement.executeUpdate();
+            return preparedStatement.execute();
+        }
+        catch (Exception e){
+                System.out.println("Prodotto non presente");
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+
+    }
 }

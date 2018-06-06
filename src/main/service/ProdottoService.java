@@ -35,5 +35,15 @@ public class ProdottoService {
         return this.prodottoDAO.deleteProdotto(prodotto);
     }
 
+    public Prodotto getProdotto (int barCode) {
+        return this.prodottoDAO.getProdotto(barCode);
+    }
+
     public boolean deleteProfit(Profit p){ return this.prodottoDAO.deleteProfit(p);}
+
+    public boolean modifyProdotto (Prodotto pro, int id) {
+        return this.prodottoDAO.modifyProdotto(pro,id);
+
+    }
+
 }

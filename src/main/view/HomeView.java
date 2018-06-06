@@ -25,14 +25,15 @@ public class HomeView implements View {
         System.out.println("3) Inserisci il margine di profitto per un prodotto");
         System.out.println("4) Elimina prodotto");
         System.out.println("5) Ricerca Ottimizzazione Materiale");
-        System.out.println("6) Logout");
+        System.out.println("6) Modifica Prodotto");
+System.out.println("7) Logout");
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
-        if (choice < 1 || choice > 6)
+        if (choice < 1 || choice > 7)
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 6)
+        else if (choice == 7)
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
         else if(choice == 5)
             MainDispatcher.getInstance().callView("FilterOptRawMat", null);

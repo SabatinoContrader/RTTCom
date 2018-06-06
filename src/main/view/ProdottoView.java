@@ -13,14 +13,14 @@ public class ProdottoView implements View {
     private ProdottoService prodottoService;
     private String mode;
 
-  public ProdottoView () {
-      this.prodottoService = new ProdottoService();
-      this.mode = "all";
-  }
+    public ProdottoView() {
+        this.prodottoService = new ProdottoService();
+        this.mode = "all";
+    }
 
     @Override
     public void showResults(Request request) {
-       this.mode  = (String) request.get("mode");
+        this.mode = (String) request.get("mode");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ProdottoView implements View {
                 String manufacturer = getInput();
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
-                prodottoService.insertProdotto(new Prodotto(cod,category, product, model, manufacturer, price));
+                prodottoService.insertProdotto(new Prodotto(cod, category, product, model, manufacturer, price));
                 break;
 
             case "insert_profit":
@@ -57,9 +57,9 @@ public class ProdottoView implements View {
                 String ecommerceName = this.getInput();
                 System.out.println("Inserisci il margine di guadagno per il prodotto:");
                 int margin = Integer.parseInt(this.getInput());
-                if(!prodottoService.insertMargin(new Profit(codice,ecommerceName,margin))){
+                if (!prodottoService.insertMargin(new Profit(codice, ecommerceName, margin))) {
                     System.out.println("Inserito margine con successo");
-                }else
+                } else
                     System.out.println("Margine non inserito");
                 break;
 
@@ -70,20 +70,44 @@ public class ProdottoView implements View {
                 prodottoService.deleteProfit(new Profit(codProd));
                 prodottoService.deleteProdotto(codProd);
                 break;
+
+            case "modify":
+                Scanner scanner3 = new Scanner(System.in);
+                System.out.println("Inserisci id del prodotto:");
+
+                int cod1 = Integer.parseInt(getInput());
+                if(prodottoService.getProdotto(cod1)!=null){
+
+                System.out.println("Categoria:");
+                String category1 = getInput();
+                System.out.println("Prodotto:");
+                String product1 = getInput();
+                System.out.println("Modello:");
+                String mode2 = getInput();
+                System.out.println("Produttore:");
+                String manufacturer1 = getInput();
+                System.out.println("Prezzo:");
+                double price1 = Double.parseDouble(getInput());
+                prodottoService.modifyProdotto(new Prodotto(cod1, category1, product1, mode2, manufacturer1, price1), cod1);
+               
+                    System.out.println("Prodotto modificato con successo");
+                } else
+                  System.out.println("Modifica fallita");
+
+                break;
+
+        }}
+
+        @Override
+        public String getInput () {
+            Scanner scanner = new Scanner(System.in);
+            return scanner.nextLine();
         }
+
+        @Override
+        public void submit() {
+            MainDispatcher.getInstance().callAction("Home", "doControl", null);
+        }
+
+
     }
-
-    @Override
-    public String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-  }
-
-    @Override
-    public void submit() {
-        MainDispatcher.getInstance().callAction("Home", "doControl", null);
-    }
-
-
-
-}

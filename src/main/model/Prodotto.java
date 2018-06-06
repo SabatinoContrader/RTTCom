@@ -22,6 +22,7 @@ public class Prodotto {
 
     public int getBarCode(){return barCode;}
 
+
     public void setBarCode(int barCode){this.barCode=barCode;}
 
     public String getCategory() {
@@ -86,5 +87,7 @@ public class Prodotto {
     public String toString() {
         return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + subcategory + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
     }
+
+
 
 }

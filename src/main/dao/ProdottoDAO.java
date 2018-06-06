@@ -23,7 +23,6 @@ int id;
 
     public List<Prodotto> search (String parameterOne, String parameterTwo) {
         String QUERY_SEARCH = "select * from product where "+parameterOne+"=?";
-
         List<Prodotto> listProdotto= new ArrayList<>();
         Connection connection  = ConnectionSingleton.getInstance();
         try {
@@ -42,7 +41,8 @@ int id;
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println(".> Errore di digitazione della 1^ PAROLA CHIAVE <.");
         }
         return listProdotto;
     }

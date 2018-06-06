@@ -26,7 +26,7 @@ public class HomeView implements View {
         System.out.println("4) Elimina prodotto");
         System.out.println("5) Ricerca Ottimizzazione Materiale");
         System.out.println("6) Modifica Prodotto");
-System.out.println("7) Logout");
+        System.out.println("7) Logout");
         this.choice = Integer.parseInt(getInput());
     }
 
@@ -34,7 +34,9 @@ System.out.println("7) Logout");
         if (choice < 1 || choice > 7)
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
         else if (choice == 7)
-            MainDispatcher.getInstance().callAction("Login", "doControl", null);
+            MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
+        else if (choice == 6)
+            MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
         else if(choice == 5)
             MainDispatcher.getInstance().callView("FilterOptRawMat", null);
         else {

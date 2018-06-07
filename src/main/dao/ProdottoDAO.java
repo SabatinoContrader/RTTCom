@@ -2,7 +2,9 @@ package main.dao;
 
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
+import main.model.Acquisto;
 import main.model.Prodotto;
+import main.model.ProdottoFornitore;
 import main.model.Profit;
 
 import java.sql.*;
@@ -10,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdottoDAO {
-int id;
+
     private final String QUERY_ALL = "select * from product";
     private final String QUERY_INSERT = "insert into product (bar_code,category, subcategory, model, manufacturer, price) values (?,?,?,?,?,?)";
     private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
     private final String QUERY_DELETE = "delete from product (category, subcategory, model, manufacturer, price) values (?,?,?,?,?)";
     private final String QUERY_MODIFY = "update product set (bar_code, category, subcategory, model, manufacturer, price) values (?,?,?,?,?,?) where bar_code=?";
+    private final String QUERY_REQUEST_BUY ="insert into requestbuy (idproduct, quantity, pricexelem, idtrader) values (?,?,?,?)";
 
     public ProdottoDAO() {
 
@@ -37,7 +40,6 @@ int id;
                 String manufacturer = resultSet.getString("manufacturer");
                 double price = resultSet.getDouble("price");
                 listProdotto.add(new Prodotto(bar_code, category, product, model, manufacturer, price));
-
             }
         }
         catch (SQLException e) {
@@ -45,6 +47,22 @@ int id;
             System.out.println(".> Errore di digitazione della 1^ PAROLA CHIAVE <.");
         }
         return listProdotto;
+    }
+
+    public boolean insertRequestBuy(Acquisto acquisto){
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REQUEST_BUY);
+            preparedStatement.setInt(1,acquisto.getIdproduct());
+            preparedStatement.setInt(2, acquisto.getQuantity());
+            preparedStatement.setDouble(3, acquisto.getPricexelem());
+            preparedStatement.setString(4, acquisto.getIdTrader());
+            return preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
     }
 
     public List<Prodotto> getAllProdotti () {

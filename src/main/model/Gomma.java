@@ -40,9 +40,7 @@ public class Gomma {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Gomma gomma = (Gomma) o;
-
         if (Double.compare(gomma.price, price) != 0) return false;
         if (model != null ? !model.equals(gomma.model) : gomma.model != null) return false;
         return manufacturer != null ? manufacturer.equals(gomma.manufacturer) : gomma.manufacturer == null;

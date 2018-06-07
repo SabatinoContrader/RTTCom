@@ -20,10 +20,13 @@ public class Prodotto {
         this.price = price;
     }
 
-    public int getBarCode(){return barCode;}
+    public int getBarCode(){
+        return barCode;
+    }
 
-
-    public void setBarCode(int barCode){this.barCode=barCode;}
+    public void setBarCode(int barCode){
+        this.barCode=barCode;
+    }
 
     public String getCategory() {
         return category;

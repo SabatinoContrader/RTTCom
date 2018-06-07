@@ -1,6 +1,7 @@
 package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Acquisto;
 import main.model.Prodotto;
 import main.model.Profit;
 import main.service.ProdottoService;
@@ -71,6 +72,9 @@ public class ProdottoView implements View {
                 prodottoService.deleteProdotto(codProd);
                 break;
 
+            //case "search":
+                //break;
+
             case "modify":
                 Scanner scanner3 = new Scanner(System.in);
                 System.out.println("Inserisci id del prodotto:");
@@ -92,11 +96,25 @@ public class ProdottoView implements View {
                
                     System.out.println("Prodotto modificato con successo");
                 } else
-                  System.out.println("Modifica fallita");
+                    System.out.println("Modifica fallita");
 
                 break;
 
-        }}
+            case "insert_request_buy":
+                Scanner scanner4 = new Scanner(System.in);
+                System.out.println("Inserisci i dati di richiesta d'acquisto:");
+                System.out.println("Id prodotto:");
+                int idproduct = Integer.parseInt(getInput());
+                System.out.println("Quantità:");
+                int quantity = Integer.parseInt(getInput());
+                System.out.println("Prezzo per unità:");
+                Double pricexelem = Double.parseDouble(getInput());
+                System.out.println("Id trader:");
+                String idtrader = getInput();
+                prodottoService.insertRequestBuy(new Acquisto(idproduct, quantity, pricexelem, idtrader));
+                break;
+        }
+    }
 
         @Override
         public String getInput () {
@@ -107,6 +125,7 @@ public class ProdottoView implements View {
         @Override
         public void submit() {
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
+
         }
 
 

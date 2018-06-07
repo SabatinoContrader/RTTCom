@@ -8,8 +8,7 @@ public class ProdottoController implements Controller {
     @Override
     public void doControl(Request request) {
         int choice = (int) request.get("choice");
-        if (choice==6)
-            choice=5;
+
         switch (choice) {
             case 1:
                request.put("mode", "insert");
@@ -23,8 +22,14 @@ public class ProdottoController implements Controller {
             case 4:
                 request.put("mode", "delete");
                 break;
-            case 5:
+            /*case 5:
+                request.put("mode", "search");
+                break; */
+            case 6:
                 request.put("mode", "modify");
+                break;
+            case 7:
+                request.put("mode", "insert_request_buy");
                 break;
         }
         MainDispatcher.getInstance().callView("Prodotto", request);

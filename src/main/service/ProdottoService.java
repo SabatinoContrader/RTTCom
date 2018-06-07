@@ -1,7 +1,9 @@
 package main.service;
 
 import main.dao.ProdottoDAO;
+import main.model.Acquisto;
 import main.model.Prodotto;
+import main.model.ProdottoFornitore;
 import main.model.Profit;
 
 import java.util.List;
@@ -16,6 +18,10 @@ public class ProdottoService {
 
     public List<Prodotto> search (String parameterOne, String parameterTwo) {
         return this.prodottoDAO.search(parameterOne, parameterTwo);
+    }
+
+    public boolean insertRequestBuy(Acquisto acquisto){
+        return this.prodottoDAO.insertRequestBuy(acquisto);
     }
 
     public List<Prodotto> getAllProdotti () {
@@ -39,7 +45,9 @@ public class ProdottoService {
         return this.prodottoDAO.getProdotto(barCode);
     }
 
-    public boolean deleteProfit(Profit p){ return this.prodottoDAO.deleteProfit(p);}
+    public boolean deleteProfit(Profit p){
+        return this.prodottoDAO.deleteProfit(p);
+    }
 
     public boolean modifyProdotto (Prodotto pro, int id) {
         return this.prodottoDAO.modifyProdotto(pro,id);

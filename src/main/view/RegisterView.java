@@ -16,7 +16,7 @@ public class RegisterView implements View {
             boolean v = (boolean) request.get("response");
             if (v) {
                 System.out.println("Utente aggiunto con successo");
-                MainDispatcher.getInstance().callView("Login",null);
+                MainDispatcher.getInstance().callView("LoginTrader",null);
             } else {
                 System.out.println("Utente non aggiunto");
             }

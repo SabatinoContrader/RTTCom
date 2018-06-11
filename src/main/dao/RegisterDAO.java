@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class RegisterDAO {
 
-    private final String QUERY_LOGIN = "insert into users(username,password) values(?,?)";
+    private final String QUERY_LOGIN = "insert into users(username,pswd) values(?,?)";
 
 
     public boolean doInsert(String username,String password){

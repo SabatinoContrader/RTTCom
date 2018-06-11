@@ -17,13 +17,11 @@ public class LoginTraderView implements View{
 
     @Override
     public void showOptions() {
-
-        System.out.println("-----LOGIN----");
-        System.out.println("Nome TRADER utente:");
+        System.out.println("----- LOGIN PLATFORM -----");
+        System.out.println("Inserisci username:");
         nomeUtente = getInput();
-        System.out.println("Password TRADER:");
+        System.out.println("Inserisci password:");
         password = getInput();
-
     }
 
     @Override
@@ -36,12 +34,10 @@ public class LoginTraderView implements View{
 
     @Override
     public void submit() {
-
         Request request = new Request();
         request.put("nomeUtente", nomeUtente);
         request.put("password", password);
         MainDispatcher.getInstance().callAction("Home", "doControl", request);
-
     }
 
 

@@ -9,9 +9,7 @@ import java.sql.SQLException;
 
 public class LoginDAO {
 
-
-
-    private final String QUERY_LOGIN = "select * from users where username = ? and password = ?";
+    private final String QUERY_LOGIN = "select * from users where username = ? and pswd = ?";
 
     public boolean login (String username, String password) {
 

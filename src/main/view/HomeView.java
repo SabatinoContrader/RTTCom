@@ -18,26 +18,30 @@ public class HomeView implements View {
         System.out.println("Benvenuto in ContraderFramework");
         System.out.println();
         System.out.println();
-        System.out.println("-------MENU-------");
+        System.out.println("------- MENU TRADER'S PLATFORM -------");
         System.out.println();
         System.out.println("1) Inserisci prodotto");
-        System.out.println("2) Visualizza prodotti disponibili");
+        System.out.println("2) Visualizza tutti prodotti");
         System.out.println("3) Inserisci il margine di profitto per un prodotto");
         System.out.println("4) Elimina prodotto");
         System.out.println("5) Ricerca Ottimizzazione Materiale");
         System.out.println("6) Modifica Prodotto");
         System.out.println("7) Procedura di richiesta d'acquisto");
-        System.out.println("8) Logout");
+        System.out.println("8) Visualizza Lista prodotti->venditori");
+        System.out.println("9) Logout");
+        System.out.print(".:> ");
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
-        if (choice < 1 || choice > 8)
+        if (choice < 1 || choice > 9)
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 8)
+        else if (choice == 9)
             MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
         else if(choice == 5)
             MainDispatcher.getInstance().callView("FilterOptRawMat", null);
+        //else if(choice == 8)
+            //MainDispatcher.getInstance().callView("IndexHome", null);
         else {
             Request request = new Request();
             request.put("choice", choice);

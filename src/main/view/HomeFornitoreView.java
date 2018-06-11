@@ -41,7 +41,7 @@ public class HomeFornitoreView implements View {
             MainDispatcher.getInstance().callView("HomeFornitore",null);
         }
         else if(choice == 3){
-            MainDispatcher.getInstance().callView("",null);
+            MainDispatcher.getInstance().callView("IndexHome",null);
         }
         else{
         Request request = new Request();

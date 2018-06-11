@@ -4,44 +4,41 @@ import java.util.Objects;
 
 public class Prodotto {
 
-    private int barCode;
+    private int id_product;
+    private int ean;
     private String category;
-    private String subcategory;
     private String model;
     private String manufacturer;
-    private double price;
 
-    public Prodotto (int barCode, String category, String subcategory, String model, String manufacturer, double price) {
-        this.barCode = barCode;
+    public Prodotto (int id_product, int ean, String category, String model, String manufacturer) {
+        this.id_product = id_product;
+        this.ean = ean;
         this.category = category;
-        this.subcategory = subcategory;
         this.model = model;
         this.manufacturer = manufacturer;
-        this.price = price;
     }
 
-    public int getBarCode(){
-        return barCode;
+    public int getIdProduct(){
+        return id_product;
     }
 
-    public void setBarCode(int barCode){
-        this.barCode=barCode;
+    public void setIdProduct(int id_product){
+        this.id_product = id_product;
     }
 
+    public int getEan(){
+        return ean;
+    }
+
+    public void setEan(int ean) {
+        this.ean = ean;
+    }
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getSubcategory() {
-        return subcategory;
-    }
-
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
     }
 
     public String getModel() {
@@ -60,37 +57,26 @@ public class Prodotto {
         this.manufacturer = manufacturer;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Prodotto prodotto = (Prodotto) o;
-        return barCode == prodotto.barCode &&
-                Double.compare(prodotto.price, price) == 0 &&
+        return id_product == prodotto.id_product &&
+                Objects.equals(ean, prodotto.ean) &&
                 Objects.equals(category, prodotto.category) &&
-                Objects.equals(subcategory, prodotto.subcategory) &&
                 Objects.equals(model, prodotto.model) &&
                 Objects.equals(manufacturer, prodotto.manufacturer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(barCode, category, subcategory, model, manufacturer, price);
+        return Objects.hash(id_product, ean, category, model, manufacturer);
     }
 
     @Override
     public String toString() {
-        return "BarCode:"+ barCode + "\nCategory: " + category + "\nProduct: " + subcategory + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\nPrice: "+price+"\n";
+        return "IdProduct:"+ id_product + "\nEAN: " + ean +"\nCategory: " + category + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\n";
     }
-
-
 
 }

@@ -31,8 +31,8 @@ public class FornitoreView implements View {
 
         switch (mode) {
             case "all":
-                List<ProdottoFornitore> prodottiFornitori = prodottoFornitoreService.getAllProdotti();
-                System.out.println("----- Prodotti disponibili -----");
+                List<Prodotto> prodottiFornitori = prodottoFornitoreService.getAllProdotti();
+                System.out.println("----- PRODOTTI DISPONIBILI -----");
                 System.out.println();
                 prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));
                 break;

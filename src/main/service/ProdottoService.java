@@ -1,10 +1,7 @@
 package main.service;
 
 import main.dao.ProdottoDAO;
-import main.model.Acquisto;
-import main.model.Prodotto;
-import main.model.ProdottoFornitore;
-import main.model.Profit;
+import main.model.*;
 
 import java.util.List;
 
@@ -18,6 +15,10 @@ public class ProdottoService {
 
     public List<Prodotto> search (String parameterOne, String parameterTwo) {
         return this.prodottoDAO.search(parameterOne, parameterTwo);
+    }
+
+    public List<ProdottoFornitore> prodottoFornitore(){
+        return this.prodottoDAO.prodottoFornitore();
     }
 
     public boolean insertRequestBuy(Acquisto acquisto){

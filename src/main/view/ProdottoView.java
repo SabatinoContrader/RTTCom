@@ -1,9 +1,9 @@
 package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
-import main.model.Acquisto;
-import main.model.Prodotto;
-import main.model.Profit;
+import main.dao.ProdottoDAO;
+import main.model.*;
+import main.service.ProdottoFornitoreService;
 import main.service.ProdottoService;
 
 import java.util.List;
@@ -11,10 +11,12 @@ import java.util.Scanner;
 
 public class ProdottoView implements View {
 
+    private ProdottoFornitoreService prodottoFornitoreService;
     private ProdottoService prodottoService;
     private String mode;
 
     public ProdottoView() {
+        this.prodottoFornitoreService = new ProdottoFornitoreService();
         this.prodottoService = new ProdottoService();
         this.mode = "all";
     }
@@ -28,10 +30,15 @@ public class ProdottoView implements View {
     public void showOptions() {
         switch (mode) {
             case "all":
-                List<Prodotto> prodotti = prodottoService.getAllProdotti();
+                /*List<Prodotto> prodotti = prodottoService.getAllProdotti();
                 System.out.println("----- Prodotti disponibili -----");
                 System.out.println();
-                prodotti.forEach(prodotto -> System.out.println(prodotto));
+                prodotti.forEach(prodotto -> System.out.println(prodotto));*/
+
+                List<Prodotto> prodottiFornitori = prodottoFornitoreService.getAllProdotti();
+                System.out.println("----- PRODOTTI DISPONIBILI -----");
+                System.out.println();
+                prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));
                 break;
             case "insert":
                 Scanner scanner = new Scanner(System.in);
@@ -39,16 +46,16 @@ public class ProdottoView implements View {
                 System.out.println("Codice Prodotto:");
                 int cod = Integer.parseInt(getInput());
                 System.out.println("Categoria:");
-                String category = getInput();
+                int ean = Integer.parseInt(getInput());
                 System.out.println("Prodotto:");
-                String product = getInput();
+                String category = getInput();
                 System.out.println("Modello:");
                 String model = getInput();
                 System.out.println("Produttore:");
                 String manufacturer = getInput();
                 System.out.println("Prezzo:");
                 double price = Double.parseDouble(getInput());
-                prodottoService.insertProdotto(new Prodotto(cod, category, product, model, manufacturer, price));
+                prodottoService.insertProdotto(new Prodotto(cod, ean, category, model, manufacturer));
                 break;
 
             case "insert_profit":
@@ -82,17 +89,15 @@ public class ProdottoView implements View {
                 int cod1 = Integer.parseInt(getInput());
                 if(prodottoService.getProdotto(cod1)!=null){
 
+                System.out.println("EAN:");
+                int ean1 = Integer.parseInt(getInput());
                 System.out.println("Categoria:");
                 String category1 = getInput();
-                System.out.println("Prodotto:");
-                String product1 = getInput();
                 System.out.println("Modello:");
                 String mode2 = getInput();
                 System.out.println("Produttore:");
                 String manufacturer1 = getInput();
-                System.out.println("Prezzo:");
-                double price1 = Double.parseDouble(getInput());
-                prodottoService.modifyProdotto(new Prodotto(cod1, category1, product1, mode2, manufacturer1, price1), cod1);
+                prodottoService.modifyProdotto(new Prodotto(cod1, ean1, category1, mode2, manufacturer1), cod1);
                
                     System.out.println("Prodotto modificato con successo");
                 } else
@@ -113,6 +118,12 @@ public class ProdottoView implements View {
                 String idtrader = getInput();
                 prodottoService.insertRequestBuy(new Acquisto(idproduct, quantity, pricexelem, idtrader));
                 break;
+
+            case "all_product_fornitore":
+                List<ProdottoFornitore> prodottiFornitore = prodottoService.prodottoFornitore();
+                System.out.println("----- PRODOTTI DISPONIBILI DEI FORNITORI-----");
+                System.out.println();
+                prodottiFornitore.forEach(fornitore ->System.out.println(fornitore));
         }
     }
 

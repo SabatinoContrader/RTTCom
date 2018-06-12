@@ -28,20 +28,25 @@ public class HomeView implements View {
         System.out.println("6) Modifica Prodotto");
         System.out.println("7) Procedura di richiesta d'acquisto");
         System.out.println("8) Visualizza Lista prodotti->venditori");
-        System.out.println("9) Logout");
+        System.out.println("9) Vendita Prodotti");
+        System.out.println("10) Logout");
         System.out.print(".:> ");
+
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
-        if (choice < 1 || choice > 9)
+        if (choice < 1 || choice > 10)
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 9)
-            MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
+        else if (choice == 10)
+            MainDispatcher.getInstance().callAction("Login", "doControl", null);
         else if(choice == 5)
             MainDispatcher.getInstance().callView("FilterOptRawMat", null);
-        //else if(choice == 8)
-            //MainDispatcher.getInstance().callView("IndexHome", null);
+
+        else if (choice==9) {
+            MainDispatcher.getInstance().callView("Canale", null);
+        }
+
         else {
             Request request = new Request();
             request.put("choice", choice);

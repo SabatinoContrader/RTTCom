@@ -7,7 +7,9 @@ import main.model.Prodotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrintFltOptrawMatView implements View  {
+public class Canale2View implements View{
+
+
 
     private String category;
     private String subcategory;
@@ -19,22 +21,22 @@ public class PrintFltOptrawMatView implements View  {
     public void showResults(Request request) {
 
         List<Prodotto> listProdotti = (ArrayList<Prodotto>) request.get("listProdotti");
-       if  (!listProdotti.isEmpty()){ //se la lista dei prodotti è diversa dal vuoto
+        if  (!listProdotti.isEmpty()){ //se la lista dei prodotti è diversa dal vuoto
             for (Prodotto prodotto : listProdotti) {
                 System.out.println(prodotto.toString());
             }
         }else {
-           System.out.println(".> Nessun elemento trovato <.");
-           System.out.println();
-       }
+            System.out.println(".> Nessun elemento trovato <.");
+            System.out.println();
+            MainDispatcher.getInstance().callView("Home", request);
+        }
 
-        MainDispatcher.getInstance().callView("Home", null);
+        MainDispatcher.getInstance().callView("Vendita", request);
 
     }
 
     @Override
     public void showOptions() {
-
 
     }
 
@@ -47,5 +49,6 @@ public class PrintFltOptrawMatView implements View  {
     public void submit() {
 
     }
+
 
 }

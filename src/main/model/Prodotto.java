@@ -63,7 +63,7 @@ public class Prodotto {
         if (o == null || getClass() != o.getClass()) return false;
         Prodotto prodotto = (Prodotto) o;
         return id_product == prodotto.id_product &&
-                Objects.equals(ean, prodotto.ean) &&
+                ean == prodotto.ean &&
                 Objects.equals(category, prodotto.category) &&
                 Objects.equals(model, prodotto.model) &&
                 Objects.equals(manufacturer, prodotto.manufacturer);
@@ -71,12 +71,18 @@ public class Prodotto {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id_product, ean, category, model, manufacturer);
     }
 
     @Override
     public String toString() {
-        return "IdProduct:"+ id_product + "\nEAN: " + ean +"\nCategory: " + category + "\nModel: " + model + "\nManufacturer: " +manufacturer + "\n";
+        return "Prodotto{" +
+                "id_product=" + id_product +
+                ", ean=" + ean +
+                ", category='" + category + '\'' +
+                ", model='" + model + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                '}';
     }
-
 }

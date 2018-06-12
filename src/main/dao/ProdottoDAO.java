@@ -11,12 +11,14 @@ import java.util.List;
 public class ProdottoDAO {
 
     private final String QUERY_ALL = "select * from product";
+
     private final String QUERY_INSERT = "insert into product (id_product, ean, category, model, manufacturer) values (?,?,?,?,?)";
     private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
     private final String QUERY_PRODOTTO_FORNIOTRE = "SELECT id_fornitore, data_inizio, data_fine, prezzo_acquisto FROM product p right join fornitore f on p.id_product = f.id_product";
     private final String QUERY_DELETE = "delete from product (ean, category, model, manufacturer) values (?,?,?,?)";
     private final String QUERY_MODIFY = "update product set (id_product, ean, category, model, manufacturer) values) values (?,?,?,?,?,?) where id_product=?";
     private final String QUERY_REQUEST_BUY ="insert into requestbuy (idproduct, quantity, pricexelem, idtrader) values (?,?,?,?)";
+
 
     public ProdottoDAO() {
 
@@ -54,9 +56,12 @@ public class ProdottoDAO {
                 int id_product = resultSet.getInt("id_product");
                 int ean = resultSet.getInt("ean");
                 String category = resultSet.getString("category");
+
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
                 listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
+
+
             }
         }
         catch (SQLException e) {
@@ -93,9 +98,11 @@ public class ProdottoDAO {
                int id_prodotto = resultSet.getInt("id_prodotto");
                int ean = resultSet.getInt("ean");
                String category = resultSet.getString("category");
+
                String model = resultSet.getString("model");
                String manufacturer = resultSet.getString("manufacturer");
                prodotti.add(new Prodotto(id_prodotto, ean, category, model, manufacturer));
+
            }
         }
         catch (SQLException e) {
@@ -105,6 +112,7 @@ public class ProdottoDAO {
     }
 
     public boolean insertProdotto(Prodotto prodotto) {
+
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
@@ -120,7 +128,10 @@ public class ProdottoDAO {
             return false;
         }
 
-    }
+            }
+
+
+
 
     public Prodotto getProdotto(int idProdotto){
         Connection c = ConnectionSingleton.getInstance();
@@ -132,9 +143,11 @@ public class ProdottoDAO {
                 int id_prodotto = resultSet.getInt("id_prodotto");
                 int ean = resultSet.getInt("ean");
                 String category = resultSet.getString("category");
+
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
                 p = new Prodotto(id_prodotto,ean,category,model,manufacturer);
+
                 return p;
             }
         }catch (Exception e){
@@ -188,12 +201,15 @@ public class ProdottoDAO {
         Connection c = ConnectionSingleton.getInstance();
 
         try{
+
             PreparedStatement preparedStatement = c.prepareStatement("update product set bar_code=?, category=?, subcategory=?, model=?, manufacturer=? where bar_code="+id+"");
             preparedStatement.setInt(1, pro.getIdProduct());
             preparedStatement.setInt(2, pro.getEan());
             preparedStatement.setString(3, pro.getCategory());
             preparedStatement.setString(4, pro.getModel());
             preparedStatement.setString(5, pro.getManufacturer());
+
+
             preparedStatement.executeUpdate();
             return preparedStatement.execute();
         }

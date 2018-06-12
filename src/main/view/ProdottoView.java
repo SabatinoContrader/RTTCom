@@ -87,7 +87,9 @@ public class ProdottoView implements View {
                 System.out.println("Inserisci id del prodotto:");
 
                 int cod1 = Integer.parseInt(getInput());
-                if(prodottoService.getProdotto(cod1)!=null){
+                Prodotto pr=prodottoService.getProdotto(cod1);
+
+                if(pr!=null){
 
                 System.out.println("EAN:");
                 int ean1 = Integer.parseInt(getInput());

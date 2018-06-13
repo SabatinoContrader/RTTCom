@@ -32,8 +32,10 @@ public class ProdottoServlet extends HttpServlet {
                 this.prodottoService.insertProdotto(newInsert);
                 response.sendRedirect("home.jsp");
                 break;
-            case "":
-                //int id_product = Integer.parseInt(request.getParameter("id_product"));
+            case "DeleteProduct":
+                int idProduct = Integer.parseInt(request.getParameter("id_product"));
+                this.prodottoService.deleteProdotto(idProduct);
+                response.sendRedirect("home.jsp");
                 break;
 
             case "ViewProduct":

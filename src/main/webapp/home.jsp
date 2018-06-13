@@ -10,9 +10,7 @@
      <a href="insertProdotto.jsp">Inserisci Prodotto</a>
 
      <h3>3. Elimina un prodotto</h3>
-              <form action="ProdottoServlet" method="post">
-                   <input type="submit" value="ViewProduct" name="richiesta">
-              </form>
+     <a href="deleteProdotto.jsp">Elimina Prodotto</a>
 
      <h3>3. Visualizza il catalogo Prodotti</h3>
          <form action="ProdottoServlet" method="post">

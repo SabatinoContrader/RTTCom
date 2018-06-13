@@ -28,6 +28,7 @@ public class VenditaController implements Controller{
             for (Prodotto prodotto : listProdotti) {
                 int canale = (int) request.get("canale");
                 String data_inizio = (String) request.get("data_inizio");
+
                 String data_fine = (String) request.get("data_fine");
 
 

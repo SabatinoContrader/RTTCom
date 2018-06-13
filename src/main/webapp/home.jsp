@@ -9,7 +9,12 @@
      <h3>1. Inserisci prodotto</h3>
      <a href="insertProdotto.jsp">Inserisci Prodotto</a>
 
-     <h3>2. Visualizza il catalogo Prodotti</h3>
+     <h3>3. Elimina un prodotto</h3>
+              <form action="ProdottoServlet" method="post">
+                   <input type="submit" value="ViewProduct" name="richiesta">
+              </form>
+
+     <h3>3. Visualizza il catalogo Prodotti</h3>
          <form action="ProdottoServlet" method="post">
               <input type="submit" value="ViewProduct" name="richiesta">
          </form>

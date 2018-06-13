@@ -87,7 +87,7 @@ public class ProdottoDAO {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(QUERY_ALL);
             while (resultSet.next()) {
-                int id_prodotto = resultSet.getInt("id_prodotto");
+                int id_prodotto = resultSet.getInt("id_product");
                 int ean = resultSet.getInt("ean");
                 String category = resultSet.getString("category");
                 String model = resultSet.getString("model");
@@ -156,20 +156,22 @@ public class ProdottoDAO {
         }
     }
 
+    */
     public boolean deleteProdotto(int id) {
         Connection c = ConnectionSingleton.getInstance();
         try{
             PreparedStatement preparedStatement = //c.prepareStatement("delete from profit where id_product="+id+"");
-                    c.prepareStatement("delete from contrader.product where bar_code ="+id+"");
+                    c.prepareStatement("delete from contrader.product where id_product ="+id+"");
             preparedStatement.executeUpdate();
             return preparedStatement.execute();
         }catch (SQLException e){
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            //GestoreEccezioni.getInstance().gestisciEccezione(e);
             return false;
         }
 
     }
 
+    /*
     public boolean deleteProfit(Profit p){
         Connection c = ConnectionSingleton.getInstance();
         try{

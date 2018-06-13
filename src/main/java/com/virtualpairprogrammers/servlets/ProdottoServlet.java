@@ -20,7 +20,7 @@ public class ProdottoServlet extends HttpServlet {
     public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
         prodottoService = ProdottoService.getService();
         String scelta = request.getParameter("richiesta");
-        HttpSession session = request.getSession(true);  //<---????
+        HttpSession session = request.getSession(true);
         switch (scelta) {
             case "InserisciProdotto":
                 int id_product = Integer.parseInt(request.getParameter("id_product"));
@@ -32,12 +32,17 @@ public class ProdottoServlet extends HttpServlet {
                 this.prodottoService.insertProdotto(newInsert);
                 response.sendRedirect("home.jsp");
                 break;
+            case "":
+                //int id_product = Integer.parseInt(request.getParameter("id_product"));
+                break;
+
             case "ViewProduct":
                 List<Prodotto> allProdotti = new ArrayList<Prodotto>();
                 allProdotti = this.prodottoService.getAllProdotti();
                 session.setAttribute("listProdotti", allProdotti);
                 response.sendRedirect("listProdotti.jsp");
                 break;
+
         }
 
     }

@@ -15,6 +15,7 @@ public class Brico implements Fornitore{
         prodotti.add(new Prodotto(14, 4, "categoria 4", "modello 4", "Brico"));
         prodotti.add(new Prodotto(78, 5, "categoria 5", "modello 5", "Brico"));
         prodotti.add(new Prodotto(41, 6, "categoria 6", "modello 6", "Brico"));
+        prodotti.add(new Prodotto(43, 7, "categoria 7", "modello 7", "Brico"));
         return prodotti;
     }
 }

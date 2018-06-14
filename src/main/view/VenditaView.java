@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class VenditaView implements View {
 
-    private int margine;
+    private double margine;
     private int canale;
     private double prezzo;
     private String data_inizio;
@@ -28,7 +28,7 @@ public class VenditaView implements View {
 
 
     public void showResults(Request request) {
-        listProdotti= (ArrayList<Prodotto>) request.get("listProdotti");
+        listProdotti = (List<Prodotto>) request.get("listProdotti");
 
 
        // List<Vendita> listProdottivendita = (ArrayList<Vendita>) request.get("listProdottivendita");
@@ -46,14 +46,15 @@ public class VenditaView implements View {
     public void showOptions() {
 
         System.out.println("Inserisci il margine di guadagno per i prodotti:");
-        margine = Integer.parseInt(this.getInput());
+        margine = Double.parseDouble(this.getInput());
         System.out.println("Inserisci Id canale:");
         canale = Integer.parseInt(this.getInput());
+        /*
         System.out.println("Inserisci data di inizio vendita:");
         data_inizio=getInput();
         System.out.println("Inserisci data di fine vendita:");
         data_fine=getInput();
-
+        */
         System.out.println();
     }
 

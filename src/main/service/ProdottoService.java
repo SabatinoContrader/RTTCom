@@ -3,6 +3,7 @@ package main.service;
 import main.dao.ProdottoDAO;
 import main.model.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ProdottoService {
@@ -11,6 +12,34 @@ public class ProdottoService {
 
     public ProdottoService() {
         this.prodottoDAO = new ProdottoDAO();
+    }
+
+    public List<Prodotto> getProdottiDisponibili(){
+        List<Prodotto> prodotti = new LinkedList<Prodotto>();
+        List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
+        for(int i=0;i<fornitori.size();i++){
+            List<Prodotto> catalogoFornitore = fornitori.get(i).getCatalogoProdotti();
+            for(int j = 0; j < catalogoFornitore.size(); j++){
+                Prodotto prodottoDalFornitore = catalogoFornitore.get(j);
+                ProdottoFornitore prodottoFornitore = new ProdottoFornitore(fornitori.get(i).getId(), "01/01/2018", null, prodottoDalFornitore.getPrezzoVendita());
+                int indiceProdotto = cercaEanProdotto(prodottoDalFornitore, prodotti);
+                if(indiceProdotto >= 0){
+                    prodotti.get(indiceProdotto).aggiungiAListaAcquisto(prodottoFornitore);
+                }else{
+                    prodottoDalFornitore.aggiungiAListaAcquisto(prodottoFornitore);
+                    prodotti.add(prodottoDalFornitore);
+                }
+            }
+        }
+        return prodotti;
+    }
+
+    private int cercaEanProdotto(Prodotto prodotto, List<Prodotto> catalogo){
+        for(int i = 0; i < catalogo.size(); i++){
+            if(catalogo.get(i).getEan() == prodotto.getEan())
+                return i;
+        }
+        return -1;
     }
 
     public List<Prodotto> searchGetPrezzo (String parameterOne, String parameterTwo) {
@@ -28,8 +57,6 @@ public class ProdottoService {
     public List<Prodotto> getAllProdotti () {
         return this.prodottoDAO.getAllProdotti();
     }
-
-
 
     public boolean insertProdotto (Prodotto prodotto) {
         return this.prodottoDAO.insertProdotto(prodotto);

@@ -1,8 +1,8 @@
 package main.service;
 
 
-import main.model.Canale;
 import main.dao.CanaleDAO;
+import main.model.Canale;
 import main.model.Prodotto;
 
 

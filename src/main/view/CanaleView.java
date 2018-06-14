@@ -3,11 +3,8 @@ package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
 
-import main.model.Canale;
-
 import main.service.CanaleService;
 
-import java.util.List;
 import java.util.Scanner;
 
 

@@ -40,5 +40,4 @@ public class LoginTraderView implements View{
         MainDispatcher.getInstance().callAction("Home", "doControl", request);
     }
 
-
 }

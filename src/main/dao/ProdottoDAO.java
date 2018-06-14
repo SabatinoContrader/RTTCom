@@ -58,9 +58,7 @@ public class ProdottoDAO {
                 String category = resultSet.getString("category");
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
-                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
-
-
+                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer,10));
             }
         }
         catch (SQLException e) {
@@ -85,7 +83,7 @@ public class ProdottoDAO {
                 String category = resultSet.getString("category");
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
-                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
+                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer, 1));
             }
         }
         catch (SQLException e) {
@@ -121,13 +119,13 @@ public class ProdottoDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {
-               int id_prodotto = resultSet.getInt("id_prodotto");
+               int id_prodotto = resultSet.getInt("id_product");
                int ean = resultSet.getInt("ean");
                String category = resultSet.getString("category");
 
                String model = resultSet.getString("model");
                String manufacturer = resultSet.getString("manufacturer");
-               prodotti.add(new Prodotto(id_prodotto, ean, category, model, manufacturer));
+               prodotti.add(new Prodotto(id_prodotto, ean, category, model, manufacturer, 1));
 
            }
         }
@@ -169,10 +167,9 @@ public class ProdottoDAO {
                 int id_prodotto = resultSet.getInt("id_product");
                 int ean = resultSet.getInt("ean");
                 String category = resultSet.getString("category");
-
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
-                p = new Prodotto(id_prodotto,ean,category,model,manufacturer);
+                p = new Prodotto(id_prodotto,ean,category,model,manufacturer, 1);
 
                 return p;
             }

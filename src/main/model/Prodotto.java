@@ -1,5 +1,6 @@
 package main.model;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,13 +12,16 @@ public class Prodotto {
     private String model;
     private String manufacturer;
     private List<ProdottoFornitore> listaAcquisto;
+    private double prezzoVendita;
 
-    public Prodotto (int id_product, int ean, String category, String model, String manufacturer) {
+    public Prodotto (int id_product, int ean, String category, String model, String manufacturer, double prezzoVendita) {
         this.id_product = id_product;
         this.ean = ean;
         this.category = category;
         this.model = model;
         this.manufacturer = manufacturer;
+        this.prezzoVendita = prezzoVendita;
+        this.listaAcquisto = new LinkedList<ProdottoFornitore>();
     }
 
     public int getIdProduct(){
@@ -59,6 +63,35 @@ public class Prodotto {
         this.manufacturer = manufacturer;
     }
 
+    public double getPrezzoVendita() {
+        return prezzoVendita;
+    }
+
+    public void setPrezzoVendita(double prezzoVendita) {
+        this.prezzoVendita = prezzoVendita;
+    }
+
+    public void aggiungiAListaAcquisto(ProdottoFornitore prodottoFornitore){
+        listaAcquisto.add(prodottoFornitore);
+    }
+
+    public void rimuoviDaListaAcquisto(int idFornitore){
+        // Da implementare
+    }
+
+    public double getPrezzoAcquisto(){
+        if(listaAcquisto.size() == 0)
+            return -1;
+        double prezzoAcquisto = listaAcquisto.get(0).getPrezzoacquisto();
+        for(int i = 1; i < listaAcquisto.size(); i++) {
+            if (listaAcquisto.get(i).getPrezzoacquisto() < prezzoAcquisto) {
+                prezzoAcquisto = listaAcquisto.get(i).getPrezzoacquisto();
+            }
+        }
+        return prezzoAcquisto;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,6 +118,8 @@ public class Prodotto {
                 ", category='" + category + '\'' +
                 ", model='" + model + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
+                ", prezzoAcquisto='" + getPrezzoAcquisto() + '\'' +
+                ", prezzoVendita='" + getPrezzoVendita() + '\'' +
                 '}';
     }
 }

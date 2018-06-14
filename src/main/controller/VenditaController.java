@@ -2,9 +2,7 @@ package main.controller;
 
 import main.MainDispatcher;
 import main.dao.VenditaDAO;
-import main.model.Fornitore;
-import main.model.Prodotto;
-import main.model.Vendita;
+import main.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +39,22 @@ public class VenditaController implements Controller{
 
             }*/
 
+            int canale = (int) request.get("canale");
+            double margine = (double) request.get("margine");
+
+            Canale canaleVendita= null;
+            if(canale == 1){
+                canaleVendita = new Amazon();
+            }else if(canale == 2){
+                canaleVendita = new Privol();
+            }
+
+            List<Prodotto> listProdotti = (List<Prodotto>) request.get("listProdotti");
+            listProdotti.forEach(prodotto -> {
+                prodotto.setPrezzoVendita(prodotto.getPrezzoAcquisto()*(1 + margine));
+            });
+            if(canaleVendita != null)
+                canaleVendita.setCatalogoProdotti(listProdotti);
             MainDispatcher.getInstance().callView("Home", request);
         }
 

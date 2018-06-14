@@ -15,6 +15,8 @@ public class ProdottoView implements View {
     private ProdottoFornitoreService prodottoFornitoreService;
     private ProdottoService prodottoService;
     private String mode;
+    private List<Prodotto> listaProdotti;
+    private List<Prodotto> prodotti;
 
     public ProdottoView() {
         this.prodottoFornitoreService = new ProdottoFornitoreService();
@@ -25,21 +27,24 @@ public class ProdottoView implements View {
     @Override
     public void showResults(Request request) {
         this.mode = (String) request.get("mode");
+        this.prodotti=(List<Prodotto>) request.get("all_product_fornitore");
+        System.out.println("----- Prodotti disponibili -----");
+        System.out.println();
+        this.prodotti.forEach(prodotto -> System.out.println(prodotto));
     }
 
     @Override
     public void showOptions() {
-        switch (mode) {
+        /*switch (mode) {
             case "all":
                 List<Prodotto> prodotti = prodottoService.getAllProdotti();
                 System.out.println("----- Prodotti disponibili -----");
                 System.out.println();
                 prodotti.forEach(prodotto -> System.out.println(prodotto));
-
-                /*List<Prodotto> prodottiFornitori = prodottoFornitoreService.getCatalogoProdotti();
+                *//*List<Prodotto> prodottiFornitori = prodottoFornitoreService.getCatalogoProdotti();
                 System.out.println("----- PRODOTTI DISPONIBILI -----");
                 System.out.println();
-                prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));*/
+                prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));*//*
                 break;
             case "insert":
                 Scanner scanner = new Scanner(System.in);
@@ -123,18 +128,21 @@ public class ProdottoView implements View {
                 break;
 
             case "all_product_fornitore":
-                /*List<ProdottoFornitore> prodottiFornitore = prodottoService.prodottoFornitore();
+                *//*List<ProdottoFornitore> prodottiFornitore = prodottoService.prodottoFornitore();
                 System.out.println("----- PRODOTTI DISPONIBILI DEI FORNITORI-----");
                 System.out.println();
-                prodottiFornitore.forEach(fornitore ->System.out.println(fornitore));*/
+                prodottiFornitore.forEach(fornitore ->System.out.println(fornitore));*//*
 
-                List<Prodotto> prodotti1 = new LinkedList<Prodotto>();
-                List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
-                System.out.println("----- PRODOTTI DISPONIBILI !!!-----");
-                System.out.println();
-                fornitori.forEach(fornitore -> prodotti1.addAll(fornitore.getCatalogoProdotti()));
-                prodotti1.forEach(fornitore1 -> System.out.println(fornitore1));
-        }
+                *//*List<Prodotto> prodotti1 = new LinkedList<Prodotto>();                                     //
+                List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();                   // Ho passato tutto nel controller per
+                System.out.println("----- PRODOTTI DISPONIBILI !!!-----");                                   // Sfruttare il REQUEST del CONTROLLORE
+                System.out.println();                                                                        // e qui richiamo solo la listaProdotti
+                fornitori.forEach(fornitore -> prodotti1.addAll(fornitore.getCatalogoProdotti()));           // e stampo il suo contenuto.
+                //List<Prodotto> catalogoLeroyMerlin = LeroyMerlin.getCatalogo();                            //
+                //Prodotto prodotto1 = new Prodotto(); *//*
+
+                //prodotti.forEach(fornitore1 -> System.out.println(fornitore1));
+        }*/
     }
 
         @Override
@@ -146,7 +154,6 @@ public class ProdottoView implements View {
         @Override
         public void submit() {
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-
         }
 
 

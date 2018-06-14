@@ -1,7 +1,6 @@
 package main.dao;
 
 import main.ConnectionSingleton;
-import main.controller.GestoreEccezioni;
 import main.model.Canale;
 import main.model.Prodotto;
 
@@ -20,6 +19,7 @@ public class CanaleDAO {
 
     public List<Canale> getAllCanali() {
         List<Canale> canali = new ArrayList<>();
+        /*
         Connection connection = ConnectionSingleton.getInstance();
         try {
 
@@ -37,11 +37,13 @@ public class CanaleDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        */
         return canali;
     }
 
 
     public Canale getProdotto(int idcanale){
+        /*
         Connection c = ConnectionSingleton.getInstance();
         Canale p;
         try{
@@ -60,6 +62,7 @@ public class CanaleDAO {
         }catch (Exception e){
             System.out.println("Errore nella ricerca dei prodotti");
         }
+        */
         return null;
     }
 
@@ -77,7 +80,7 @@ public class CanaleDAO {
                 String category = resultSet.getString("category");
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
-                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
+                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer, 1));
 
             }
         }

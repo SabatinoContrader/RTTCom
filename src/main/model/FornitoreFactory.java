@@ -20,4 +20,6 @@ public class FornitoreFactory {
         fornitori.add(new Inditex());
         return fornitori;
     }
+
+
 }

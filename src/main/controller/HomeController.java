@@ -21,6 +21,5 @@ public class HomeController implements Controller {
                 MainDispatcher.getInstance().callAction("LoginTrader", "doControl", request);
         }
         else MainDispatcher.getInstance().callView("Home", null);
-
     }
 }

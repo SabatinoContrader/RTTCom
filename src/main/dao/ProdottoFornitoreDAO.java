@@ -56,7 +56,7 @@ public class ProdottoFornitoreDAO {
                 String category = resultSet.getString("category");
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
-                prodotti.add(new Prodotto(id_product, ean, category, model, manufacturer));
+                prodotti.add(new Prodotto(id_product, ean, category, model, manufacturer, 1));
 
             }
 

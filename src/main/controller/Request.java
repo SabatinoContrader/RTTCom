@@ -8,7 +8,7 @@ public class Request {
     private Map<String, Object> parameters;
 
     public Request(){
-        this.parameters = new HashMap<String, Object>();
+        this.parameters = new HashMap<String, Object>(); // <-- descrizione definita in ProdottoController
     }
 
     public void put(String key, Object value){

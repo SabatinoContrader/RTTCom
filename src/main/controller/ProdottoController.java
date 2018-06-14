@@ -3,13 +3,16 @@ package main.controller;
 import main.MainDispatcher;
 import main.model.Fornitore;
 import main.model.FornitoreFactory;
+import main.model.LeroyMerlin;
 import main.model.Prodotto;
+import main.service.ProdottoService;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ProdottoController implements Controller {
 
+    private ProdottoService prodottoService = new ProdottoService();
 
     @Override
     public void doControl(Request request) {
@@ -19,11 +22,7 @@ public class ProdottoController implements Controller {
             case 1:
                request.put("mode", "insert");
                break;
-            case 2:{
-                    List<Prodotto> prodotti = new LinkedList<Prodotto>();
-                    List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
-                    fornitori.forEach(fornitore -> prodotti.addAll(fornitore.getCatalogoProdotti()));
-                }
+            case 2:
                 request.put("mode", "all");
                 break;
             case 3:
@@ -42,6 +41,7 @@ public class ProdottoController implements Controller {
                 request.put("mode", "insert_request_buy");
                 break;
             case 8:
+                request.put("all_product_fornitore", prodottoService.getProdottiDisponibili());  // <- Lo faccio cosi perche faccio riferimento alla REQUEST definita nel package CONTROLLER
                 request.put("mode","all_product_fornitore");
                 break;
         }

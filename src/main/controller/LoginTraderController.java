@@ -4,6 +4,8 @@ import main.MainDispatcher;
 
 public class LoginTraderController implements Controller {
 
+    public LoginTraderController() {
+    }
 
     @Override
     public void doControl(Request request) {

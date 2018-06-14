@@ -56,7 +56,6 @@ public class ProdottoDAO {
                 int id_product = resultSet.getInt("id_product");
                 int ean = resultSet.getInt("ean");
                 String category = resultSet.getString("category");
-
                 String model = resultSet.getString("model");
                 String manufacturer = resultSet.getString("manufacturer");
                 listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
@@ -70,6 +69,33 @@ public class ProdottoDAO {
         }
         return listProdotto;
     }
+
+    public List<Prodotto> searchGetPrezzo (String parameterOne, String parameterTwo) {
+        String QUERY_SEARCH = "select * from product where category = ? and model = ?";
+        List<Prodotto> listProdotto= new ArrayList<>();
+        Connection connection  = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement= connection.prepareStatement(QUERY_SEARCH);
+            preparedStatement.setString(1, parameterOne);
+            preparedStatement.setString(2, parameterTwo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id_product = resultSet.getInt("id_product");
+                int ean = resultSet.getInt("ean");
+                String category = resultSet.getString("category");
+                String model = resultSet.getString("model");
+                String manufacturer = resultSet.getString("manufacturer");
+                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
+            }
+        }
+        catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println(".> Errore di digitazione della 1^ PAROLA CHIAVE <.");
+        }
+        return listProdotto;
+    }
+
+
 
     public boolean insertRequestBuy(Acquisto acquisto){
         Connection connection = ConnectionSingleton.getInstance();
@@ -174,7 +200,7 @@ public class ProdottoDAO {
         Connection c = ConnectionSingleton.getInstance();
         try{
             PreparedStatement preparedStatement = //c.prepareStatement("delete from profit where id_product="+id+"");
-                    c.prepareStatement("delete from contrader.product where bar_code ="+id+"");
+                    c.prepareStatement("delete from contrader.product where id_product ="+id+"");
             preparedStatement.executeUpdate();
             return preparedStatement.execute();
         }catch (SQLException e){

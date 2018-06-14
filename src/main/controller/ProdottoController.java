@@ -1,6 +1,12 @@
 package main.controller;
 
 import main.MainDispatcher;
+import main.model.Fornitore;
+import main.model.FornitoreFactory;
+import main.model.Prodotto;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProdottoController implements Controller {
 
@@ -13,7 +19,11 @@ public class ProdottoController implements Controller {
             case 1:
                request.put("mode", "insert");
                break;
-            case 2:
+            case 2:{
+                    List<Prodotto> prodotti = new LinkedList<Prodotto>();
+                    List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
+                    fornitori.forEach(fornitore -> prodotti.addAll(fornitore.getCatalogoProdotti()));
+                }
                 request.put("mode", "all");
                 break;
             case 3:

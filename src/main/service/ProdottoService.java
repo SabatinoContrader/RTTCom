@@ -13,8 +13,8 @@ public class ProdottoService {
         this.prodottoDAO = new ProdottoDAO();
     }
 
-    public List<Prodotto> search (String parameterOne, String parameterTwo) {
-        return this.prodottoDAO.search(parameterOne, parameterTwo);
+    public List<Prodotto> searchGetPrezzo (String parameterOne, String parameterTwo) {
+        return this.prodottoDAO.searchGetPrezzo(parameterOne, parameterTwo);
     }
 
     public List<ProdottoFornitore> prodottoFornitore(){
@@ -29,10 +29,11 @@ public class ProdottoService {
         return this.prodottoDAO.getAllProdotti();
     }
 
+
+
     public boolean insertProdotto (Prodotto prodotto) {
         return this.prodottoDAO.insertProdotto(prodotto);
     }
-
 
     public boolean insertMargin(Profit profit) {
         return this.prodottoDAO.insertMargin(profit);
@@ -52,7 +53,6 @@ public class ProdottoService {
 
     public boolean modifyProdotto (Prodotto pro, int id) {
         return this.prodottoDAO.modifyProdotto(pro,id);
-
     }
 
 }

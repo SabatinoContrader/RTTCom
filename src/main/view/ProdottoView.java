@@ -6,6 +6,7 @@ import main.model.*;
 import main.service.ProdottoFornitoreService;
 import main.service.ProdottoService;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,15 +31,15 @@ public class ProdottoView implements View {
     public void showOptions() {
         switch (mode) {
             case "all":
-                /*List<Prodotto> prodotti = prodottoService.getAllProdotti();
+                List<Prodotto> prodotti = prodottoService.getAllProdotti();
                 System.out.println("----- Prodotti disponibili -----");
                 System.out.println();
-                prodotti.forEach(prodotto -> System.out.println(prodotto));*/
+                prodotti.forEach(prodotto -> System.out.println(prodotto));
 
-                List<Prodotto> prodottiFornitori = prodottoFornitoreService.getAllProdotti();
+                /*List<Prodotto> prodottiFornitori = prodottoFornitoreService.getCatalogoProdotti();
                 System.out.println("----- PRODOTTI DISPONIBILI -----");
                 System.out.println();
-                prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));
+                prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));*/
                 break;
             case "insert":
                 Scanner scanner = new Scanner(System.in);
@@ -122,10 +123,17 @@ public class ProdottoView implements View {
                 break;
 
             case "all_product_fornitore":
-                List<ProdottoFornitore> prodottiFornitore = prodottoService.prodottoFornitore();
+                /*List<ProdottoFornitore> prodottiFornitore = prodottoService.prodottoFornitore();
                 System.out.println("----- PRODOTTI DISPONIBILI DEI FORNITORI-----");
                 System.out.println();
-                prodottiFornitore.forEach(fornitore ->System.out.println(fornitore));
+                prodottiFornitore.forEach(fornitore ->System.out.println(fornitore));*/
+
+                List<Prodotto> prodotti1 = new LinkedList<Prodotto>();
+                List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
+                System.out.println("----- PRODOTTI DISPONIBILI !!!-----");
+                System.out.println();
+                fornitori.forEach(fornitore -> prodotti1.addAll(fornitore.getCatalogoProdotti()));
+                prodotti1.forEach(fornitore1 -> System.out.println(fornitore1));
         }
     }
 

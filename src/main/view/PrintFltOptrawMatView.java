@@ -14,21 +14,25 @@ public class PrintFltOptrawMatView implements View  {
     private String model;
     private String manufacturer;
     private double price;
+    List<Prodotto> listProdotti;
 
     @Override
     public void showResults(Request request) {
 
-        List<Prodotto> listProdotti = (ArrayList<Prodotto>) request.get("listProdotti");
+        listProdotti = (ArrayList<Prodotto>) request.get("listProdotti");
        if  (!listProdotti.isEmpty()){ //se la lista dei prodotti è diversa dal vuoto
             for (Prodotto prodotto : listProdotti) {
                 System.out.println(prodotto.toString());
+
             }
         }else {
            System.out.println(".> Nessun elemento trovato <.");
            System.out.println();
        }
+        System.out.println();
+        System.out.println();
+        //MainDispatcher.getInstance().callView("Home", request);
 
-        MainDispatcher.getInstance().callView("Home", null);
 
     }
 
@@ -45,6 +49,9 @@ public class PrintFltOptrawMatView implements View  {
 
     @Override
     public void submit() {
+        Request request=new Request();
+        request.put("listProdotti",listProdotti);
+        MainDispatcher.getInstance().callAction("SearchPrice", "doControl", request);
 
     }
 

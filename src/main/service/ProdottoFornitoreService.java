@@ -16,12 +16,14 @@ public class ProdottoFornitoreService {
         this.prodottoFornitoreDAO = new ProdottoFornitoreDAO();
     }
 
+    /*
     public List<Prodotto> getAllProdotti() {
-        /*List<Prodotto> prodotti = new LinkedList<Prodotto>();
-        List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
-        fornitori.forEach(fornitore -> prodotti.addAll(fornitore.getProdotti()));
-        return prodotti;*/
         return this.prodottoFornitoreDAO.getAllProdotti();
+    }*/
+
+    //Seguire qui....
+    public List<Prodotto> getCatalogoProdotti(){
+        return this.prodottoFornitoreDAO.getCatalogoProdotti();
     }
 
     public List<Acquisto> getAllRequestBuy (){

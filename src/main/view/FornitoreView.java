@@ -2,12 +2,11 @@ package main.view;
 
 import main.MainDispatcher;
 import main.controller.Request;
-import main.model.Acquisto;
-import main.model.Prodotto;
-import main.model.ProdottoFornitore;
+import main.model.*;
 import main.service.ProdottoFornitoreService;
 import main.service.ProdottoService;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,8 +30,8 @@ public class FornitoreView implements View {
 
         switch (mode) {
             case "all":
-                List<Prodotto> prodottiFornitori = prodottoFornitoreService.getAllProdotti();
-                System.out.println("----- PRODOTTI DISPONIBILI -----");
+                List<Prodotto> prodottiFornitori = prodottoFornitoreService.getCatalogoProdotti();
+                System.out.println("----- PRODOTTI DISPONIBILI !!-----");
                 System.out.println();
                 prodottiFornitori.forEach(prodottoFornitore -> System.out.println(prodottoFornitore));
                 break;

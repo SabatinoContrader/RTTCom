@@ -18,12 +18,12 @@ public class VenditaDAO {
 
     }
 
-    public Fornitore getProdottofornitore(int idProdotto) {
+    /*public Fornitore getProdottofornitore(int idProdotto) {
         Connection c = ConnectionSingleton.getInstance();
         Fornitore f;
         try {
             Statement statement = c.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from fornitore where id_product = " + idProdotto + "");
+            ResultSet resultSet = statement.executeQuery("select * from fornitore where id_product = 1079");
             if (resultSet.next()) {
                 int id_prodotto = resultSet.getInt("id_product");
                 int id_fornitore = resultSet.getInt("id_fornitore");
@@ -34,14 +34,14 @@ public class VenditaDAO {
                 double prezzoac = resultSet.getDouble("prezzo_acquisto");
                 f = new Fornitore(id_prodotto, id_fornitore, dataini, datafin, prezzoac);
 
-                return f;
+                return ;
             }
         } catch (SQLException e) {
             System.out.println("Errore nella ricerca dei prodotti");
         }
         return null;
 
-    }
+    }*/
 
         public boolean modificavendita (Vendita vendita,int margine, double prezzo_acquisto){
             Connection connection = ConnectionSingleton.getInstance();

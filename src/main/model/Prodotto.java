@@ -1,14 +1,16 @@
 package main.model;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Prodotto {
 
     private int id_product;
-    private int ean;
+    private int ean; //STRINGA
     private String category;
     private String model;
     private String manufacturer;
+    private List<ProdottoFornitore> listaAcquisto;
 
     public Prodotto (int id_product, int ean, String category, String model, String manufacturer) {
         this.id_product = id_product;

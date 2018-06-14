@@ -19,7 +19,7 @@ public class FilterOptRawMatController implements Controller{
             if (request != null) {
                 String parolaChiaveOne = request.get("parolaChiaveOne").toString();
                 String parolaChiaveTwo = request.get("parolaChiaveTwo").toString();
-                List<Prodotto> listProdotti = prodottoDAO.search(parolaChiaveOne, parolaChiaveTwo);
+                List<Prodotto> listProdotti = prodottoDAO.searchGetPrezzo(parolaChiaveOne, parolaChiaveTwo);
                 request.put("listProdotti", listProdotti);
                 MainDispatcher.getInstance().callView("PrintFltOptrawMat", request);
         }

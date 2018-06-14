@@ -17,7 +17,8 @@ public class VenditaService {
         }
 
     public Fornitore getProdottofornitore(int idProdotto)  {
-        return this.venditaDAO.getProdottofornitore(idProdotto);
+        //return this.venditaDAO.getProdottofornitore(idProdotto);
+        return null;
     }
 
 

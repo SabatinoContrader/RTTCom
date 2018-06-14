@@ -36,8 +36,8 @@ public class FilterOptRawMatView implements View{
     @Override
     public void submit() {
         Request request = new Request();
-        request.put("parolaChiaveOne", this.parolaChiaveOne);
-        request.put("parolaChiaveTwo", this.parolaChiaveTwo);
+        request.put("parolaChiaveOne", this.parolaChiaveOne); // delete il this
+        request.put("parolaChiaveTwo", this.parolaChiaveTwo); // delete il this
         MainDispatcher.getInstance().callAction("FilterOptRawMat", "doControl", request);
     }
 

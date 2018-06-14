@@ -43,7 +43,8 @@ public class ProdottoFornitoreDAO {
         return prodotti;
     }*/
 
-    public List<Prodotto> getAllProdotti () {
+    //public List<Prodotto> getAllProdotti () {
+    public List<Prodotto> getCatalogoProdotti(){
         List<Prodotto> prodotti = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
         try {

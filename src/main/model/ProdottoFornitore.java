@@ -5,6 +5,8 @@ import java.util.Objects;
 public class ProdottoFornitore {
 
     private int id_fornitore;
+    private int ip_prodotto_su_fornitore;
+    private double quantita;
     private String data_inizio;
     private String data_fine;
     private Double prezzo_acquisto;

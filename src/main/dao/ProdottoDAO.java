@@ -16,7 +16,7 @@ public class ProdottoDAO {
     private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
     private final String QUERY_PRODOTTO_FORNIOTRE = "SELECT id_fornitore, data_inizio, data_fine, prezzo_acquisto FROM product p right join fornitore f on p.id_product = f.id_product";
     private final String QUERY_DELETE = "delete from product (ean, category, model, manufacturer) values (?,?,?,?)";
-    private final String QUERY_MODIFY = "update product set (id_product, ean, category, model, manufacturer) values) values (?,?,?,?,?,?) where id_product=?";
+    private final String QUERY_MODIFY = "update product set (id_product, ean, category, model, manufacturer) values (?,?,?,?,?,?) where id_product=?";
     private final String QUERY_REQUEST_BUY ="insert into requestbuy (idproduct, quantity, pricexelem, idtrader) values (?,?,?,?)";
 
 
@@ -164,9 +164,9 @@ public class ProdottoDAO {
         Prodotto p;
         try{
             Statement statement = c.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from product where bar_code = "+idProdotto+"");
+            ResultSet resultSet = statement.executeQuery("select * from product where id_product= "+idProdotto+"");
             if(resultSet.next()){
-                int id_prodotto = resultSet.getInt("id_prodotto");
+                int id_prodotto = resultSet.getInt("id_product");
                 int ean = resultSet.getInt("ean");
                 String category = resultSet.getString("category");
 
@@ -228,7 +228,7 @@ public class ProdottoDAO {
 
         try{
 
-            PreparedStatement preparedStatement = c.prepareStatement("update product set bar_code=?, category=?, subcategory=?, model=?, manufacturer=? where bar_code="+id+"");
+            PreparedStatement preparedStatement = c.prepareStatement("update product set (id_product, ean, category, model, manufacturer) values (?,?,?,?,?) where id_product="+id+"");
             preparedStatement.setInt(1, pro.getIdProduct());
             preparedStatement.setInt(2, pro.getEan());
             preparedStatement.setString(3, pro.getCategory());

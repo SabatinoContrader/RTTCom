@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginTraderServlet extends HttpServlet {
@@ -15,11 +16,15 @@ public class LoginTraderServlet extends HttpServlet {
     public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException
     {
         loginService =  new LoginService();
+        HttpSession session = request.getSession();
+        session.setAttribute("utente", null);
         if (request != null) {
             String nomeUtente = request.getParameter("username").toString();
             String password = request.getParameter("password").toString();
-            if (loginService.login(nomeUtente, password))
+            if (loginService.login(nomeUtente, password)) {
+                session.setAttribute("utente", nomeUtente);
                 response.sendRedirect("home.jsp");
+            }
             else
                 response.sendRedirect("login.jsp");
         }

@@ -3,7 +3,7 @@
 <title>Menu Principale Trader</title>
 </head>
 <body>
-     <h1>Benvenuto in ContraderFramework</h1>
+     <h1>Benvenuto <%= request.getSession().getAttribute("utente")%></h1>
      <h2>------- MENU TRADERS PLATFORM -------</h2>
      <h2>    <h2>
 
@@ -24,11 +24,6 @@
      <h3>5. Ricerca un prodotto</h3>
      <form action="" method="post">
      <input type="submit" value="SearchProduct" name="richiesta">
-     </form>
-
-     <h3>6. Visualizza lista prodotti</h3>
-     <form action="ProdottoServlet" method="get">
-     <input type="submit" value="ViewListProduct" name="richiesta">
      </form>
 
      <h3>8.logout<h3>

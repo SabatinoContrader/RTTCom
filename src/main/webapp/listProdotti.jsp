@@ -3,10 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
  <head>
-     <% List<Prodotto> allProduct = (List<Prodotto>) session.getAttribute("all_product");%>
+     <% List<Prodotto> all_product_fornitore = (List<Prodotto>) session.getAttribute("all_product_fornitore");%>
  </head>
  <body>
-
+<h1>Benvenuto <%= request.getSession().getAttribute("utente")%></h1>
 <form action="ProdottoServlet" method="post">
     <input type="text" name="category">
     <input type="submit" value="SearchCategory" name="richiesta">
@@ -49,9 +49,13 @@
          <th>
             PREZZO DI VENDITA
           </th>
+         <th>
+          </th>
+         <th>
+          </th>
 
      </tr>
-        <%for (Prodotto prodotti : allProduct) { %>
+        <%for (Prodotto prodotti : all_product_fornitore) { %>
      <tr>
          <td>
              <input type="checkbox" name="products" value="<%= prodotti.getId()%>"/>
@@ -85,20 +89,26 @@
          <td>
              <%=  prodotti.getPrezzoVendita()%>
          </td>
+         <td>
+             <a href="ProdottoServlet?richiesta=ModificaProdotto&id=<%=  prodotti.getId()%>">Modifica</a>
+         </td>
+         <td>
+             <a href="ProdottoServlet?richiesta=EliminaProdotto&id=<%= prodotti.getId()%>">Elimina</a>
+         </td>
 
      </tr>
      <% }%>
  </table>
 <input type="submit" value="SellProducts" name="richiesta">
 </form>
- <a href="home.jsp">Home</a>
  <h2></h2>
  <h2></h2>
  <form action="" method="post">
  <h2>----- PRODUCT OPTIONS -----</h2>
- <h2>1 - Inserisci un nuovo Prodotto<input type="text" name=""></h2>
- <h2>2 -Modifica un prodotto<input type="submit" value="" name=""></h2>
- <h2>3 -Elimina un prodotto<input type="submit" value="" name=""></h2>
+ <h3><a href="insertProdotto.jsp">1. - Inserisci un nuovo Prodotto</a></h3>
+ <!-- <input type="text" value="Scelta" name="richiesta">
+ <button type = "submit" value = "Vai" name = "pulsante">GO</button> -->
+ <h3></h3>
  <a href="home.jsp">Home</a>
  </form>
  </body>

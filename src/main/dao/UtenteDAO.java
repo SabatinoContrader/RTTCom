@@ -96,8 +96,8 @@ public class UtenteDAO {
             preparedStatement.setString(2,utente.getPassword());
             preparedStatement.setString(3,utente.getNome());
             preparedStatement.setString(4,utente.getCognome());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet = preparedStatement.getGeneratedKeys();
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
                 id = resultSet.getInt(1);
             }

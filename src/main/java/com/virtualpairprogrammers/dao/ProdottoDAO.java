@@ -1,209 +1,376 @@
 package com.virtualpairprogrammers.dao;
 
+import com.virtualpairprogrammers.model.Prodotto;
+import com.virtualpairprogrammers.model.ProdottoFornitore;
+import com.virtualpairprogrammers.utils.ConnectionSingleton;
+import com.virtualpairprogrammers.utils.GestoreEccezioni;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.virtualpairprogrammers.utils.ConnectionSingleton;
-import com.virtualpairprogrammers.domain.Prodotto;
 
 public class ProdottoDAO {
-    private final String QUERY_ALL = "select * from product";
-    private final String QUERY_INSERT = "insert into product (id_product, ean, category, model, manufacturer) values (?,?,?,?,?)";
-    private final String QUERY_INSERT_PROFIT = "insert into profit (id_product,ecommerce_name,profit_margin) values (?,?,?)";
-    private final String QUERY_PRODOTTO_FORNIOTRE = "SELECT id_fornitore, data_inizio, data_fine, prezzo_acquisto FROM product p right join fornitore f on p.id_product = f.id_product";
-    private final String QUERY_DELETE = "delete from product (ean, category, model, manufacturer) values (?,?,?,?)";
-    private final String QUERY_MODIFY = "update product set (id_product, ean, category, model, manufacturer) values) values (?,?,?,?,?,?) where id_product=?";
-    private final String QUERY_REQUEST_BUY ="insert into requestbuy (idproduct, quantity, pricexelem, idtrader) values (?,?,?,?)";
 
-    public ProdottoDAO() {
+        private final String QUERY_INSERT_PRODOTTO = "INSERT INTO prodotto " +
+                "(ean," +
+                "category," +
+                "model," +
+                "manufacturer," +
+                "description," +
+                "long_description," +
+                "sellPrice) " +
+                "VALUES " +
+                "(" +
+                "?," +
+                "?," +
+                "?," +
+                "?," +
+                "?," +
+                "?," +
+                "?" +
+                ")";
 
-    }
+        private final String QUERY_SELECT_PRODOTTO_EAN = "SELECT * FROM prodotto WHERE EAN = ?";
 
-    /*
-    public List<ProdottoFornitore> prodottoFornitore(){
-        List<ProdottoFornitore> prodottiFornitore = new ArrayList<>();
-        Connection connection = ConnectionSingleton.getInstance();
-        try{
+        private final String QUERY_INSERT_PRODOTTO_FORNITORE = "INSERT INTO prodotto_fornitore " +
+                "(id_prodotto," +
+                "id_fornitore," +
+                "codice_prodotto_su_fornitore," +
+                "quantita," +
+                "data_inizio," +
+                "data_fine," +
+                "prezzo_acquisto) " +
+                "VALUES " +
+                "(?," +
+                "?," +
+                "?," +
+                "?," +
+                "?," +
+                "?," +
+                "?)";
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_PRODOTTO_FORNIOTRE);
-            while (resultSet.next()) {
-                int id_fornitore = resultSet.getInt("id_fornitore");
-                String data_inizio = resultSet.getString("data_inizio");
-                String data_fine = resultSet.getString("data_fine");
-                double prezzo_acquisto = resultSet.getDouble("prezzo_acquisto");
-                prodottiFornitore.add(new ProdottoFornitore(id_fornitore, data_inizio, data_fine, prezzo_acquisto));
+        private final String QUERY_DELETE_PRODOTTO_FORNITORE = "DELETE FROM prodotto_fornitore " +
+                "WHERE " +
+                "id_prodotto = ? AND " +
+                "id_fornitore = ? AND " +
+                "data_inizio = ?";
+
+        private final String QUERY_DELETE_PRODOTTO_FORNITORE_ID_PRODOTTO = "DELETE FROM prodotto_fornitore " +
+                "WHERE " +
+                "id_prodotto = ?";
+
+        private final String QUERY_GET= "SELECT * FROM prodotto " +
+                "WHERE " +
+                "id = ?";
+
+        private final String QUERY_GET_BY_EAN= "SELECT * FROM prodotto " +
+                "WHERE " +
+                "ean = ?";
+
+        private final String QUERY_GET_ALL= "SELECT * FROM prodotto";
+
+        private final String QUERY_GET_PRODOTTI_FORNITORE= "SELECT * FROM prodotto_fornitore " +
+                "WHERE " +
+                "id_prodotto = ?";
+
+        private final String QUERY_UPDATE="UPDATE prodotto\n" +
+                "SET\n" +
+                "ean = ?, " +
+                "category = ?, " +
+                "model = ?, " +
+                "manufacturer = ?, " +
+                "description = ?, " +
+                "long_description = ?, " +
+                "sellPrice = ? " +
+                "WHERE id = ?";
+
+        private final String QUERY_DELETE = "DELETE FROM prodotto\n" +
+                "WHERE id = ?";
+
+        public Prodotto get(int id){
+            Connection connection = ConnectionSingleton.getInstance();
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GET);
+                preparedStatement.setInt(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                Prodotto prodotto = new Prodotto();
+                prodotto.setId(id);
+                if (resultSet.next()) {
+                    prodotto.setEan(resultSet.getString("ean"));
+                    prodotto.setCategory(resultSet.getString("category"));
+                    prodotto.setModel(resultSet.getString("model"));
+                    prodotto.setManufacturer(resultSet.getString("manufacturer"));
+                    prodotto.setDescrizione(resultSet.getString("description"));
+                    prodotto.setDescrizioneLunga(resultSet.getString("long_description"));
+                    prodotto.setPrezzoVendita(resultSet.getDouble("sellPrice"));
+
+                    PreparedStatement preparedStatement1 = connection.prepareStatement(QUERY_GET_PRODOTTI_FORNITORE);
+                    preparedStatement1.setInt(1, id);
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+                    while (resultSet1.next()) {
+                        ProdottoFornitore prodottoFornitore = new ProdottoFornitore();
+                        prodottoFornitore.setIdFornitore(resultSet1.getInt("id_fornitore"));
+                        prodottoFornitore.setCodiceProdottoFornitore(resultSet1.getString("codice_prodotto_su_fornitore"));
+                        prodottoFornitore.setQuantita(resultSet1.getDouble("quantita"));
+                        prodottoFornitore.setDataInizio(resultSet1.getDate("data_inizio"));
+                        prodottoFornitore.setDataFine(resultSet1.getDate("data_fine"));
+                        prodottoFornitore.setPrezzoAcquisto(resultSet1.getDouble("prezzo_acquisto"));
+                        prodotto.aggiungiAListaAcquisto(prodottoFornitore);
+                    }
+                    preparedStatement1.close();
+                }
+                preparedStatement.close();
+                return prodotto;
+            }catch (Exception e){
+                GestoreEccezioni.getInstance().gestisciEccezione(e);
+                System.out.println("Errore nella ricerca dei prodotti");
+                return null;
             }
-        }catch (SQLException e) {
-            e.printStackTrace();
         }
-        return prodottiFornitore;
-    }
 
-    public List<Prodotto> search (String parameterOne, String parameterTwo) {
-        String QUERY_SEARCH = "select * from product where "+parameterOne+"=?";
-        List<Prodotto> listProdotto= new ArrayList<>();
-        Connection connection  = ConnectionSingleton.getInstance();
-        try {
-            PreparedStatement preparedStatement= connection.prepareStatement(QUERY_SEARCH);
-            preparedStatement.setString(1, parameterTwo);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id_product = resultSet.getInt("id_product");
-                int ean = resultSet.getInt("ean");
-                String category = resultSet.getString("category");
-                String model = resultSet.getString("model");
-                String manufacturer = resultSet.getString("manufacturer");
-                listProdotto.add(new Prodotto(id_product, ean, category, model, manufacturer));
+        public Prodotto getByEan(String ean){
+            Connection connection = ConnectionSingleton.getInstance();
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GET);
+                preparedStatement.setString(1, ean);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                Prodotto prodotto = new Prodotto();
+                if (resultSet.next()) {
+                    prodotto.setId(resultSet.getInt("id"));
+                    prodotto.setEan(resultSet.getString("ean"));
+                    prodotto.setCategory(resultSet.getString("category"));
+                    prodotto.setModel(resultSet.getString("model"));
+                    prodotto.setManufacturer(resultSet.getString("manufacturer"));
+                    prodotto.setDescrizione(resultSet.getString("description"));
+                    prodotto.setDescrizioneLunga(resultSet.getString("long_description"));
+                    prodotto.setPrezzoVendita(resultSet.getDouble("sellPrice"));
+
+                    PreparedStatement preparedStatement1 = connection.prepareStatement(QUERY_GET_PRODOTTI_FORNITORE);
+                    preparedStatement1.setInt(1, prodotto.getId());
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+                    while (resultSet1.next()) {
+                        ProdottoFornitore prodottoFornitore = new ProdottoFornitore();
+                        prodottoFornitore.setIdFornitore(resultSet1.getInt("id_fornitore"));
+                        prodottoFornitore.setCodiceProdottoFornitore(resultSet1.getString("codice_prodotto_su_fornitore"));
+                        prodottoFornitore.setQuantita(resultSet1.getDouble("quantita"));
+                        prodottoFornitore.setDataInizio(resultSet1.getDate("data_inizio"));
+                        prodottoFornitore.setDataFine(resultSet1.getDate("data_fine"));
+                        prodottoFornitore.setPrezzoAcquisto(resultSet1.getDouble("prezzo_acquisto"));
+                        prodotto.aggiungiAListaAcquisto(prodottoFornitore);
+                    }
+                    preparedStatement1.close();
+                }
+                preparedStatement.close();
+                return prodotto;
+            }catch (Exception e){
+                GestoreEccezioni.getInstance().gestisciEccezione(e);
+                System.out.println("Errore nella ricerca dei prodotti");
+                return null;
             }
         }
-        catch (SQLException e) {
-            //e.printStackTrace();
-            System.out.println(".> Errore di digitazione della 1^ PAROLA CHIAVE <.");
-        }
-        return listProdotto;
-    }
 
-    public boolean insertRequestBuy(Acquisto acquisto){
-        Connection connection = ConnectionSingleton.getInstance();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REQUEST_BUY);
-            preparedStatement.setInt(1,acquisto.getIdproduct());
-            preparedStatement.setInt(2, acquisto.getQuantity());
-            preparedStatement.setDouble(3, acquisto.getPricexelem());
-            preparedStatement.setString(4, acquisto.getIdTrader());
-            return preparedStatement.execute();
-        }
-        catch (SQLException e) {
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
-        }
-    } */
+        public List<Prodotto> getAll(){
+            List<Prodotto> prodotti = new ArrayList<Prodotto>();
+            Connection connection = ConnectionSingleton.getInstance();
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GET_ALL);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Prodotto prodotto = new Prodotto();
+                    prodotto.setId(resultSet.getInt("id"));
+                    prodotto.setEan(resultSet.getString("ean"));
+                    prodotto.setCategory(resultSet.getString("category"));
+                    prodotto.setModel(resultSet.getString("model"));
+                    prodotto.setManufacturer(resultSet.getString("manufacturer"));
+                    prodotto.setDescrizione(resultSet.getString("description"));
+                    prodotto.setDescrizioneLunga(resultSet.getString("long_description"));
+                    prodotto.setPrezzoVendita(resultSet.getDouble("sellPrice"));
 
-    public List<Prodotto> getAllProdotti () {
-        List<Prodotto> prodotti = new ArrayList<>();
-        Connection connection = ConnectionSingleton.getInstance();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
-            while (resultSet.next()) {
-                int id_prodotto = resultSet.getInt("id_product");
-                int ean = resultSet.getInt("ean");
-                String category = resultSet.getString("category");
-                String model = resultSet.getString("model");
-                String manufacturer = resultSet.getString("manufacturer");
-                prodotti.add(new Prodotto(id_prodotto, ean, category, model, manufacturer));
+                    PreparedStatement preparedStatement1 = connection.prepareStatement(QUERY_GET_PRODOTTI_FORNITORE);
+                    preparedStatement1.setInt(1, prodotto.getId());
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+                    while (resultSet1.next()) {
+                        ProdottoFornitore prodottoFornitore = new ProdottoFornitore();
+                        prodottoFornitore.setIdFornitore(resultSet1.getInt("id_fornitore"));
+                        prodottoFornitore.setCodiceProdottoFornitore(resultSet1.getString("codice_prodotto_su_fornitore"));
+                        prodottoFornitore.setQuantita(resultSet1.getDouble("quantita"));
+                        prodottoFornitore.setDataInizio(resultSet1.getDate("data_inizio"));
+                        prodottoFornitore.setDataFine(resultSet1.getDate("data_fine"));
+                        prodottoFornitore.setPrezzoAcquisto(resultSet1.getDouble("prezzo_acquisto"));
+                        prodotto.aggiungiAListaAcquisto(prodottoFornitore);
+                    }
+                    preparedStatement1.close();
+                    prodotti.add(prodotto);
+                }
+                preparedStatement.close();
+                return prodotti;  //<-- ritorna
+            }catch (Exception e){
+                GestoreEccezioni.getInstance().gestisciEccezione(e);
+                System.out.println("Errore nella ricerca dei prodotti");
+                return null;
             }
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return prodotti;
-    }
 
+        // Restituisce l' id del prodotto appena inserito
+        // In caso di errore restituisce:
+        // -1 Errore generico
+        // -2 Non ci sono righe in listaAcquisto
+        // -3 Le date inizio e fine in lista acquisto non sono corrette
+        public int update(Prodotto prodotto){
+            // ATTENZIONE VERIFICARE CHE CI SIA ALMENO UNA RIGA DI PRODOTTOFORNITORE
+            Connection connection = ConnectionSingleton.getInstance();
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE);
+                int i = 1;
+                preparedStatement.setString(i++,prodotto.getEan());
+                preparedStatement.setString(i++,prodotto.getCategory());
+                preparedStatement.setString(i++,prodotto.getModel());
+                preparedStatement.setString(i++,prodotto.getManufacturer());
+                preparedStatement.setString(i++,prodotto.getDescrizione());
+                preparedStatement.setString(i++,prodotto.getDescrizioneLunga());
+                preparedStatement.setDouble(i++,prodotto.getPrezzoVendita());
+                preparedStatement.setInt(i++,prodotto.getId());
+                preparedStatement.executeUpdate();
+
+                preparedStatement.close();
+                for (ProdottoFornitore prodottoFornitore: prodotto.getListaAcquisto()) {
+                    preparedStatement = connection.prepareStatement(QUERY_DELETE_PRODOTTO_FORNITORE_ID_PRODOTTO);
+                    i = 1;
+                    preparedStatement.setInt(i++, prodotto.getId());
+                    preparedStatement.execute();
+                    preparedStatement.close();
+
+                    preparedStatement = connection.prepareStatement(QUERY_INSERT_PRODOTTO_FORNITORE);
+                    i = 1;
+                    preparedStatement.setInt(i++, prodotto.getId());
+                    preparedStatement.setInt(i++, prodottoFornitore.getidFornitore());
+                    preparedStatement.setString(i++, prodottoFornitore.getCodiceProdottoFornitore());
+                    preparedStatement.setDouble(i++, prodottoFornitore.getQuantita());
+                    preparedStatement.setDate(i++, new java.sql.Date(prodottoFornitore.getDataInizio().getTime()));
+                    if(prodottoFornitore.getDataFine() != null)
+                        preparedStatement.setDate(i++, new java.sql.Date(prodottoFornitore.getDataFine().getTime()));
+                    else
+                        preparedStatement.setDate(i++, null);
+                    preparedStatement.setDouble(i++, prodottoFornitore.getPrezzoAcquisto());
+                    preparedStatement.execute();
+                    preparedStatement.close();
+                }
+                return 0;
+            }
+            catch (Exception e){
+                GestoreEccezioni.getInstance().gestisciEccezione(e);
+                return -1;
+            }
+
+        }
+
+        public int delete(int id){
+            Connection connection = ConnectionSingleton.getInstance();
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
+                preparedStatement.setInt(1, id);
+                boolean result = preparedStatement.execute();
+                preparedStatement.close();
+                return 0;
+            }catch (Exception e){
+                GestoreEccezioni.getInstance().gestisciEccezione(e);
+                return -1;
+            }
+        }
+
+        // Restituisce l' id del prodotto appena inserito
+        // In caso di errore restituisce:
+        // -1 Errore generico
+        // -2 Non ci sono righe in listaAcquisto
+        // -3 Le date inizio e fine in lista acquisto non sono corrette
+        public int insert(Prodotto prodotto) {
+            // ATTENZIONE VERIFICARE CHE CI SIA ALMENO UNA RIGA DI PRODOTTOFORNITORE
+            Connection connection = ConnectionSingleton.getInstance();
+            int productId = -1;
+            try {
+                // Verifichiamo la presenza dell' EAN nel nostro db
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SELECT_PRODOTTO_EAN);
+                preparedStatement.setString(1, prodotto.getEan());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    productId = resultSet.getInt("id");
+                }
+                preparedStatement.close();
+                // Se il prodotto non esiste lo aggiungiamo
+                if(productId == -1){
+                    String generatedColumns[] = { "id" };
+                    preparedStatement = connection.prepareStatement(QUERY_INSERT_PRODOTTO, generatedColumns);
+                    int i = 1;
+                    preparedStatement.setString(i++,prodotto.getEan());
+                    preparedStatement.setString(i++,prodotto.getCategory());
+                    preparedStatement.setString(i++,prodotto.getModel());
+                    preparedStatement.setString(i++,prodotto.getManufacturer());
+                    preparedStatement.setString(i++,prodotto.getDescrizione());
+                    preparedStatement.setString(i++,prodotto.getDescrizioneLunga());
+                    preparedStatement.setDouble(i++,prodotto.getPrezzoVendita());
+                    preparedStatement.execute();
+                    resultSet = preparedStatement.getGeneratedKeys();
+                    while (resultSet.next()) {
+                        productId = resultSet.getInt(1);
+                    }
+                    preparedStatement.close();
+                }
+
+                for (ProdottoFornitore prodottoFornitore: prodotto.getListaAcquisto()) {
+                    preparedStatement = connection.prepareStatement(QUERY_DELETE_PRODOTTO_FORNITORE);
+                    int i = 1;
+                    preparedStatement.setInt(i++, productId);
+                    preparedStatement.setInt(i++, prodottoFornitore.getidFornitore());
+                    preparedStatement.setDate(i++, new java.sql.Date(prodottoFornitore.getDataInizio().getTime()));
+                    preparedStatement.execute();
+                    preparedStatement.close();
+
+                    preparedStatement = connection.prepareStatement(QUERY_INSERT_PRODOTTO_FORNITORE);
+                    i = 1;
+                    preparedStatement.setInt(i++, productId);
+                    preparedStatement.setInt(i++, prodottoFornitore.getidFornitore());
+                    preparedStatement.setString(i++, prodottoFornitore.getCodiceProdottoFornitore());
+                    preparedStatement.setDouble(i++, prodottoFornitore.getQuantita());
+                    preparedStatement.setDate(i++, new java.sql.Date(prodottoFornitore.getDataInizio().getTime()));
+                    if(prodottoFornitore.getDataFine() != null)
+                        preparedStatement.setDate(i++, new java.sql.Date(prodottoFornitore.getDataFine().getTime()));
+                    else
+                        preparedStatement.setDate(i++, null);
+                    preparedStatement.setDouble(i++, prodottoFornitore.getPrezzoAcquisto());
+                    preparedStatement.execute();
+                    preparedStatement.close();
+                }
+
+
+            } catch (Exception e) {
+                GestoreEccezioni.getInstance().gestisciEccezione(e);
+                return -1;
+            }
+            return productId;
+        }
 
     public boolean insertProdotto(Prodotto prodotto) {
+
         Connection connection = ConnectionSingleton.getInstance();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
-            preparedStatement.setInt(1,prodotto.getIdProduct());
-            preparedStatement.setInt(2, prodotto.getEan());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_PRODOTTO);
+            preparedStatement.setInt(1,prodotto.getId());
+            preparedStatement.setString(2, prodotto.getEan());
             preparedStatement.setString(3, prodotto.getCategory());
             preparedStatement.setString(4, prodotto.getModel());
             preparedStatement.setString(5, prodotto.getManufacturer());
+            preparedStatement.setString(6, prodotto.getDescrizione());
+            preparedStatement.setString(7, prodotto.getDescrizioneLunga());
+            preparedStatement.setDouble(8, prodotto.getPrezzoVendita());
             return preparedStatement.execute();
         }
         catch (SQLException e) {
+            System.out.println("ERRORE DI LETTURA NEL DATABASE");
             //GestoreEccezioni.getInstance().gestisciEccezione(e);
             return false;
         }
 
-    }
 
-    /*
-    public Prodotto getProdotto(int idProdotto){
-        Connection c = ConnectionSingleton.getInstance();
-        Prodotto p;
-        try{
-            Statement statement = c.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from product where bar_code = "+idProdotto+"");
-            if(resultSet.next()){
-                int id_prodotto = resultSet.getInt("id_prodotto");
-                int ean = resultSet.getInt("ean");
-                String category = resultSet.getString("category");
-                String model = resultSet.getString("model");
-                String manufacturer = resultSet.getString("manufacturer");
-                p = new Prodotto(id_prodotto,ean,category,model,manufacturer);
-                return p;
-            }
-        }catch (Exception e){
-            System.out.println("Errore nella ricerca dei prodotti");
-        }
-        return null;
-    }
-
-    public boolean insertMargin(Profit profit){
-        Connection c = ConnectionSingleton.getInstance();
-        try{
-            PreparedStatement preparedStatement = c.prepareStatement(QUERY_INSERT_PROFIT);
-            preparedStatement.setInt(1,profit.getId_product());
-            preparedStatement.setString(2,profit.getEcommerce_name());
-            preparedStatement.setInt(3,profit.getMargin_profit());
-            return preparedStatement.execute();
-        }catch(Exception e){
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return true;
-        }
-    }
-
-    */
-    public boolean deleteProdotto(int id) {
-        Connection c = ConnectionSingleton.getInstance();
-        try{
-            PreparedStatement preparedStatement = //c.prepareStatement("delete from profit where id_product="+id+"");
-                    c.prepareStatement("delete from contrader.product where id_product ="+id+"");
-            preparedStatement.executeUpdate();
-            return preparedStatement.execute();
-        }catch (SQLException e){
-            //GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
-        }
 
     }
-
-    /*
-    public boolean deleteProfit(Profit p){
-        Connection c = ConnectionSingleton.getInstance();
-        try{
-            PreparedStatement ps = c.prepareStatement("delete from profit where id_product="+p.getId_product()+"");
-            ps.executeUpdate();
-            return ps.execute();
-        }catch (Exception e){
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
-        }
-    }
-
-
-    public boolean modifyProdotto(Prodotto pro, int id) {
-        Connection c = ConnectionSingleton.getInstance();
-
-        try{
-            PreparedStatement preparedStatement = c.prepareStatement("update product set bar_code=?, category=?, subcategory=?, model=?, manufacturer=? where bar_code="+id+"");
-            preparedStatement.setInt(1, pro.getIdProduct());
-            preparedStatement.setInt(2, pro.getEan());
-            preparedStatement.setString(3, pro.getCategory());
-            preparedStatement.setString(4, pro.getModel());
-            preparedStatement.setString(5, pro.getManufacturer());
-            preparedStatement.executeUpdate();
-            return preparedStatement.execute();
-        }
-        catch (Exception e){
-            System.out.println("Prodotto non presente");
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
-        }
-
-    }
-    */
 }

@@ -8,6 +8,7 @@
     <h2>Category<input type="text" name="category"></h2>
     <h2>Model<input type="text" name="model"> </h2>
     <h2>Manufacturer<input type="text" name="manufacturer"></h2>
+    <h2>PrezzoVendita<input type="text" name="prezzovendita"></h2>
     <input type="submit" value="InserisciProdotto" name="richiesta">
 </form>
 </body>

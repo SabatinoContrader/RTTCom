@@ -1,64 +1,30 @@
 package main.controller;
 
 import main.MainDispatcher;
-import main.dao.VenditaDAO;
 import main.model.*;
+import main.service.VenditaService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VenditaController implements Controller{
 
-    private VenditaDAO venditaDAO;
-    private VenditaDAO vendita1DAO;
+    private VenditaService venditaService;
 
     public VenditaController() {
-    venditaDAO = new VenditaDAO();
-    vendita1DAO=new VenditaDAO();
+        venditaService = new VenditaService();
     }
 
     @Override
     public void doControl(Request request) {
-        /*if (request != null) {
-            List<Prodotto> listProdotti = (ArrayList<Prodotto>) request.get("listProdotti");
-            for (Prodotto prodotto : listProdotti) {
-                int canale = (int) request.get("canale");
-                String data_inizio = (String) request.get("data_inizio");
+        int canale = (int) request.get("canale");
+        double margine = (double) request.get("margine");
+        List<Prodotto> listProdotti = (List<Prodotto>) request.get("prodotti");
 
-                String data_fine = (String) request.get("data_fine");
+        List<Prodotto> prodottiInVendita = venditaService.getCatalogoVendita(canale,margine,listProdotti);
 
-                int margine = (int) request.get("margine");
-                int idprodotto = prodotto.getIdProduct();
-                Fornitore fo = vendita1DAO.getProdottofornitore(idprodotto);
-                double prezzo_acquisto = fo.getPrezzoAcquisto();
+        request.put("vendita",prodottiInVendita);
 
-                Vendita vendita = new Vendita(prodotto.getIdProduct(), canale, prodotto.getCategory(), prodotto.getModel(), prodotto.getManufacturer(), data_inizio, data_fine, prezzo_acquisto);
-
-
-                venditaDAO.modificavendita(vendita, margine, prezzo_acquisto);
-
-            }*/
-
-            int canale = (int) request.get("canale");
-            double margine = (double) request.get("margine");
-
-            Canale canaleVendita= null;
-            if(canale == 1){
-                canaleVendita = new Amazon();
-            }else if(canale == 2){
-                canaleVendita = new Privol();
-            }
-
-            List<Prodotto> listProdotti = (List<Prodotto>) request.get("listProdotti");
-            listProdotti.forEach(prodotto -> {
-                prodotto.setPrezzoVendita(prodotto.getPrezzoAcquisto()*(1 + margine));
-            });
-            if(canaleVendita != null)
-                canaleVendita.setCatalogoProdotti(listProdotti);
-            MainDispatcher.getInstance().callView("Home", request);
-        }
-
-
-    //}
+        MainDispatcher.getInstance().callView("Home", request);
+    }
 
 }

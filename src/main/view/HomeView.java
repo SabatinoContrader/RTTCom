@@ -11,7 +11,15 @@ public class HomeView implements View {
     private int choice;
 
     public void showResults(Request request) {
-
+        if(request != null && request.get("message") != null) {
+            String message = request.get("message").toString();
+            if (message.equals("erroreScelta"))
+                System.out.println("Attenzione inserire una scelta valida!!!");
+            if (message.equals("erroreNavigazione"))
+                System.out.println("Attenzione si e' verificato un errore di navigazione!!!");
+            if (message.equals("prodottiAggiornatiDaFornitori"))
+                System.out.println("Ho aggiornato i prodotti dai fornitori!!!");
+        }
     }
 
     public void showOptions() {
@@ -20,35 +28,40 @@ public class HomeView implements View {
         System.out.println();
         System.out.println("------- MENU TRADER'S PLATFORM -------");
         System.out.println();
-        System.out.println("1) Inserisci prodotto");
-        System.out.println("2) Visualizza prodotti da Mysql");
-        System.out.println("3) Inserisci il margine di profitto per un prodotto");
-        System.out.println("4) Elimina prodotto");
-        System.out.println("5) Ricerca Ottimizzazione Materiale-Prezzo");
-        System.out.println("6) Modifica Prodotto");
-        System.out.println("7) Procedura di richiesta d'acquisto");
-        System.out.println("8) Visualizza la Lista dei prodotti con il meccanismo INTERFACCIA"); // Ing. Sabatino prova da qui
-        System.out.println("9) Vendita Prodotti");
-        System.out.println("10) Logout");
+        System.out.println("1) Visualizza prodotti ");
+        System.out.println("2) Ricerca prodotti");
+        System.out.println("3) Visualizza richieste d'acquisto");
+        System.out.println("4) Aggiorna Prodotti Da Fornitori");
+        System.out.println("5) Logout");
         System.out.print(".:> ");
 
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
-        if (choice < 1 || choice > 10)
-            MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 10)
-            MainDispatcher.getInstance().callAction("Login", "doControl", null);
-        else if(choice == 5)
-            MainDispatcher.getInstance().callView("FilterOptRawMat", null);
-
-        else if (choice==9) {
-            MainDispatcher.getInstance().callView("Canale", null);
+        Request request = new Request();
+        if (choice < 1 || choice > 5){
+            request.put("message", "erroreScelta");
+            request.put("action", "home");
+            MainDispatcher.getInstance().callAction("Home", "doControl", request);
         }
-
+        else if (choice == 1) {
+            request.put("action", "listaProdotti");
+            MainDispatcher.getInstance().callAction("Prodotto", "doControl", request);
+        }
+        else if(choice == 2) {
+            request.put("action", "cercaProdotti");
+            MainDispatcher.getInstance().callAction("Prodotto", "doControl", request);
+        }
+        else if(choice == 3)
+            MainDispatcher.getInstance().callView("Canale", null);
+        else if(choice == 4) {
+            request.put("action", "updateFromSuppliers");
+            MainDispatcher.getInstance().callAction("Prodotto", "doControl", request);
+        }
+        else if(choice == 5)
+            MainDispatcher.getInstance().callView("IndexHome", null);
         else {
-            Request request = new Request();
             request.put("choice", choice);
             MainDispatcher.getInstance().callAction("Prodotto", "doControl", request);
         }

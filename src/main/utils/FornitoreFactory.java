@@ -1,4 +1,6 @@
-package main.model;
+package main.utils;
+
+import main.model.Fornitore;
 
 import java.util.LinkedList;
 import java.util.List;

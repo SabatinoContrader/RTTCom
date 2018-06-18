@@ -1,39 +1,45 @@
-drop table product;
-create table product (id_product int, ean int, category varchar(100), model varchar(100), manufacturer varchar(50), primary key (id_product));
-insert into  product (id_product, ean, category, model, manufacturer) values (1045,4000123,'categ1','model2','Brico');
-insert into  product (id_product, ean, category, model, manufacturer) values (1079,4266511,'categ2','model3','Brico');
-insert into  product (id_product, ean, category, model, manufacturer) values (1115,2260555,'categ2','model6','Brico');
-insert into  product (id_product, ean, category, model, manufacturer) values (1155,2260545,'categ4','model1','Brico');
-insert into  product (id_product, ean, category, model, manufacturer) values (1937,2260545,'categ3','model5','Brico');
-insert into  product (id_product, ean, category, model, manufacturer) values (2045,4000123,'categ1','model3','inditex');
-insert into  product (id_product, ean, category, model, manufacturer) values (2079,4266511,'categ2','model3','inditex');
-insert into  product (id_product, ean, category, model, manufacturer) values (2115,2260555,'categ2','model6','inditex');
-insert into  product (id_product, ean, category, model, manufacturer) values (2155,2260545,'categ4','model1','inditex');
-insert into  product (id_product, ean, category, model, manufacturer) values (2937,2260545,'categ3','model2','inditex');
-insert into  product (id_product, ean, category, model, manufacturer) values (3045,4000123,'categ1','model2','leroyMerlyn');
-insert into  product (id_product, ean, category, model, manufacturer) values (3079,4266511,'categ2','model3','leroyMerlyn');
-insert into  product (id_product, ean, category, model, manufacturer) values (3115,2260555,'categ2','model6','leroyMerlyn');
-insert into  product (id_product, ean, category, model, manufacturer) values (3155,226545,'categ4','model1','leroyMerlyn');
-insert into  product (id_product, ean, category, model, manufacturer) values (3937,2260545,'categ3','model5','leroyMerlyn');
+drop table utente;
+create table utente (id int, username varchar(100),password varchar(100),nome varchar(100), cognome varchar(100), primary key(username), unique(username));
+insert into utente (id,username,password,nome,cognome) values(1,'pippo','paperino','pippo','paperino');
+insert into utente (id,username,password,nome,cognome) values(2,'ciccio','bello','ciccio','bello');
 
-drop table profit;
-create table profit (id_product int,ecommerce_name varchar(100),profit_margin int,primary key(id_product,ecommerce_name),foreign key (id_product) references product(id_product) on delete cascade);
-insert into profit (id_product,ecommerce_name,profit_margin) values(111,"amazon",200);
-insert into profit (id_product,ecommerce_name,profit_margin) values(111,"ebay",300);
-
-drop table fornitore;
-create table fornitore (id_product int, id_fornitore int, data_inizio date, data_fine date, prezzo_acquisto double, primary key(id_fornitore), foreign key (id_product) references product(id_product)on delete cascade);
-insert into fornitore (id_product,id_fornitore,data_inizio,data_fine,prezzo_acquisto) values(1045,110928,20180606,20180706,324.18);
-insert into fornitore (id_product,id_fornitore,data_inizio,data_fine,prezzo_acquisto) values(1079,110945,20180606,null,174.18);
-insert into fornitore (id_product,id_fornitore,data_inizio,data_fine,prezzo_acquisto) values(2115,113328,20180106,20180306,224.18);
-insert into fornitore (id_product,id_fornitore,data_inizio,data_fine,prezzo_acquisto) values(3155,226545,20180101,null,188.11);
-insert into fornitore (id_product,id_fornitore,data_inizio,data_fine,prezzo_acquisto) values(1937,409012,20180423,null,111.99);
-
-drop table users;
-create table users (username varchar(100),pswd varchar(100),primary key(username));
-insert into users (username,pswd) values('ciccio','bello');
-insert into users (username,pswd) values('pippo','paperino');
 
 drop table canale;
 create table canale (id_product int, id_canale int,data_inizio date, data_fine date,profit_margin int, price double, primary key(id_product,id_canale));
 insert into canale (id_product,id_canale,data_inizio,data_fine,profit_margin,price) values(1112,1,20130606,null,10,35.4);
+insert into canale (id_product,id_canale,data_inizio,data_fine,profit_margin,price) values(1222,2,20150402,null,23,42);
+
+drop table fornitore;
+create table fornitore (id int, nome varchar(100), primary key(id));
+insert into fornitore (id, nome) values(1,'Leroy Merlyn');
+insert into fornitore (id, nome) values(2,'Inditex');
+insert into fornitore (id, nome) values(3,'Brico');
+
+drop table prodotto;
+create table prodotto (id int auto_increment, ean varchar(150) unique, category varchar(100), model varchar(100), manufacturer varchar(100),description varchar(2048), long_description varchar(2048),sellPrice double, primary key (id));
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (16,'EANPROVA 1','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 100);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (17,'EANPROVA 2','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 50);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (18,'EANPROVA 3','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 80);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (19,'EANPROVA 4','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 30);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (22,'EANPROVA 5','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 150);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (23,'EANPROVA 6','Categoria 1','Prova','Samsung','Descrizione 1', 'Descrizione lunga 1', 200);
+
+
+drop table prodotto_fornitore;
+create table prodotto_fornitore (id_prodotto int(11), id_fornitore int(11), codice_prodotto_su_fornitore varchar(255) not null, quantita double, data_inizio datetime, data_fine datetime, prezzo_acquisto int, primary key (id_prodotto, id_fornitore, data_inizio), foreign key(id_prodotto) references prodotto(id) on delete cascade on update cascade, foreign key(id_fornitore) references fornitore(id) on delete cascade on update cascade);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (16, 1,1234,1,'2018-01-01 00:00:00',null, 100);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (16, 2,123,1,'2018-01-01 00:00:00',null, 100);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (16, 3,1,1,'2018-01-01 00:00:00',null, 100);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (17, 1,4,1,'2018-01-01 00:00:00',null, 50);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (17, 2,1233,1,'2018-01-01 00:00:00',null, 50);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (17, 3,2,1,'2018-01-01 00:00:00',null, 50);
+insert into  prodotto_fornitore (id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (18, 1,6,1,'2018-01-01 00:00:00',null, 80);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (18, 2,123456,1,'2018-01-01 00:00:00',null, 80);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (18, 3,3,1,'2018-01-01 00:00:00',null, 80);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (19, 1,8,1,'2018-01-01 00:00:00',null, 30);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (19, 2,11,1,'2018-01-01 00:00:00',null, 30);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (19, 3,4,1,'2018-01-01 00:00:00',null, 30);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (22, 1,22,1,'2018-01-01 00:00:00',null, 150);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (22, 2,124,1,'2018-01-01 00:00:00',null, 150);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (22, 3,5,1,'2018-01-01 00:00:00',null, 150);
+insert into  prodotto_fornitore(id_prodotto, id_fornitore, codice_prodotto_su_fornitore, quantita, data_inizio, data_fine, prezzo_acquisto) values (23, 3,6,1,'2018-01-01 00:00:00',null, 200);

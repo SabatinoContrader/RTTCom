@@ -1,14 +1,8 @@
 package main.controller;
 
 import main.MainDispatcher;
-import main.model.Fornitore;
-import main.model.FornitoreFactory;
-import main.model.LeroyMerlin;
 import main.model.Prodotto;
 import main.service.ProdottoService;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class ProdottoController implements Controller {
 
@@ -16,36 +10,57 @@ public class ProdottoController implements Controller {
 
     @Override
     public void doControl(Request request) {
-        int choice = (int) request.get("choice");
+        if(request == null)
+            request = new Request();
 
-        switch (choice) {
-            case 1:
-               request.put("mode", "insert");
-               break;
-            case 2:
+        if(request.get("action") != null){
+            if(request.get("action").toString().equalsIgnoreCase("listaProdotti")){
+                request.put("prodotti", prodottoService.getAllProdotti());
                 request.put("mode", "all");
-                break;
-            case 3:
-                request.put("mode","insert_profit");
-                break;
-            case 4:
-                request.put("mode", "delete");
-                break;
-            /*case 5:
-                request.put("mode", "search");
-                break; */
-            case 6:
-                request.put("mode", "modify");
-                break;
-            case 7:
-                request.put("mode", "insert_request_buy");
-                break;
-            case 8:
-                request.put("all_product_fornitore", prodottoService.getProdottiDisponibili());  // <- Lo faccio cosi perche faccio riferimento alla REQUEST definita nel package CONTROLLER
-                request.put("mode","all_product_fornitore");
-                break;
+                MainDispatcher.getInstance().callView("ListaProdotti", request);
+            }
+            if(request.get("action").toString().equalsIgnoreCase("cercaProdotti")){
+                MainDispatcher.getInstance().callView("ProductsSearch", request);
+            }
+            if(request.get("action").toString().equalsIgnoreCase("applyFilter")){
+                request.put("prodotti", prodottoService.search(request.get("parolaChiaveOne").toString(), request.get("parolaChiaveTwo").toString()));
+                request.put("mode", "filtered");
+                MainDispatcher.getInstance().callView("ListaProdotti", request);
+            }
+            if(request.get("action").toString().equalsIgnoreCase("sellProducts")){
+                MainDispatcher.getInstance().callView("Vendita", request);
+            }
+            if(request.get("action").toString().equalsIgnoreCase("updateFromSuppliers")){
+                prodottoService.aggiornaProdottiDaFornitori();
+                request.put("message", "prodottiAggiornatiDaFornitori");
+                MainDispatcher.getInstance().callView("Home", request);
+            }
+            if (request.get("action").toString().equalsIgnoreCase("inserisciProdotto")){
+                Prodotto inseriscoProdotto = (Prodotto) request.get("insertProdotto");
+                prodottoService.insert(inseriscoProdotto);
+                MainDispatcher.getInstance().callView("Home", request);
+                //-----------------------forse qui serve altro ----------------------
+            }
+            if(request.get("action").toString().equalsIgnoreCase("visualizzaModificaProdotto")){
+                request.put("prodotto", prodottoService.get(Integer.parseInt(request.get("idProdotto").toString())));
+                MainDispatcher.getInstance().callView("Product", request);
+            }
+            if(request.get("action").toString().equalsIgnoreCase("modificaProdotto")){
+                Prodotto prodotto = (Prodotto) request.get("prodotto");
+                prodottoService.update(prodotto);
+                request.put("prodotti", prodottoService.getAllProdotti());
+                request.put("mode", "all");
+                MainDispatcher.getInstance().callView("ListaProdotti", request);
+            }
+            if(request.get("action").toString().equalsIgnoreCase("cancellaProdotto")){
+                prodottoService.delete(Integer.parseInt(request.get("idProdotto").toString()));
+                request.put("prodotti", prodottoService.getAllProdotti());
+                request.put("mode", "all");
+                MainDispatcher.getInstance().callView("ListaProdotti", request);
+            }
         }
-        MainDispatcher.getInstance().callView("Prodotto", request);
+        request.put("message", "erroreNavigazione");
+        MainDispatcher.getInstance().callView("Home", request);
 
     }
 }

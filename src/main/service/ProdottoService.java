@@ -2,7 +2,10 @@ package main.service;
 
 import main.dao.ProdottoDAO;
 import main.model.*;
+import main.utils.FornitoreFactory;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class ProdottoService {
             List<Prodotto> catalogoFornitore = fornitori.get(i).getCatalogoProdotti();
             for(int j = 0; j < catalogoFornitore.size(); j++){
                 Prodotto prodottoDalFornitore = catalogoFornitore.get(j);
-                ProdottoFornitore prodottoFornitore = new ProdottoFornitore(fornitori.get(i).getId(), "01/01/2018", null, prodottoDalFornitore.getPrezzoVendita());
+                ProdottoFornitore prodottoFornitore = new ProdottoFornitore(fornitori.get(i).getId(),"" + prodottoDalFornitore.getId(),1, new Date(118,0,1), null, prodottoDalFornitore.getPrezzoVendita());
                 int indiceProdotto = cercaEanProdotto(prodottoDalFornitore, prodotti);
                 if(indiceProdotto >= 0){
                     prodotti.get(indiceProdotto).aggiungiAListaAcquisto(prodottoFornitore);
@@ -34,6 +37,23 @@ public class ProdottoService {
         return prodotti;
     }
 
+    public void aggiornaProdottiDaFornitori(){
+        List<Prodotto> prodotti = getProdottiDisponibili();
+        prodotti.forEach(prodotto -> {prodottoDAO.insert(prodotto);});
+    }
+
+    public Prodotto get(int id){
+        return prodottoDAO.get(id);
+    }
+
+    public void update(Prodotto prodotto){
+        prodottoDAO.update(prodotto);
+    }
+
+    public void delete(int id){
+        prodottoDAO.delete(id);
+    }
+
     private int cercaEanProdotto(Prodotto prodotto, List<Prodotto> catalogo){
         for(int i = 0; i < catalogo.size(); i++){
             if(catalogo.get(i).getEan() == prodotto.getEan())
@@ -42,44 +62,50 @@ public class ProdottoService {
         return -1;
     }
 
-    public List<Prodotto> searchGetPrezzo (String parameterOne, String parameterTwo) {
-        return this.prodottoDAO.searchGetPrezzo(parameterOne, parameterTwo);
+    // FUNZIONA SOLO PER CATEGORIA SISTEMARE !!!
+    public List<Prodotto> search (String parameterOne, String parameterTwo) {
+        List<Prodotto> prodotti = getAllProdotti();
+        List<Prodotto> prodottiFiltrati = new ArrayList<Prodotto>();
+        prodotti.forEach(prodotto -> {
+            if(prodotto.getCategory() != null && prodotto.getCategory().contains(parameterTwo))
+                prodottiFiltrati.add(prodotto);
+        });
+        return prodottiFiltrati;
     }
 
-    public List<ProdottoFornitore> prodottoFornitore(){
+   /* public List<ProdottoFornitore> prodottoFornitore(){
         return this.prodottoDAO.prodottoFornitore();
     }
 
     public boolean insertRequestBuy(Acquisto acquisto){
-        return this.prodottoDAO.insertRequestBuy(acquisto);
-    }
+       return false;
+       //return this.prodottoDAO.insertRequestBuy(acquisto);
+   }*/
 
     public List<Prodotto> getAllProdotti () {
-        return this.prodottoDAO.getAllProdotti();
+        return this.prodottoDAO.getAll();
     }
 
-    public boolean insertProdotto (Prodotto prodotto) {
-        return this.prodottoDAO.insertProdotto(prodotto);
+    public int insert (Prodotto prodotto) {
+        //return false;
+        return this.prodottoDAO.insert(prodotto);
     }
 
-    public boolean insertMargin(Profit profit) {
-        return this.prodottoDAO.insertMargin(profit);
-    }
+
 
     public boolean deleteProdotto (int prodotto) {
-        return this.prodottoDAO.deleteProdotto(prodotto);
+        return false;
+        //return this.prodottoDAO.deleteProdotto(prodotto);
     }
 
     public Prodotto getProdotto (int barCode) {
-        return this.prodottoDAO.getProdotto(barCode);
+        return null;
+        //return this.prodottoDAO.getProdotto(barCode);
     }
 
-    public boolean deleteProfit(Profit p){
-        return this.prodottoDAO.deleteProfit(p);
-    }
 
     public boolean modifyProdotto (Prodotto pro, int id) {
-        return this.prodottoDAO.modifyProdotto(pro,id);
+        return false;
+        //return this.prodottoDAO.modifyProdotto(pro,id);
     }
-
 }

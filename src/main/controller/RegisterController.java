@@ -1,26 +1,21 @@
 package main.controller;
 
-import main.MainDispatcher;
-import main.service.RegisterService;
+import main.service.LoginService;
 
 public class RegisterController implements Controller{
 
-    private RegisterService registerService;
+    private LoginService loginService;
 
     public RegisterController(){
-        this.registerService = new RegisterService();
+        this.loginService = new LoginService();
     }
+
 
     @Override
     public void doControl(Request request) {
-        if(request!=null){
-            String nomeUtente = request.get("nomeUtente").toString();
-            String password = request.get("passwordUtente").toString();
-            request.put("response",this.registerService.doRegister(nomeUtente,password));
-            MainDispatcher.getInstance().callView("Register",request);
-        }
-        else {
-            System.out.println("Error");
-        }
+
+
+
     }
+
 }

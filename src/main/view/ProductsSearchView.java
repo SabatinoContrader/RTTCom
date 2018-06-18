@@ -5,24 +5,24 @@ import main.controller.Request;
 
 import java.util.Scanner;
 
-public class FilterOptRawMatView implements View{
+public class ProductsSearchView implements View{
 
     private String parolaChiaveOne;
     private String parolaChiaveTwo;
 
-    public FilterOptRawMatView () {
+    private String mode;
+
+    public ProductsSearchView() {
     }
 
-    @Override
+
     public void showResults(Request request) {
     }
 
-    @Override
     public void showOptions() {
-        System.out.println("----- RICERCA MATERIALE ----");
-        System.out.println("Inserisci 1.a parola chiave:");
+        System.out.println("Inserisci Campo:");
         parolaChiaveOne = getInput();
-        System.out.println("Inserisci 2.a parola chiave:");
+        System.out.println("Inserisci parola chiave:");
         parolaChiaveTwo = getInput();
         System.out.println();
     }
@@ -35,10 +35,12 @@ public class FilterOptRawMatView implements View{
 
     @Override
     public void submit() {
+
         Request request = new Request();
-        request.put("parolaChiaveOne", this.parolaChiaveOne); // delete il this
-        request.put("parolaChiaveTwo", this.parolaChiaveTwo); // delete il this
-        MainDispatcher.getInstance().callAction("FilterOptRawMat", "doControl", request);
+        request.put("parolaChiaveOne", this.parolaChiaveOne);
+        request.put("parolaChiaveTwo", this.parolaChiaveTwo);
+        request.put("action", "applyFilter");
+        MainDispatcher.getInstance().callAction("Prodotto", "doControl", request);
     }
 
 }

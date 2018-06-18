@@ -29,7 +29,7 @@ public class IndexHomeView implements View{
                 MainDispatcher.getInstance().callView("Register", null);
                 break;
             case 2:
-                MainDispatcher.getInstance().callAction("LoginTrader", "doControl", null);
+                MainDispatcher.getInstance().callView("Login", null);
                 break;
         }
 

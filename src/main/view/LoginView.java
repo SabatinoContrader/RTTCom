@@ -5,7 +5,7 @@ import main.controller.Request;
 
 import java.util.Scanner;
 
-public class LoginTraderView implements View{
+public class LoginView implements View{
 
     private String nomeUtente;
     private String password;
@@ -26,10 +26,8 @@ public class LoginTraderView implements View{
 
     @Override
     public String getInput() {
-
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-
     }
 
     @Override
@@ -37,7 +35,8 @@ public class LoginTraderView implements View{
         Request request = new Request();
         request.put("nomeUtente", nomeUtente);
         request.put("password", password);
-        MainDispatcher.getInstance().callAction("Home", "doControl", request);
+        MainDispatcher.getInstance().callAction("Login", "doControl", request);
     }
+
 
 }

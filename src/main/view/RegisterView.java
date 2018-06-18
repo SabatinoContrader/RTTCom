@@ -2,33 +2,34 @@ package main.view;
 
 import main.MainDispatcher;
 import main.controller.Request;
+
 import java.util.Scanner;
 
 public class RegisterView implements View {
 
-    private String nomeUtente;
-    private String passwordUtente;
-
+    private String username;
+    private String password;
+    private String nome;
+    private String cognome;
 
     @Override
     public void showResults(Request request) {
-        if(request!=null) {
-            boolean v = (boolean) request.get("response");
-            if (v) {
-                System.out.println("Utente aggiunto con successo");
-                MainDispatcher.getInstance().callView("LoginTrader",null);
-            } else {
-                System.out.println("Utente non aggiunto");
-            }
-        }
+
+
     }
 
     @Override
     public void showOptions() {
-        System.out.println("Inserisci il nome utente:");
-        this.nomeUtente = this.getInput();
-        System.out.println("Inserisci la password:");
-        this.passwordUtente = this.getInput();
+        System.out.println(" -------- REGISTRAZIONE TRADER --------");
+        System.out.println("Inserisci Username:");
+        username = getInput();
+        System.out.println("Inserisci Paassword:");
+        password = getInput();
+        System.out.println("Inserisci il Nome:");
+        nome = getInput();
+        System.out.println("Inserisci il Cognome:");
+        cognome = getInput();
+
     }
 
     @Override
@@ -40,8 +41,10 @@ public class RegisterView implements View {
     @Override
     public void submit() {
         Request request = new Request();
-        request.put("nomeUtente",this.nomeUtente);
-        request.put("passwordUtente",this.passwordUtente);
-        MainDispatcher.getInstance().callAction("Register","doControl",request);
+        request.put("nomeUtente", username);
+        request.put("password", password);
+        request.put("nome", nome);
+        request.put("cognome", cognome);
+        MainDispatcher.getInstance().callAction("Register", "doControl", request);
     }
 }

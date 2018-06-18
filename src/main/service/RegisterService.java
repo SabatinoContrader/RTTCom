@@ -1,17 +1,14 @@
 package main.service;
 
-import main.dao.RegisterDAO;
+import main.dao.UtenteDAO;
 
 public class RegisterService {
 
-    private RegisterDAO registerDao;
+    private UtenteDAO utenteDAO;
 
-    public RegisterService(){
-        this.registerDao = new RegisterDAO();
+    public RegisterService() {
+        this.utenteDAO = new UtenteDAO();
     }
 
-    public boolean doRegister(String username,String password){
-        return this.registerDao.doInsert(username,password);
-    }
 
 }

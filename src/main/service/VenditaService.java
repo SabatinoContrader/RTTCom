@@ -1,30 +1,35 @@
 package main.service;
 
-import main.dao.VenditaDAO;
-import main.model.Fornitore;
-import main.model.Vendita;
+import main.model.Canale;
+import main.model.Prodotto;
+import main.utils.Amazon;
+import main.utils.Privol;
 
 import java.util.List;
 
 public class VenditaService {
 
-
-
-        private VenditaDAO venditaDAO;
-
-        public VenditaService() {
-            this.venditaDAO = new VenditaDAO();
-        }
-
-    public Fornitore getProdottofornitore(int idProdotto)  {
-        //return this.venditaDAO.getProdottofornitore(idProdotto);
-        return null;
+    public VenditaService() {
     }
 
 
+    public List<Prodotto> getCatalogoVendita(int canale, double margine, List<Prodotto> listProdotti) {
 
-        public boolean modificavendita(Vendita vendita, int margine, double prezzo_acquisto) {
-            return this.venditaDAO.modificavendita(vendita,margine,prezzo_acquisto);
-     }
+        Canale canaleVendita = null;
+        if (canale == 1) {
+            canaleVendita = new Amazon();
+        } else if (canale == 2) {
+            canaleVendita = new Privol();
+        }
+
+
+        listProdotti.forEach(prodotto -> {
+            prodotto.setPrezzoVendita(prodotto.getPrezzoAcquisto() * (1 + margine));
+        });
+        if (canaleVendita != null)
+            canaleVendita.setCatalogoProdotti(listProdotti);
+
+        return listProdotti;
+    }
 
 }

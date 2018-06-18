@@ -1,11 +1,14 @@
-package main.model;
+package main.utils;
+
+import main.model.Canale;
+import main.model.Prodotto;
 
 import java.util.List;
 
-public class Privol implements Canale {
+public class Amazon implements Canale {
     @Override
     public void setCatalogoProdotti(List<Prodotto> prodotti) {
-        System.out.println("STO STAMPANDO DAL CANALE PRIVOL!!!");
+        System.out.println("STO STAMPANDO DAL CANALE AMAZON !!!");
         prodotti.forEach(prodotto -> System.out.println(prodotto));
     }
 

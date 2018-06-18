@@ -65,10 +65,10 @@ public class UtenteDAO {
             Utente utente = new Utente();
             if (resultSet.next()) {
                 utente.setId(resultSet.getInt("id"));
-                utente.setNome(resultSet.getString("nome"));
-                utente.setCognome(resultSet.getString("cognome"));
                 utente.setNomeUtente(resultSet.getString("username"));
                 utente.setPassword(resultSet.getString("password"));
+                utente.setNome(resultSet.getString("nome"));
+                utente.setCognome(resultSet.getString("cognome"));
                 preparedStatement.close();
                 return utente;
             }

@@ -13,10 +13,10 @@ public class Utente {
 
     public Utente(int id, String nome, String cognome, String nomeUtente, String password) {
         this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
         this.nomeUtente = nomeUtente;
         this.password = password;
+        this.nome = nome;
+        this.cognome = cognome;
     }
 
     public int getId() {

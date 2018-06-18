@@ -1,9 +1,9 @@
-<%@ page import="com.virtualpairprogrammers.domain.Prodotto" %>
+<%@ page import="com.virtualpairprogrammers.model.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
  <head>
-     <% List<Prodotto> all_product_fornitore = (List<Prodotto>) session.getAttribute("all_product_fornitore");%>
+     <% List<Prodotto> allProduct = (List<Prodotto>) session.getAttribute("all_product");%>
  </head>
  <body>
 
@@ -41,19 +41,24 @@
              MANUFACTURER
          </th>
          <th>
-            PREZZOACQUISTO
+            DESCRIZIONE
          </th>
          <th>
-             PREZZOVENDITA
+             DESCRIZIONE LUNGA
          </th>
+         <th>
+            PREZZO DI VENDITA
+          </th>
+
      </tr>
-        <%for (Prodotto prodotti : all_product_fornitore) { %>
+        <%for (Prodotto prodotti : allProduct) { %>
      <tr>
-        <td>
-            <input type="checkbox" name="products" value="<%= prodotti.getIdProduct()%>"/>
-        </td>
          <td>
-             <%= prodotti.getIdProduct()%>
+             <input type="checkbox" name="products" value="<%= prodotti.getId()%>"/>
+         </td>
+
+         <td>
+             <%= prodotti.getId()%>
          </td>
 
          <td>
@@ -72,16 +77,29 @@
              <%=  prodotti.getManufacturer()%>
          </td>
          <td>
-             <%=  prodotti.getPrezzoAcquisto()%>
+             <%=  prodotti.getDescrizione()%>
+         </td>
+         <td>
+             <%=  prodotti.getDescrizioneLunga()%>
          </td>
          <td>
              <%=  prodotti.getPrezzoVendita()%>
          </td>
+
      </tr>
      <% }%>
  </table>
 <input type="submit" value="SellProducts" name="richiesta">
 </form>
  <a href="home.jsp">Home</a>
+ <h2></h2>
+ <h2></h2>
+ <form action="" method="post">
+ <h2>----- PRODUCT OPTIONS -----</h2>
+ <h2>1 - Inserisci un nuovo Prodotto<input type="text" name=""></h2>
+ <h2>2 -Modifica un prodotto<input type="submit" value="" name=""></h2>
+ <h2>3 -Elimina un prodotto<input type="submit" value="" name=""></h2>
+ <a href="home.jsp">Home</a>
+ </form>
  </body>
 </html>

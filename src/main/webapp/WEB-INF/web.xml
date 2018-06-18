@@ -27,6 +27,11 @@
 		<servlet-class>com.virtualpairprogrammers.servlets.CanaleServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.RegisterServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>LoginTraderServlet</servlet-name>
 		<url-pattern>/LoginTraderServlet</url-pattern>
@@ -45,6 +50,11 @@
 	<servlet-mapping>
 		<servlet-name>CanaleServlet</servlet-name>
 		<url-pattern>/CanaleServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>RegisterServlet</servlet-name>
+		<url-pattern>/RegisterServlet</url-pattern>
 	</servlet-mapping>
 
 	<session-config>

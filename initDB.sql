@@ -1,5 +1,5 @@
 drop table utente;
-create table utente (id int auto_increment, username varchar(100),password varchar(100),nome varchar(100), cognome varchar(100), primary key(id,username), unique(username));
+create table utente (id int auto_increment, username varchar(100),password varchar(100),nome varchar(100), cognome varchar(100), primary key(id), unique(username));
 insert into utente (id,username,password,nome,cognome) values(1,'pippo','paperino','pippo','paperino');
 insert into utente (id,username,password,nome,cognome) values(2,'ciccio','bello','ciccio','bello');
 

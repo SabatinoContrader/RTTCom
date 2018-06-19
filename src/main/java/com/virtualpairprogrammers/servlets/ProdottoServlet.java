@@ -23,8 +23,6 @@ public class ProdottoServlet extends HttpServlet {
         prodottoService =  new ProdottoService();
         switch (scelta) {
             case "ModificaProdotto":
-                if(session.getAttribute("utente") == null)
-                    response.sendRedirect("login.jsp");
                 int prodottoModifica = Integer.parseInt(request.getParameter("id"));
                 Prodotto prodotto = prodottoService.get(prodottoModifica);
                 //session.setAttribute("prodotto", prodotto);
@@ -77,11 +75,11 @@ public class ProdottoServlet extends HttpServlet {
                 //response.sendRedirect("listProdotti.jsp");
                 break;
             case "EliminaProdotto":
-                int id_=Integer.parseInt(request.getParameter("id"));
-                this.prodottoService.delete(id_);
+                int idDelete=Integer.parseInt(request.getParameter("id"));
+                this.prodottoService.delete(idDelete);
                 request.setAttribute("all_product_fornitore",prodottoService.getAllProdotti());
                 getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
-            break;
+                break;
         }
 
     }

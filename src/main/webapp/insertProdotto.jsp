@@ -1,12 +1,15 @@
  <%@ page import="com.virtualpairprogrammers.model.Prodotto" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
      <% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");
 
      if (prodotto == null)
-     prodotto= new Prodotto();%>
+     prodotto = new Prodotto();
+
+     %>
+
 </head>
 <body>
 <form action="ProdottoServlet" method="post">

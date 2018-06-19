@@ -3,6 +3,7 @@ package com.virtualpairprogrammers.servlets;
 import com.virtualpairprogrammers.model.Prodotto;
 import com.virtualpairprogrammers.service.ProdottoService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +23,17 @@ public class ProdottoServlet extends HttpServlet {
         prodottoService =  new ProdottoService();
         switch (scelta) {
             case "ModificaProdotto":
+                if(session.getAttribute("utente") == null)
+                    response.sendRedirect("login.jsp");
                 int prodottoModifica = Integer.parseInt(request.getParameter("id"));
                 Prodotto prodotto = prodottoService.get(prodottoModifica);
-                session.setAttribute("prodotto", prodotto);
-                response.sendRedirect("insertProdotto.jsp");
+                request.setAttribute("prodotto",prodotto);
+                getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request, response);
                 break;
             case "ViewListProduct":
                 List<Prodotto> allProdotti = this.prodottoService.getAllProdotti();
-                session.setAttribute("all_product_fornitore", allProdotti);
-                response.sendRedirect("listProdotti.jsp");
+                request.setAttribute("all_product_fornitore", allProdotti);
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
                 break;
             case "SearchCategory":
                 String categoria = request.getParameter("category");
@@ -40,19 +43,18 @@ public class ProdottoServlet extends HttpServlet {
                     if(prodottoSearch.getCategory().contains(categoria))
                         searchProdotti.add(prodottoSearch);
                 }
-                session.setAttribute("all_product_fornitore", searchProdotti);
-                response.sendRedirect("listProdotti.jsp");
+                request.setAttribute("all_product_fornitore", searchProdotti);
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
                 break;
             case "SellProducts":
                 String[] prodottiSell = request.getParameterValues("products");
                 for (String prodottoSell : prodottiSell) {
                     System.out.println("ProdottoSell: " + prodottoSell);
                 }
-                response.sendRedirect("listProdotti.jsp");
-                break;
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
             case "ViewListProductFornitore":
-                session.setAttribute("all_product_fornitore", prodottoService.getProdottiDisponibili());
-                response.sendRedirect("listProdotti.jsp");
+                request.setAttribute("all_product_fornitore", prodottoService.getProdottiDisponibili());
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
             case "UpdateProdotto":
                 int id = -1;
                 try{
@@ -70,8 +72,8 @@ public class ProdottoServlet extends HttpServlet {
                     this.prodottoService.insert(newInsert);
                 else
                     this.prodottoService.update(newInsert);
-                session.setAttribute("all_product_fornitore", prodottoService.getAllProdotti());
-                response.sendRedirect("listProdotti.jsp");
+                request.setAttribute("all_product_fornitore", prodottoService.getAllProdotti());
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
                 break;
 
         }

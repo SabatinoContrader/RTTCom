@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
  <head>
-     <% List<Prodotto> all_product_fornitore = (List<Prodotto>) session.getAttribute("all_product_fornitore");%>
+     <% List<Prodotto> all_product_fornitore = (List<Prodotto>) request.getAttribute("all_product_fornitore");%>
  </head>
  <body>
 <h1>Benvenuto <%= request.getSession().getAttribute("utente")%></h1>

@@ -3,7 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-     <% Prodotto prodotto = (Prodotto) session.getAttribute("prodotto");%>
+     <% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");
+     if (prodotto ==null)
+     prodotto= new Prodotto();%>
 </head>
 <body>
 <form action="ProdottoServlet" method="post">

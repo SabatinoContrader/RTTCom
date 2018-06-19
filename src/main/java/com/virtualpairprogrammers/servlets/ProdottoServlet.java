@@ -27,25 +27,24 @@ public class ProdottoServlet extends HttpServlet {
                     response.sendRedirect("login.jsp");
                 int prodottoModifica = Integer.parseInt(request.getParameter("id"));
                 Prodotto prodotto = prodottoService.get(prodottoModifica);
-                request.setAttribute("prodotto",prodotto);
-                getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request, response);
+                //session.setAttribute("prodotto", prodotto);
+                request.setAttribute("prodotto", prodotto);
+                getServletContext().getRequestDispatcher("/insertProdotto.jsp").forward(request,response);
+                //response.sendRedirect("insertProdotto.jsp");
                 break;
             case "ViewListProduct":
                 List<Prodotto> allProdotti = this.prodottoService.getAllProdotti();
                 request.setAttribute("all_product_fornitore", allProdotti);
-                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
                 break;
             case "SearchCategory":
-                String categoria = request.getParameter("category");
-                List<Prodotto> allProdottiSearch = this.prodottoService.getAllProdotti();
-                final List<Prodotto> searchProdotti = new ArrayList<Prodotto>();
-                for (Prodotto prodottoSearch : allProdottiSearch) {
-                    if(prodottoSearch.getCategory().contains(categoria))
-                        searchProdotti.add(prodottoSearch);
-                }
-                request.setAttribute("all_product_fornitore", searchProdotti);
-                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
-                break;
+                String fieldOne = request.getParameter("colonna");
+                String fieldTwo = request.getParameter("campoRiga");
+                List<Prodotto> filterProduct = prodottoService.searchProduct(fieldOne,fieldTwo);
+                request.setAttribute("all_product_fornitore",filterProduct);
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
+                //System.out.println(filterProduct.get(0).getId()); <-- trucchetto per verificare se i dati arrivano fin qui
+                //response.sendRedirect("listProdotti.jsp");
             case "SellProducts":
                 String[] prodottiSell = request.getParameterValues("products");
                 for (String prodottoSell : prodottiSell) {
@@ -54,7 +53,8 @@ public class ProdottoServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
             case "ViewListProductFornitore":
                 request.setAttribute("all_product_fornitore", prodottoService.getProdottiDisponibili());
-                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
+                //response.sendRedirect("listProdotti.jsp");
             case "UpdateProdotto":
                 int id = -1;
                 try{
@@ -73,7 +73,8 @@ public class ProdottoServlet extends HttpServlet {
                 else
                     this.prodottoService.update(newInsert);
                 request.setAttribute("all_product_fornitore", prodottoService.getAllProdotti());
-                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
+                //response.sendRedirect("listProdotti.jsp");
                 break;
 
         }

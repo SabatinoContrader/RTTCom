@@ -4,12 +4,13 @@
 <html>
 <head>
      <% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");
-     if (prodotto ==null)
+
+     if (prodotto == null)
      prodotto= new Prodotto();%>
 </head>
 <body>
 <form action="ProdottoServlet" method="post">
-    <input type="hidden" name="id" value="<%= prodotto.getId()%>">
+    <h2>ID<input type="hidden" name="id" value="<%= prodotto.getId()%>"></h2>
     <h2>EAN<input type="text" name="ean" value="<%= prodotto.getEan()%>"></h2>
     <h2>Category<input type="text" name="category" value="<%= prodotto.getCategory()%>"></h2>
     <h2>Model<input type="text" name="model" value="<%= prodotto.getModel()%>"> </h2>

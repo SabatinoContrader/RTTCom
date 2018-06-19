@@ -370,7 +370,32 @@ public class ProdottoDAO {
             return false;
         }
 
-
-
     }
+
+    public List<Prodotto> search (String parameterOne, String parameterTwo){
+        String QUERY_SEARCH = "select * from prodotto where " + parameterOne + "=?";
+        List<Prodotto> listprodotto = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SEARCH);
+            preparedStatement.setString(1, parameterTwo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String ean = resultSet.getString("ean");
+                String category = resultSet.getString("category");
+                String model = resultSet.getString("model");
+                String manufacturer = resultSet.getString("manufacturer");
+                String descrizione = resultSet.getString("description");
+                String descrizioneLunga = resultSet.getString("long_description");
+                double prezzoVendita = resultSet.getDouble("sellPrice");
+                listprodotto.add(new Prodotto(id,ean,category,model,manufacturer,descrizione,descrizioneLunga,prezzoVendita));
+            }
+        }catch (SQLException e) {
+            //GestoreEccezioni.getInstance().gestisciEccezione(e);
+            System.out.println(".> ERRORE DI DIGITAZIONE DELLA PRIMA PAROLA CHIAVE <.");
+        }
+        return listprodotto;
+    }
+
 }

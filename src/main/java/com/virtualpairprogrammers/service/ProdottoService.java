@@ -93,7 +93,9 @@ public class ProdottoService {
         return this.prodottoDAO.insert(prodotto);
     }
 
-
+    public List<Prodotto> searchProduct(String parameterOne, String parameterTwo){
+        return prodottoDAO.search(parameterOne,parameterTwo);
+    }
 
     public boolean deleteProdotto (int prodotto) {
         return false;

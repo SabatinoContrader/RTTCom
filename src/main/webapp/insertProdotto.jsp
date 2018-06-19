@@ -1,4 +1,4 @@
-<%@ page import="com.virtualpairprogrammers.model.Prodotto" %>
+ <%@ page import="com.virtualpairprogrammers.model.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

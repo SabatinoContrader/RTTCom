@@ -56,7 +56,7 @@ public class ProdottoServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
                 //response.sendRedirect("listProdotti.jsp");
             case "UpdateProdotto":
-                int id = -1;
+                int id = 0;
                 try{
                     id = Integer.parseInt(request.getParameter("id"));
                 }catch(Exception e){}
@@ -68,7 +68,7 @@ public class ProdottoServlet extends HttpServlet {
                 String descrizioneLunga = request.getParameter("descrizioneLunga");
                 double prezzoVendita = Double.parseDouble(request.getParameter("prezzoVendita"));
                 Prodotto newInsert = new Prodotto(id, ean, category, model, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
-                if(id == -1)
+                if(id == 0)
                     this.prodottoService.insert(newInsert);
                 else
                     this.prodottoService.update(newInsert);
@@ -76,7 +76,12 @@ public class ProdottoServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
                 //response.sendRedirect("listProdotti.jsp");
                 break;
-
+            case "EliminaProdotto":
+                int id_=Integer.parseInt(request.getParameter("id"));
+                this.prodottoService.delete(id_);
+                request.setAttribute("all_product_fornitore",prodottoService.getAllProdotti());
+                getServletContext().getRequestDispatcher("/listProdotti.jsp").forward(request,response);
+            break;
         }
 
     }

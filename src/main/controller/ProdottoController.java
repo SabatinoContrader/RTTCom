@@ -4,6 +4,8 @@ import main.MainDispatcher;
 import main.model.Prodotto;
 import main.service.ProdottoService;
 
+import java.util.List;
+
 public class ProdottoController implements Controller {
 
     private ProdottoService prodottoService = new ProdottoService();
@@ -23,9 +25,16 @@ public class ProdottoController implements Controller {
                 MainDispatcher.getInstance().callView("ProductsSearch", request);
             }
             if(request.get("action").toString().equalsIgnoreCase("applyFilter")){
-                request.put("prodotti", prodottoService.search(request.get("parolaChiaveOne").toString(), request.get("parolaChiaveTwo").toString()));
+                //request.put("prodotti", prodottoService.search(request.get("parolaChiaveOne").toString(), request.get("parolaChiaveTwo").toString()));
+                String parolaChiaveOne = request.get("parolaChiaveOne").toString();
+                String parolaChiaveTwo = request.get("parolaChiaveTwo").toString();
+                List<Prodotto> filterProduct = prodottoService.searchProduct(parolaChiaveOne,parolaChiaveTwo);
                 request.put("mode", "filtered");
+                request.put("filterListProduct", filterProduct);
                 MainDispatcher.getInstance().callView("ListaProdotti", request);
+                //request.put("mode", "filtered");
+                //MainDispatcher.getInstance().callView("ListaProdotti", request);
+                // ---------------------------- eseguo qui una modifica ---------------------------------------
             }
             if(request.get("action").toString().equalsIgnoreCase("sellProducts")){
                 MainDispatcher.getInstance().callView("Vendita", request);
@@ -39,7 +48,6 @@ public class ProdottoController implements Controller {
                 Prodotto inseriscoProdotto = (Prodotto) request.get("insertProdotto");
                 prodottoService.insert(inseriscoProdotto);
                 MainDispatcher.getInstance().callView("Home", request);
-                //-----------------------forse qui serve altro ----------------------
             }
             if(request.get("action").toString().equalsIgnoreCase("visualizzaModificaProdotto")){
                 request.put("prodotto", prodottoService.get(Integer.parseInt(request.get("idProdotto").toString())));

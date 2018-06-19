@@ -73,6 +73,10 @@ public class ProdottoService {
         return prodottiFiltrati;
     }
 
+    public List<Prodotto> searchProduct(String parameterOne, String parameterTwo){
+        return prodottoDAO.search(parameterOne,parameterTwo);
+    }
+
    /* public List<ProdottoFornitore> prodottoFornitore(){
         return this.prodottoDAO.prodottoFornitore();
     }
@@ -87,7 +91,6 @@ public class ProdottoService {
     }
 
     public int insert (Prodotto prodotto) {
-        //return false;
         return this.prodottoDAO.insert(prodotto);
     }
 

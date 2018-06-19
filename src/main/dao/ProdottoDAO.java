@@ -348,28 +348,29 @@ public class ProdottoDAO {
             return productId;
         }
 
-    public boolean insertProdotto(Prodotto prodotto) {
-
-        Connection connection = ConnectionSingleton.getInstance();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_PRODOTTO);
-            preparedStatement.setInt(1,prodotto.getId());
-            preparedStatement.setString(2, prodotto.getEan());
-            preparedStatement.setString(3, prodotto.getCategory());
-            preparedStatement.setString(4, prodotto.getModel());
-            preparedStatement.setString(5, prodotto.getManufacturer());
-            preparedStatement.setString(6, prodotto.getDescrizione());
-            preparedStatement.setString(7, prodotto.getDescrizioneLunga());
-            preparedStatement.setDouble(8, prodotto.getPrezzoVendita());
-            return preparedStatement.execute();
+        public List<Prodotto> search (String parameterOne, String parameterTwo){
+            String QUERY_SEARCH = "select * from prodotto where " + parameterOne + "=?";
+            List<Prodotto> listprodotto = new ArrayList<>();
+            Connection connection = ConnectionSingleton.getInstance();
+            try{
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SEARCH);
+                preparedStatement.setString(1, parameterTwo);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while(resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    String ean = resultSet.getString("ean");
+                    String category = resultSet.getString("category");
+                    String model = resultSet.getString("model");
+                    String manufacturer = resultSet.getString("manufacturer");
+                    String descrizione = resultSet.getString("description");
+                    String descrizioneLunga = resultSet.getString("long_description");
+                    double prezzoVendita = resultSet.getDouble("sellPrice");
+                    listprodotto.add(new Prodotto(id,ean,category,model,manufacturer,descrizione,descrizioneLunga,prezzoVendita));
+                }
+            }catch (SQLException e) {
+                //GestoreEccezioni.getInstance().gestisciEccezione(e);
+                System.out.println(".> ERRORE DI DIGITAZIONE DELLA PRIMA PAROLA CHIAVE <.");
+            }
+            return listprodotto;
         }
-        catch (SQLException e) {
-            System.out.println("ERRORE DI LETTURA NEL DATABASE");
-            //GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
-        }
-
-
-
-    }
 }

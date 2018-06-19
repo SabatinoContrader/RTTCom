@@ -20,9 +20,9 @@ public class ProductsSearchView implements View{
     }
 
     public void showOptions() {
-        System.out.println("Inserisci Campo:");
+        System.out.println("Inserisci 1^ Campo:");
         parolaChiaveOne = getInput();
-        System.out.println("Inserisci parola chiave:");
+        System.out.println("Inserisci 2^ Campo:");
         parolaChiaveTwo = getInput();
         System.out.println();
     }

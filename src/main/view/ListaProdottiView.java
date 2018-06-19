@@ -5,6 +5,7 @@ import main.controller.Request;
 import main.model.Prodotto;
 import main.service.ProdottoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,9 +24,18 @@ public class ListaProdottiView implements View{
 
     @Override
     public void showResults(Request request) {
-        this.prodotti=(List<Prodotto>) request.get("prodotti");
-        if(request != null && request.get("mode") != null)
-            this.mode = request.get("mode").toString();
+        //this.prodotti=(List<Prodotto>) request.get("prodotti");
+        if(request != null && request.get("mode") != null){
+        this.mode = request.get("mode").toString();
+        List<Prodotto> listProdotti = (ArrayList<Prodotto>)request.get("filterListProduct");
+        for(Prodotto prodotto:listProdotti){
+                System.out.println(prodotto.toString());
+            }
+        }else {
+            System.out.println(".> Nessun elemento presente nel database <.");
+        }
+           // this.mode = request.get("mode").toString();
+
 
         if(mode.equalsIgnoreCase("filtered"))
             System.out.println("----- Prodotti filtrati -----");
@@ -33,7 +43,7 @@ public class ListaProdottiView implements View{
             System.out.println("----- Prodotti disponibili -----");
 
         System.out.println();
-        this.prodotti.forEach(prodotto -> System.out.println(prodotto));
+        //this.prodotti.forEach(prodotto -> System.out.println(prodotto));
     }
 
     @Override

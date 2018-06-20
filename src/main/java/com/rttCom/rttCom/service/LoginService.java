@@ -17,7 +17,7 @@ public class LoginService {
     }
 	
 	public Boolean login (String username, String password) {
-		Utente utente = utenteRepository.findByUsernameAndPassword(username, password);
+		Utente utente = utenteRepository.findByUsername(username);
         if(utente == null){
             return false;
         }else{

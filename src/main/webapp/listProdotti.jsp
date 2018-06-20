@@ -55,6 +55,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		</form>
+		<input type="submit" value="SellProducts" name="richiesta"> <button href="home.jsp">Home</button><h4><a href="insertProdotto.jsp">Inserisci Prodotto</a></h4>
+	</form>
 </body>
 </html>

@@ -25,9 +25,9 @@ public class LoginTraderController {
     }
 
 	@RequestMapping(value="/logintraderControl", method = RequestMethod.POST)
-    public String loginController (@RequestParam("username") String nomeUtente, @RequestParam("username") String password, HttpServletRequest request, Map<String, Object> model) {
+    public String loginController (@RequestParam("username") String nomeUtente, @RequestParam("password") String password, HttpServletRequest request, Map<String, Object> model) {
 		
-		if (loginService.login(nomeUtente, password) != null) {
+		if (loginService.login(nomeUtente, password)) {
             	
                 HttpSession session = request.getSession(true);
                 session.setAttribute("utente", nomeUtente);
@@ -35,7 +35,7 @@ public class LoginTraderController {
             }
             else {
    
-                return "login";
+                return "index";
             }
             
         }

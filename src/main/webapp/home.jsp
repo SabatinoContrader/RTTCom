@@ -8,8 +8,8 @@
      <h2>    <h2>
 
      <h3>1. Visualizza tutti i Prodotti</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <form action="/prodotto/ritornaProdotti" method="get">
+     <input type="submit" value="listProdotti" name="richiesta">
      </form>
 
      <h3>2. Elimina un prodotto</h3>

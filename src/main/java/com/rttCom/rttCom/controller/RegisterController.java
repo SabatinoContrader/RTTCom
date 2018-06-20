@@ -34,7 +34,8 @@ public class RegisterController {
                 return "index";
             else
                 return "register";
-        }return "register";
+        }
+        return "register";
             
         }
 }

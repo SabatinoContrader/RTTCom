@@ -18,7 +18,7 @@ public class ProdottoDAO {
                 "manufacturer," +
                 "description," +
                 "long_description," +
-                "sellPrice) " +
+                "sell_price) " +
                 "VALUES " +
                 "(" +
                 "?," +
@@ -81,7 +81,7 @@ public class ProdottoDAO {
                 "manufacturer = ?, " +
                 "description = ?, " +
                 "long_description = ?, " +
-                "sellPrice = ? " +
+                "sell_price = ? " +
                 "WHERE id = ?";
 
         private final String QUERY_DELETE = "DELETE FROM prodotto\n" +
@@ -102,7 +102,7 @@ public class ProdottoDAO {
                     prodotto.setManufacturer(resultSet.getString("manufacturer"));
                     prodotto.setDescrizione(resultSet.getString("description"));
                     prodotto.setDescrizioneLunga(resultSet.getString("long_description"));
-                    prodotto.setPrezzoVendita(resultSet.getDouble("sellPrice"));
+                    prodotto.setPrezzoVendita(resultSet.getDouble("sell_price"));
 
                     PreparedStatement preparedStatement1 = connection.prepareStatement(QUERY_GET_PRODOTTI_FORNITORE);
                     preparedStatement1.setInt(1, id);
@@ -143,7 +143,7 @@ public class ProdottoDAO {
                     prodotto.setManufacturer(resultSet.getString("manufacturer"));
                     prodotto.setDescrizione(resultSet.getString("description"));
                     prodotto.setDescrizioneLunga(resultSet.getString("long_description"));
-                    prodotto.setPrezzoVendita(resultSet.getDouble("sellPrice"));
+                    prodotto.setPrezzoVendita(resultSet.getDouble("sell_price"));
 
                     PreparedStatement preparedStatement1 = connection.prepareStatement(QUERY_GET_PRODOTTI_FORNITORE);
                     preparedStatement1.setInt(1, prodotto.getId());
@@ -184,7 +184,7 @@ public class ProdottoDAO {
                     prodotto.setManufacturer(resultSet.getString("manufacturer"));
                     prodotto.setDescrizione(resultSet.getString("description"));
                     prodotto.setDescrizioneLunga(resultSet.getString("long_description"));
-                    prodotto.setPrezzoVendita(resultSet.getDouble("sellPrice"));
+                    prodotto.setPrezzoVendita(resultSet.getDouble("sell_price"));
 
                     PreparedStatement preparedStatement1 = connection.prepareStatement(QUERY_GET_PRODOTTI_FORNITORE);
                     preparedStatement1.setInt(1, prodotto.getId());
@@ -388,7 +388,7 @@ public class ProdottoDAO {
                 String manufacturer = resultSet.getString("manufacturer");
                 String descrizione = resultSet.getString("description");
                 String descrizioneLunga = resultSet.getString("long_description");
-                double prezzoVendita = resultSet.getDouble("sellPrice");
+                double prezzoVendita = resultSet.getDouble("sell_price");
                 listprodotto.add(new Prodotto(id,ean,category,model,manufacturer,descrizione,descrizioneLunga,prezzoVendita));
             }
         }catch (SQLException e) {

@@ -16,13 +16,13 @@ insert into fornitore (id, nome) values(2,'Inditex');
 insert into fornitore (id, nome) values(3,'Brico');
 
 drop table prodotto;
-create table prodotto (id int auto_increment, ean varchar(150) unique, category varchar(100), model varchar(100), manufacturer varchar(100),description varchar(2048), long_description varchar(2048),sellPrice double, primary key (id));
-insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (16,'EANPROVA 1','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 100);
-insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (17,'EANPROVA 2','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 50);
-insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (18,'EANPROVA 3','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 80);
-insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (19,'EANPROVA 4','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 30);
-insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (22,'EANPROVA 5','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 150);
-insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sellPrice) values (23,'EANPROVA 6','Categoria 1','Prova','Samsung','Descrizione 1', 'Descrizione lunga 1', 200);
+create table prodotto (id int auto_increment, ean varchar(150) unique, category varchar(100), model varchar(100), manufacturer varchar(100),description varchar(2048), long_description varchar(2048),sell_price double, primary key (id));
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sell_price) values (16,'EANPROVA 1','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 100);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sell_price) values (17,'EANPROVA 2','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 50);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sell_price) values (18,'EANPROVA 3','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 80);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sell_price) values (19,'EANPROVA 4','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 30);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sell_price) values (22,'EANPROVA 5','Categoria 1','Modello 1','Manufacturer 1','Descrizione 1', 'Descrizione lunga 1', 150);
+insert into  prodotto (id, ean, category, model, manufacturer,description, long_description,sell_price) values (23,'EANPROVA 6','Categoria 1','Prova','Samsung','Descrizione 1', 'Descrizione lunga 1', 200);
 
 
 drop table prodotto_fornitore;

@@ -25,7 +25,7 @@ public class RegisterController {
         this.loginService = loginService;
     }
 
-	@RequestMapping(value="/registerControl", method = RequestMethod.POST)
+	@RequestMapping(value="/registerControl", method = RequestMethod.GET)
     public String RegisterController (@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("nome") String nome, @RequestParam("cognome") String cognome, HttpServletRequest request, Map<String, Object> model) {
 		
 	

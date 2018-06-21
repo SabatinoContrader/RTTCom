@@ -5,7 +5,8 @@
 </head>
 <body>
 
-<form action = "/utente/registerControl" method= "post">
+<form action = "/utente/registerControl" method= "GET">
+
 <h2>username: <input type = "text" id = "user" name ="username"></h2>
 <h2>password: <input type = "text" id = "pass" name ="password"></h2>
 <h2>Nome:<input type="text" name="nome"></h2>

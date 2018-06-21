@@ -61,5 +61,20 @@
 			type="button" onclick="location.href='/home.jsp'"
 			value="Back to home" />
 	</form>
+	
+	<c:choose>
+		<c:when test="${result == 'ok'}">
+			<p>
+				<strong>prodotto inserito con successo</strong>
+			</p>
+		</c:when>
+
+		<c:when test="${result == 'ko'}">
+			<p>
+				<strong>ERRORE durante l'inserimento</strong>
+			</p>
+		</c:when>
+	</c:choose>
+	
 </body>
 </html>

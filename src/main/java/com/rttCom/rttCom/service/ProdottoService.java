@@ -27,9 +27,9 @@ public class ProdottoService {
         return this.prodottoRepository.findAll();
     }
 	
-	public void insert(Prodotto prodotto) {
-		if(prodottoRepository.findByEan(prodotto.getEan()) != null)
+	public boolean insert(Prodotto prodotto) {
 			prodottoRepository.save(prodotto);
+			return true;
 	}
 	
 	public void delete(int id) {

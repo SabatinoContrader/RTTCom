@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-
 
 </head>
 <body>
@@ -26,18 +26,19 @@
 				value="${prodotto.manufacturer}">
 		</h2>
 		<h2>
-			Descrizione<input type="text" name="descrizione"
+			Descrizione<input type="text" name="description"
 				value="${prodotto.description}">
 		</h2>
 		<h2>
-			Descrizione lunga<input type="text" name="descrizioneLunga"
-				value="${prodotto.long_descriptioin}">
+			Descrizione lunga<input type="text" name="long_description"
+				value="${prodotto.long_description}">
 		</h2>
 		<h2>
-			Prezzo di Vendita<input type="text" name="prezzoVendita"
+			Prezzo di Vendita<input type="text" name="sell_price"
 				value="${prodotto.sell_price}">
 		</h2>
 		<input type="submit" value="UpdateProdotto" name="richiesta">
 	</form>
+
 </body>
 </html>

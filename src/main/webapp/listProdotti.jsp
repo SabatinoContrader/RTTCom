@@ -55,10 +55,10 @@
 			</c:forEach>
 		</table>
 		<input type="submit" value="SellProducts" name="richiesta"> <input
-			type="button" onclick="location.href='insertProdotto.jsp'"
+			type="button" onclick="location.href='/insertProdotto.jsp'"
 			value="InsertProduct" />
 		<input
-			type="button" onclick="location.href='home.jsp'"
+			type="button" onclick="location.href='/home.jsp'"
 			value="Back to home" />
 	</form>
 </body>

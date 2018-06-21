@@ -19,4 +19,6 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	String findByEan(String ean);
 	Prodotto save(Prodotto prodotto);
 	
+	void deleteById(Integer id);
+	
 }

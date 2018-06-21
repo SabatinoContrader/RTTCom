@@ -46,10 +46,10 @@
 					<td>${prodotto.sell_price}</td>
 
 					<td><a
-						href="ProdottoServlet?richiesta=ModificaProdotto&id=${prodotti.id}">Modifica</a>
+						href="/prodotto/ModificaProdotto?id=${prodotto.id}">Modifica</a>
 					</td>
 					<td><a
-						href="ProdottoServlet?richiesta=EliminaProdotto&id=${prodotti.id}">Elimina</a>
+						href="/prodotto/EliminaProdotto?id=${prodotto.id}">Elimina</a>
 					</td>
 				</tr>
 			</c:forEach>

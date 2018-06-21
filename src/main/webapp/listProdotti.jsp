@@ -31,11 +31,10 @@
 
 			</tr>
 			<c:forEach items="${listProdotti}" var="prodotto">
-				<!-- codice spring per visualizzare gli annunci -->
 
 				<tr>
 					<td><input type="checkbox" name="products"
-						value="${prodotti.Id}" /></td>
+						value="${prodotti.id}" /></td>
 					<td></td>
 					<td>${prodotto.id}</td>
 					<td>${prodotto.ean}</td>
@@ -47,15 +46,20 @@
 					<td>${prodotto.sell_price}</td>
 
 					<td><a
-						href="ProdottoServlet?richiesta=ModificaProdotto&id=${prodotti.Id}">Modifica</a>
+						href="ProdottoServlet?richiesta=ModificaProdotto&id=${prodotti.id}">Modifica</a>
 					</td>
 					<td><a
-						href="ProdottoServlet?richiesta=EliminaProdotto&id=${prodotti.Id}">Elimina</a>
+						href="ProdottoServlet?richiesta=EliminaProdotto&id=${prodotti.id}">Elimina</a>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="SellProducts" name="richiesta"> <button href="home.jsp">Home</button><h4><a href="insertProdotto.jsp">Inserisci Prodotto</a></h4>
+		<input type="submit" value="SellProducts" name="richiesta"> <input
+			type="button" onclick="location.href='insertProdotto.jsp'"
+			value="InsertProduct" />
+		<input
+			type="button" onclick="location.href='home.jsp'"
+			value="Back to home" />
 	</form>
 </body>
 </html>

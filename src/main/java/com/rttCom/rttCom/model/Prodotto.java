@@ -37,13 +37,13 @@ public class Prodotto {
 	// private List<ProdottoFornitore> listaAcquisto;
 
 	@Column
-	private int sell_price;
+	private double sell_price;
 
 	public Prodotto() {
 	}
 
 	public Prodotto(int id, String ean, String category, String model, String manufacturer, String description,
-			String long_description, int sell) {
+			String long_description, double sell) {
 		super();
 		this.id = id;
 		this.ean = ean;
@@ -126,11 +126,11 @@ public class Prodotto {
 		// Da implementare
 	}
 
-	public int getSell_price() {
+	public double getSell_price() {
 		return sell_price;
 	}
 
-	public void setSell_price(int sell_price) {
+	public void setSell_price(double sell_price) {
 		this.sell_price = sell_price;
 	}
 

@@ -16,4 +16,7 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	
 	List<Prodotto> findAll();
 	
+	String findByEan(String ean);
+	Prodotto save(Prodotto prodotto);
+	
 }

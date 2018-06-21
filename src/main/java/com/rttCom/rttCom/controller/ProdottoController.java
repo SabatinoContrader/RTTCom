@@ -38,10 +38,8 @@ public class ProdottoController {
 	
 	@RequestMapping(value = "/insertProdotto", method = RequestMethod.POST)
 	public String insertProdotti(HttpServletRequest request, Model model){
-		int id=0;
-        try{
-            id = Integer.parseInt(request.getParameter("id"));
-        }catch(Exception e){}
+		Prodotto prodotto;
+		boolean result;
 		String ean = request.getParameter("ean");
         String category = request.getParameter("category");
         String modello = request.getParameter("model");
@@ -49,9 +47,17 @@ public class ProdottoController {
         String descrizione = request.getParameter("description");
         String descrizioneLunga = request.getParameter("long_description");
         double prezzoVendita = Double.parseDouble(request.getParameter("sell_price"));
-        Prodotto newInsert = new Prodotto(id, ean, category, modello, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
-		prodottoService.insert(newInsert);
-		return "UpdateProdotto";
+        prodotto = new Prodotto(0, ean, category, modello, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
+		result = prodottoService.insert(prodotto);
+		if(!result) {
+		model.addAttribute("result", "ko");
+			return "insertProdotto";
+		}
+		model.addAttribute("result", "ok");
+		
+		model.addAttribute("listProdotti", prodottoService.getAllProdotti());
+		return "listProdotti";
+		
 	}
 
 	@RequestMapping(value = "/EliminaProdotto", method = RequestMethod.GET) 

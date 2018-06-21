@@ -20,10 +20,6 @@
      <input type="submit" value="SearchProduct" name="richiesta">
      </form>
 
-     <h3>4.logout<h3>
-     <form action="LogoutServlet" method="post">
-     <input type="submit" value="Logout" name="Logout">
-     </form>
-
+     <input type="button" onclick="location.href='/index.jsp'" value = "Logout"/>
 </body>
 </html>

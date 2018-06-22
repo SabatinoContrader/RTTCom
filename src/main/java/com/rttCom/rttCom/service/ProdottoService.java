@@ -32,6 +32,16 @@ public class ProdottoService {
 			return true;
 	}
 	
+	public boolean updateProdotto(Prodotto prodotto, int id) {
+		prodottoRepository.updateProdotto(prodotto.getEan(), prodotto.getCategory(), prodotto.getModel(), prodotto.getManufacturer(), prodotto.getDescription(), prodotto.getLong_description(), prodotto.getSell_price(), id);
+		return true;
+	}
+	
+	public Prodotto getProdottoById(int id) {
+		Prodotto prodotto=prodottoRepository.findById(id);
+		return prodotto;
+	}
+	
 	public void delete(int id) {
 		prodottoRepository.deleteById(id);
 	}

@@ -7,10 +7,24 @@
 
 </head>
 <body>
+
+
 	<form action="/prodotto/insertProdotto" method="post">
-		<h2>
-			ID<input type="hidden" name="id" value="${prodotto.id}">
-		</h2>
+
+		<c:choose>
+			<c:when test="${prodotto.id== null}">
+				<h2>
+					ID<input  name="id" value="0">
+				</h2>
+			</c:when>
+
+			<c:when test="${prodotto.id!= null}">
+				<h2>
+					ID<input  name="id" value="${prodotto.id}">
+				</h2>
+			</c:when>
+		</c:choose>
+
 		<h2>
 			EAN<input type="text" name="ean" value="${prodotto.ean}">
 		</h2>

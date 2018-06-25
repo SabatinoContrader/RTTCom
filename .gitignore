@@ -26,3 +26,7 @@
 /.metadata/
 
 /.metadata/
+/.gitignore
+/mvnw
+/mvnw.cmd
+/pom.xml

@@ -27,57 +27,72 @@ public class ProdottoController {
 		this.prodottoService = prodottoService;
 	}
 
-	@RequestMapping(value = "/ritornaProdotti", method = RequestMethod.GET) 
+	@RequestMapping(value = "/ritornaProdotti", method = RequestMethod.GET)
 	public String ritornaProdotti(Model model) {
-		
+
 		List<Prodotto> prodotti = new ArrayList<Prodotto>();
 		prodotti = prodottoService.getAllProdotti();
 		model.addAttribute("listProdotti", prodotti);
 		return "listProdotti";
 	}
-	
+
 	@RequestMapping(value = "/insertProdotto", method = RequestMethod.POST)
-	public String insertProdotti(HttpServletRequest request, Model model){
+	public String insertProdotti(HttpServletRequest request, Model model) {
 		Prodotto prodotto;
 		boolean result;
-		int id =Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		String ean = request.getParameter("ean");
-        String category = request.getParameter("category");
-        String modello = request.getParameter("model");
-        String manufacturer = request.getParameter("manufacturer");
-        String descrizione = request.getParameter("description");
-        String descrizioneLunga = request.getParameter("long_description");
-        double prezzoVendita = Double.parseDouble(request.getParameter("sell_price"));
-        prodotto = new Prodotto(0, ean, category, modello, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
-        if (id==0) {
+		String category = request.getParameter("category");
+		String modello = request.getParameter("model");
+		String manufacturer = request.getParameter("manufacturer");
+		String descrizione = request.getParameter("description");
+		String descrizioneLunga = request.getParameter("long_description");
+		double prezzoVendita = Double.parseDouble(request.getParameter("sell_price"));
+		prodotto = new Prodotto(0, ean, category, modello, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
+		if (id == 0) {
 			result = prodottoService.insert(prodotto);
-        }else {
-        	result = prodottoService.updateProdotto(prodotto, id);
-        	}
-		if(!result) {
-		model.addAttribute("result", "ko");
+		} else {
+			result = prodottoService.updateProdotto(prodotto, id);
+		}
+		if (!result) {
+			model.addAttribute("result", "ko");
 			return "insertProdotto";
 		}
 		model.addAttribute("result", "ok");
-		
+
 		model.addAttribute("listProdotti", prodottoService.getAllProdotti());
 		return "listProdotti";
-		
-	}
-	
-	@RequestMapping(value = "/ModificaProdotto", method = RequestMethod.GET)
-	public String modificaProdotti(@RequestParam("id") int id, Model model) {
-	         model.addAttribute("prodotto", this.prodottoService.getProdottoById(id));
-	         return "insertProdotto";
+
 	}
 
-	@RequestMapping(value = "/EliminaProdotto", method = RequestMethod.GET) 
-	public String cancellaprodotto(@RequestParam("id") int id, Model model) {
-         this.prodottoService.delete(id);
-         model.addAttribute("listProdotti", prodottoService.getAllProdotti());
-         return "listProdotti";
-		
+	@RequestMapping(value = "/ModificaProdotto", method = RequestMethod.GET)
+	public String modificaProdotti(@RequestParam("id") int id, Model model) {
+		model.addAttribute("prodotto", this.prodottoService.getProdottoById(id));
+		return "insertProdotto";
 	}
-	
-	
+
+	@RequestMapping(value = "/EliminaProdotto", method = RequestMethod.GET)
+	public String cancellaprodotto(@RequestParam("id") int id, Model model) {
+		this.prodottoService.delete(id);
+		model.addAttribute("listProdotti", prodottoService.getAllProdotti());
+		return "listProdotti";
+
+	}
+
+	@RequestMapping(value = "/SearchProdotto", method = RequestMethod.GET)
+	public String searchprodotto(@RequestParam("colonna") String colonna, @RequestParam("campo") String campo,
+			Model model) {
+		List<Prodotto> prodottifiltrati = new ArrayList<Prodotto>();
+		prodottifiltrati = prodottoService.search(colonna, campo);
+		model.addAttribute("listProdotti", prodottifiltrati);
+		return "listProdotti";
+
+	}
+
+	@RequestMapping(value = "/SearchPriceForInterval", method = RequestMethod.GET)
+	public String searchPriceForInterval(@RequestParam("priceInterval") String priceInterval, Model model) {
+		model.addAttribute("listProdotti", this.prodottoService.searchPriceforInterval(priceInterval));
+		return "listProdotti";
+	}
+
 }

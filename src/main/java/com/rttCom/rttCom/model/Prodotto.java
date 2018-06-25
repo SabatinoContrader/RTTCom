@@ -36,8 +36,8 @@ public class Prodotto {
 
 	// private List<ProdottoFornitore> listaAcquisto;
 
-	@Column
-	private double sell_price;
+	@Column(name="sell_price")
+	private double sellPrice;
 
 	public Prodotto() {
 	}
@@ -52,7 +52,7 @@ public class Prodotto {
 		this.manufacturer = manufacturer;
 		this.description = description;
 		this.long_description = long_description;
-		this.sell_price = sell;
+		this.sellPrice = sell;
 	}
 
 	public int getId() {
@@ -127,11 +127,11 @@ public class Prodotto {
 	}
 
 	public double getSell_price() {
-		return sell_price;
+		return sellPrice;
 	}
 
 	public void setSell_price(double sell_price) {
-		this.sell_price = sell_price;
+		this.sellPrice = sell_price;
 	}
 
 }

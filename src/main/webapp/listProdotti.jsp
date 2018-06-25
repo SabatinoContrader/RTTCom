@@ -6,11 +6,43 @@
 </head>
 
 <body>
-	<form action="ProdottoServlet" method="post">
-		<input type="text" name="colonna"> <input type="text"
-			name="campoRiga"> <input type="submit" value="SearchCategory"
-			name="richiesta">
+	<form action="/prodotto/SearchProdotto" method="get">
+		<div>
+			Seleziona ricerca <select name="colonna">
+				<option disabled selected value>-- Select an Option --</option>
+				<option value="id">ID</option>
+				<option value="ean">EAN</option>
+				<option value="category">Category</option>
+				<option value="model">Model</option>
+				<option value="manufacturer">Manufacturer</option>
+				<option value="price">Price</option>
+			</select>
+		</div>
+
+		<div>
+			Inserisci valore <input type="text" name="campo">
+		</div>
+
+		<div>
+			<input type="submit" value="listProdottiFiltrati" name="richiesta">
+		</div>
 	</form>
+
+	<form action="/prodotto/SearchPriceForInterval" method="get">
+
+		Scegli Intervallo <select name="priceInterval">
+			<optgroup label="Price">
+				<option value="1-200">Fascia 1-200</option>
+				<option value="201-300">Fascia 201-300</option>
+				<option value="301-400">Fascia 301-400</option>
+				<option value="401-500">Fascia 401-500</option>
+				<option value="501-600">Fascia 501-600</option>
+				<option value="601-700">Fascia 601-700</option>
+			</optgroup>
+		</select> <input type="submit" value="Cerca Prodotto" name="richiesta">
+	</form>
+
+
 	<form action="/prodotto/ritornaProdotti" method="get">
 		<table>
 			<tr>
@@ -27,9 +59,11 @@
 				<th>MANUFACTURER</th>
 				<th>DESCRIZIONE</th>
 				<th>DESCRIZIONE LUNGA</th>
-				<th>PREZZO ACQUISTO</th>
+				<th>PREZZO VENDITA</th>
 
 			</tr>
+
+
 			<c:forEach items="${listProdotti}" var="prodotto">
 
 				<tr>
@@ -45,23 +79,19 @@
 					<td>${prodotto.long_description}</td>
 					<td>${prodotto.sell_price}</td>
 
-					<td><a
-						href="/prodotto/ModificaProdotto?id=${prodotto.id}">Modifica</a>
+					<td><a href="/prodotto/ModificaProdotto?id=${prodotto.id}">Modifica</a>
 					</td>
-					<td><a
-						href="/prodotto/EliminaProdotto?id=${prodotto.id}">Elimina</a>
+					<td><a href="/prodotto/EliminaProdotto?id=${prodotto.id}">Elimina</a>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<input type="submit" value="SellProducts" name="richiesta"> <input
 			type="button" onclick="location.href='/insertProdotto.jsp'"
-			value="InsertProduct" />
-		<input
-			type="button" onclick="location.href='/home.jsp'"
-			value="Back to home" />
+			value="InsertProduct" /> <input type="button"
+			onclick="location.href='/home.jsp'" value="Back to home" />
 	</form>
-	
+
 	<c:choose>
 		<c:when test="${result == 'ok'}">
 			<p>
@@ -75,6 +105,5 @@
 			</p>
 		</c:when>
 	</c:choose>
-	
 </body>
 </html>

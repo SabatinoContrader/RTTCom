@@ -1,5 +1,5 @@
 package com.rttCom.rttCom.model;
-
+/*
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -99,3 +99,4 @@ public class ProdottoFornitore {
 	
     
 }
+*/

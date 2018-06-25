@@ -12,6 +12,7 @@ import com.rttCom.rttCom.dao.UtenteRepository;
 import com.rttCom.rttCom.model.Fornitore;
 import com.rttCom.rttCom.model.Prodotto;
 import com.rttCom.rttCom.model.ProdottoFornitore;
+import com.rttCom.rttCom.model.Utente;
 
 @Service
 public class ProdottoService {
@@ -31,6 +32,7 @@ public class ProdottoService {
 			prodottoRepository.save(prodotto);
 			return true;
 	}
+	
 	
 	public boolean updateProdotto(Prodotto prodotto, int id) {
 		prodottoRepository.updateProdotto(prodotto.getEan(), prodotto.getCategory(), prodotto.getModel(), prodotto.getManufacturer(), prodotto.getDescription(), prodotto.getLong_description(), prodotto.getSell_price(), id);

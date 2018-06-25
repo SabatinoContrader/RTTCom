@@ -7,14 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity //???
-@Table(name = "utente")  // mi serve per indicare il NOME della tabella strettamente legata alla classe UTENTE
+@Entity 
+@Table(name = "utente")  
 
 public class Utente{
 	
-	@Id                                                    //Indico la primary Key a chi appartiene
-	@GeneratedValue(strategy = GenerationType.IDENTITY)    // Indico la situazione di autoincremental
-	@Column                                                // Indico che è una colonna della tabella
+	@Id                                                    
+	@GeneratedValue(strategy = GenerationType.IDENTITY)    
+	@Column                                                
 	private int id;
 	@Column
     private String username;
@@ -75,8 +75,6 @@ public class Utente{
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-
-    
+	}   
 	
 }

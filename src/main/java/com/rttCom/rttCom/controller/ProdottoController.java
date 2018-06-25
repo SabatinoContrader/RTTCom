@@ -67,7 +67,7 @@ public class ProdottoController {
 	
 	@RequestMapping(value = "/ModificaProdotto", method = RequestMethod.GET)
 	public String modificaProdotti(@RequestParam("id") int id, Model model) {
-	         model.addAttribute("prodotto",  this.prodottoService.getProdottoById(id));
+	         model.addAttribute("prodotto", this.prodottoService.getProdottoById(id));
 	         return "insertProdotto";
 	}
 

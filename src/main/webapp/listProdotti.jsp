@@ -65,13 +65,13 @@
 	<c:choose>
 		<c:when test="${result == 'ok'}">
 			<p>
-				<strong>prodotto inserito con successo</strong>
+				<strong>PRODOTTO INSERITO CON SUCCESSO</strong>
 			</p>
 		</c:when>
 
 		<c:when test="${result == 'ko'}">
 			<p>
-				<strong>ERRORE durante l'inserimento</strong>
+				<strong>ERRORE DURANTE L'INSERIMENTO DEI DATI</strong>
 			</p>
 		</c:when>
 	</c:choose>

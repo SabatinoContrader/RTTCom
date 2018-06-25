@@ -32,20 +32,20 @@ public class ProdottoFornitore {
     private Date data_fine;
 	
 	@Column
-    private Double prezz_acquisto;
+    private Double prezzo_acquisto;
     
     public ProdottoFornitore() {
     }
 
 	public ProdottoFornitore(int id_fornitore, @NotNull String codice_prodotto_su_fornitore, double quantita,
-			Date data_inizio, Date data_fine, Double prezz_acquisto) {
+			Date data_inizio, Date data_fine, Double prezzo_acquisto) {
 		super();
 		this.id_fornitore = id_fornitore;
 		this.codice_prodotto_su_fornitore = codice_prodotto_su_fornitore;
 		this.quantita = quantita;
 		this.data_inizio = data_inizio;
 		this.data_fine = data_fine;
-		this.prezz_acquisto = prezz_acquisto;
+		this.prezzo_acquisto = prezzo_acquisto;
 	}
 
 	public int getId_fornitore() {
@@ -88,12 +88,12 @@ public class ProdottoFornitore {
 		this.data_fine = data_fine;
 	}
 
-	public Double getPrezz_acquisto() {
-		return prezz_acquisto;
+	public Double getPrezzo_acquisto() {
+		return prezzo_acquisto;
 	}
 
-	public void setPrezz_acquisto(Double prezz_acquisto) {
-		this.prezz_acquisto = prezz_acquisto;
+	public void setPrezzo_acquisto(Double prezzo_acquisto) {
+		this.prezzo_acquisto = prezzo_acquisto;
 	}
 
 	

@@ -1,102 +1,53 @@
 package com.rttCom.rttCom.model;
-/*
+
 import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import lombok.*;
 
-@Entity 
-@Table(name = "prodotto_fornitore")
+@Data
+@NoArgsConstructor @AllArgsConstructor
+
+@Entity
 public class ProdottoFornitore {
-	
+		
 	@Id
 	@Column
 	private int id_fornitore;
 	
-	
-	@Column
 	@NotNull
-    private String codice_prodotto_su_fornitore;
+	@Column(name = "codice_prodotto_su_fornitore")
+    private String codiceProdottoSuFornitore;
 	
 	@Column
     private double quantita;
+
+	@Column(name = "data_inizio")
+    private Date dataInizio;
+
+	@Column(name = "data_fine")
+    private Date dataFine;
+
+	@Column(name = "prezzo_acquisto")
+    private Double prezzoAcquisto;
 	
-	
-	@Column
-    private Date data_inizio;
-	
-	@Column
-    private Date data_fine;
-	
-	@Column
-    private Double prezzo_acquisto;
+	@ManyToOne
+    @JoinColumn(name="idProdotto")
+	private Prodotto prodotto;
     
-    public ProdottoFornitore() {
-    }
-
-	public ProdottoFornitore(int id_fornitore, @NotNull String codice_prodotto_su_fornitore, double quantita,
-			Date data_inizio, Date data_fine, Double prezzo_acquisto) {
-		super();
+	public ProdottoFornitore(int id_fornitore, String codiceProdottoSufornitore, double quantita, Date dataInizio, Date dataFine, Double prezzoAcquisto) {
 		this.id_fornitore = id_fornitore;
-		this.codice_prodotto_su_fornitore = codice_prodotto_su_fornitore;
+		this.codiceProdottoSuFornitore = codiceProdottoSufornitore;
 		this.quantita = quantita;
-		this.data_inizio = data_inizio;
-		this.data_fine = data_fine;
-		this.prezzo_acquisto = prezzo_acquisto;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+		this.prezzoAcquisto = prezzoAcquisto;
 	}
-
-	public int getId_fornitore() {
-		return id_fornitore;
-	}
-
-	public void setId_fornitore(int id_fornitore) {
-		this.id_fornitore = id_fornitore;
-	}
-
-	public String getCodice_prodotto_su_fornitore() {
-		return codice_prodotto_su_fornitore;
-	}
-
-	public void setCodice_prodotto_su_fornitore(String codice_prodotto_su_fornitore) {
-		this.codice_prodotto_su_fornitore = codice_prodotto_su_fornitore;
-	}
-
-	public double getQuantita() {
-		return quantita;
-	}
-
-	public void setQuantita(double quantita) {
-		this.quantita = quantita;
-	}
-
-	public Date getData_inizio() {
-		return data_inizio;
-	}
-
-	public void setData_inizio(Date data_inizio) {
-		this.data_inizio = data_inizio;
-	}
-
-	public Date getData_fine() {
-		return data_fine;
-	}
-
-	public void setData_fine(Date data_fine) {
-		this.data_fine = data_fine;
-	}
-
-	public Double getPrezzo_acquisto() {
-		return prezzo_acquisto;
-	}
-
-	public void setPrezzo_acquisto(Double prezzo_acquisto) {
-		this.prezzo_acquisto = prezzo_acquisto;
-	}
-
 	
-    
 }
-*/

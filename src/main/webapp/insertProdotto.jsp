@@ -45,11 +45,11 @@
 		</h2>
 		<h2>
 			Descrizione lunga<input type="text" name="long_description"
-				value="${prodotto.long_description}">
+				value="${prodotto.longDescription}">
 		</h2>
 		<h2>
 			Prezzo di Vendita<input type="text" name="sell_price"
-				value="${prodotto.sell_price}">
+				value="${prodotto.sellPrice}">
 		</h2>
 		<input type="submit" value="UpdateProdotto" name="richiesta">
 	</form>

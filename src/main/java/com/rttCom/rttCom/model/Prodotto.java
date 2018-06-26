@@ -1,14 +1,24 @@
 package com.rttCom.rttCom.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.*;
+
+@Data
 
 @Entity
-@Table(name = "prodotto")
 public class Prodotto {
 
 	@Id
@@ -31,85 +41,14 @@ public class Prodotto {
 	@Column
 	private String description;
 
-	@Column
-	private String long_description;
+	@Column(name = "long_description")
+	private String longDescription;
 
-	// private List<ProdottoFornitore> listaAcquisto;
-
-	@Column(name="sell_price")
+	@Column(name = "sell_price")
 	private double sellPrice;
 
-	public Prodotto() {
-	}
-
-	public Prodotto(int id, String ean, String category, String model, String manufacturer, String description,
-			String long_description, double sell) {
-		super();
-		this.id = id;
-		this.ean = ean;
-		this.category = category;
-		this.model = model;
-		this.manufacturer = manufacturer;
-		this.description = description;
-		this.long_description = long_description;
-		this.sellPrice = sell;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEan() {
-		return ean;
-	}
-
-	public void setEan(String ean) {
-		this.ean = ean;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLong_description() {
-		return long_description;
-	}
-
-	public void setLong_description(String long_description) {
-		this.long_description = long_description;
-	}
+	@OneToMany(mappedBy = "prodotto")
+    private Set<ProdottoFornitore> listaAcquisto = new HashSet<ProdottoFornitore>();
 
 	/*
 	 * public void aggiungiAListaAcquisto(ProdottoFornitore prodottoFornitore){
@@ -126,12 +65,23 @@ public class Prodotto {
 		// Da implementare
 	}
 
-	public double getSell_price() {
-		return sellPrice;
-	}
+    public void aggiungiAListaAcquisto(ProdottoFornitore prodottoFornitore){
+        listaAcquisto.add(prodottoFornitore);
+    }
+    
+    public Prodotto() {
+    }
 
-	public void setSell_price(double sell_price) {
-		this.sellPrice = sell_price;
+	public Prodotto(String ean, String category, String model, String manufacturer, String description,
+			String longDescription, double sellPrice) {
+		super();
+		this.ean = ean;
+		this.category = category;
+		this.model = model;
+		this.manufacturer = manufacturer;
+		this.description = description;
+		this.longDescription = longDescription;
+		this.sellPrice = sellPrice;
 	}
 
 }

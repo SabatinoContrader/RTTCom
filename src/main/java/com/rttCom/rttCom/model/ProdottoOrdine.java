@@ -2,42 +2,36 @@ package com.rttCom.rttCom.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.*;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 
-@Entity 
-public class Destinatario {
+@Entity
+public class ProdottoOrdine {
 
 	@Id                                                    
 	@GeneratedValue(strategy = GenerationType.IDENTITY)    
 	@Column                                                
 	private int id;
-	
-	@Column                                                
-	private int id_destinatario;
-	
-	@Column
-    private String nome;
-	
-	@Column
-    private String cognome;
-	
-	@Column
-    private String indirizzo;
 
-	@Column(name = "cod_fiscale")
-    private String codFiscale;
+	@Column
+	private int id_prodotto;
 	
 	@Column
-	private String email;
+	private int quantita;
 	
 	@Column
-	private int telefono;
-	
+	private double prezzo;	
+
+	@ManyToOne
+    @JoinColumn(name="idOrdineCanale")
+	private OrdineCanale ordineCanale;
 }

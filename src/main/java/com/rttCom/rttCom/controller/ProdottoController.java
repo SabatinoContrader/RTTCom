@@ -48,7 +48,7 @@ public class ProdottoController {
 		String descrizione = request.getParameter("description");
 		String descrizioneLunga = request.getParameter("long_description");
 		double prezzoVendita = Double.parseDouble(request.getParameter("sell_price"));
-		prodotto = new Prodotto(0, ean, category, modello, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
+		prodotto = new Prodotto(ean, category, modello, manufacturer, descrizione, descrizioneLunga, prezzoVendita);
 		if (id == 0) {
 			result = prodottoService.insert(prodotto);
 		} else {
@@ -92,6 +92,19 @@ public class ProdottoController {
 	@RequestMapping(value = "/SearchPriceForInterval", method = RequestMethod.GET)
 	public String searchPriceForInterval(@RequestParam("priceInterval") String priceInterval, Model model) {
 		model.addAttribute("listProdotti", this.prodottoService.searchPriceforInterval(priceInterval));
+		return "listProdotti";
+	}
+
+	@RequestMapping(value = "/ProdottiDaFornitori", method = RequestMethod.GET)
+	public String prodottiDaFornitori(Model model) {
+		model.addAttribute("listProdotti", this.prodottoService.getProdottiDaFornitori());
+		return "listProdotti";
+	}
+
+	@RequestMapping(value = "/CopiaDaFornitori", method = RequestMethod.GET)
+	public String copiaDaFornitori(Model model) {
+		this.prodottoService.copiaDaFornitori();		
+		model.addAttribute("listProdotti", this.prodottoService.getAllProdotti());
 		return "listProdotti";
 	}
 

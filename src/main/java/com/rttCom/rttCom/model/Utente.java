@@ -6,12 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.*;
 
-@Entity 
-@Table(name = "utente")  
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 
+@Entity
 public class Utente{
-	
+
 	@Id                                                    
 	@GeneratedValue(strategy = GenerationType.IDENTITY)    
 	@Column                                                
@@ -24,57 +26,5 @@ public class Utente{
     private String nome;
 	@Column
     private String cognome;
-	
-	public Utente() { // perche è necessario creare un costruttore VUOTO????
-    }
-
-	public Utente(int id, String username, String password, String nome, String cognome) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.nome = nome;
-		this.cognome = cognome;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}   
 	
 }

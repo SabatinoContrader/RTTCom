@@ -11,8 +11,18 @@
      <form action="/prodotto/ritornaProdotti" method="get">
      <input type="submit" value="listProdotti" name="richiesta">
      </form>
+     
+     <h3>2. Visualizza prodotti da fornitori</h3>
+     <form action="/prodotto/ProdottiDaFornitori" method="get">
+     <input type="submit" value="listProdotti" name="richiesta">
+     </form>
+     
+     <h3>3. Copia prodotti da fornitori</h3>
+     <form action="/prodotto/CopiaDaFornitori" method="get">
+     <input type="submit" value="listProdotti" name="richiesta">
+     </form>
 
-     <h3>2. Ricerca un prodotto</h3>
+     <h3>4. Ricerca un prodotto</h3>
      <form action="" method="post">
      <input type="submit" value="SearchProduct" name="richiesta">
      </form>

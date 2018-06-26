@@ -12,7 +12,9 @@ import com.rttCom.rttCom.dao.ProdottoRepository;
 import com.rttCom.rttCom.dao.UtenteRepository;
 import com.rttCom.rttCom.model.Fornitore;
 import com.rttCom.rttCom.model.Prodotto;
+import com.rttCom.rttCom.model.ProdottoFornitore;
 import com.rttCom.rttCom.model.Utente;
+import com.rttCom.rttCom.utils.FornitoreFactory;
 
 
 @Service
@@ -34,10 +36,15 @@ public class ProdottoService {
 		return true;
 	}
 
+	public boolean insertAll(List<Prodotto> prodotti) {
+		prodottoRepository.saveAll(prodotti);
+		return true;
+	}
+
 	public boolean updateProdotto(Prodotto prodotto, int id) {
 		prodottoRepository.updateProdotto(prodotto.getEan(), prodotto.getCategory(), prodotto.getModel(),
-				prodotto.getManufacturer(), prodotto.getDescription(), prodotto.getLong_description(),
-				prodotto.getSell_price(), id);
+				prodotto.getManufacturer(), prodotto.getDescription(), prodotto.getLongDescription(),
+				prodotto.getSellPrice(), id);
 		return true;
 	}
 
@@ -99,5 +106,37 @@ public class ProdottoService {
 		listProdotti = prodottoRepository.searchPriceforInterval(priceMin, priceMax);
 		return listProdotti;
 	}
+	
+    public List<Prodotto> getProdottiDaFornitori(){
+        List<Prodotto> prodotti = new LinkedList<Prodotto>();
+        List<Fornitore> fornitori = FornitoreFactory.getInstance().getFornitori();
+        for(int i=0;i<fornitori.size();i++){
+            List<Prodotto> catalogoFornitore = fornitori.get(i).getCatalogoProdotti();
+            for(int j = 0; j < catalogoFornitore.size(); j++){
+                Prodotto prodottoDalFornitore = catalogoFornitore.get(j);
+                ProdottoFornitore prodottoFornitore = new ProdottoFornitore(fornitori.get(i).getId(),"" + prodottoDalFornitore.getId(),1, new Date(118,0,1), null, prodottoDalFornitore.getSellPrice());
+                int indiceProdotto = cercaEanProdotto(prodottoDalFornitore, prodotti);
+                if(indiceProdotto >= 0){
+                    prodotti.get(indiceProdotto).aggiungiAListaAcquisto(prodottoFornitore);
+                }else{
+                    prodottoDalFornitore.aggiungiAListaAcquisto(prodottoFornitore);
+                    prodotti.add(prodottoDalFornitore);
+                }
+            }
+        }
+        return prodotti;
+    }
+	
+    public void copiaDaFornitori(){
+    	this.insertAll(getProdottiDaFornitori());
+    }
+
+    private int cercaEanProdotto(Prodotto prodotto, List<Prodotto> catalogo){
+        for(int i = 0; i < catalogo.size(); i++){
+            if(catalogo.get(i).getEan().equalsIgnoreCase(prodotto.getEan()))
+                return i;
+        }
+        return -1;
+    }
 
 }

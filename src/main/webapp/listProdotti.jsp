@@ -76,8 +76,8 @@
 					<td>${prodotto.model}</td>
 					<td>${prodotto.manufacturer}</td>
 					<td>${prodotto.description}</td>
-					<td>${prodotto.long_description}</td>
-					<td>${prodotto.sell_price}</td>
+					<td>${prodotto.longDescription}</td>
+					<td>${prodotto.sellPrice}</td>
 
 					<td><a href="/prodotto/ModificaProdotto?id=${prodotto.id}">Modifica</a>
 					</td>

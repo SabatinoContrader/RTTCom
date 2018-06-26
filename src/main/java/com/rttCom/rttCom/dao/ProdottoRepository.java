@@ -27,13 +27,11 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	Prodotto findByEan(String ean);
 	
 	Prodotto save(Prodotto prodotto);
-	
-	
+		
 	@Modifying
 	@Query("UPDATE Prodotto SET ean=?1, category=?2, model=?3, manufacturer=?4, description=?5, long_description=?6, sell_price=?7 where id=?8")
-	void updateProdotto(String ean, String category, String model, String manufacturer, String description, String long_description, double sell_price, int id);
+	void updateProdotto(String ean, String category, String model, String manufacturer, String description, String longDescription, double sellPrice, int id);
 	
-
 	List<Prodotto> findByCategory(String category);
 	
 	Prodotto findById(int id);
@@ -50,7 +48,6 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	@Query("SELECT P FROM Prodotto P  WHERE sell_price>=?1 and sell_price<=?2")
 	List<Prodotto> searchPriceforInterval(double pricemin, double pricemax);
 	
-
 	void deleteById(Integer id);
 	
 }

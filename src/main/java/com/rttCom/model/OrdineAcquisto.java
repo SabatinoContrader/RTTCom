@@ -40,7 +40,8 @@ public class OrdineAcquisto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ordineAcquisto", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="id_ordineacquisto", nullable=false, referencedColumnName="id")
 	private List<ProdottoOrdineAcquisto> listaProdotti = new ArrayList<ProdottoOrdineAcquisto>();
 	
 	@ManyToOne

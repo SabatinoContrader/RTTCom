@@ -22,4 +22,7 @@ public interface OrdineVenditaRepository extends CrudRepository<OrdineVendita, L
 	
 	List<OrdineVendita> findByStato(StatoOrdineVendita statoOrdine);
 	
+	OrdineVendita save(OrdineVendita ordinevendita);
+	
+	List<OrdineVendita> findAll();
 }

@@ -42,8 +42,9 @@ public class OrdineVendita {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ordineVendita", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinColumn(name="id_ordinevendita", nullable=false, referencedColumnName="id")
 	private List<ProdottoOrdineVendita> listaProdotti = new ArrayList<ProdottoOrdineVendita>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ordineVendita", cascade = CascadeType.ALL)

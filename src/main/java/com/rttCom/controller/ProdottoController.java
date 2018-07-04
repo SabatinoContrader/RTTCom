@@ -1,5 +1,6 @@
 package com.rttCom.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rttCom.GenericResponse;
+import com.rttCom.converter.ProdottoCanaleConverter;
 import com.rttCom.converter.ProdottoConverter;
+import com.rttCom.dto.ProdottoCanaleDTO;
 import com.rttCom.dto.ProdottoDTO;
 import com.rttCom.dto.UtenteDTO;
+import com.rttCom.model.Canale;
 import com.rttCom.model.Prodotto;
+import com.rttCom.model.ProdottoCanale;
 import com.rttCom.model.Utente;
+import com.rttCom.service.CanaleService;
 import com.rttCom.service.ProdottoService;
 
 @CrossOrigin(value = "*")
@@ -33,16 +39,19 @@ public class ProdottoController {
 
 	private ProdottoService prodottoService;
 	private ProdottoConverter prodottoConverter;
+	private ProdottoCanaleConverter prodottoCanaleConverter;
+	private CanaleService canaleService;
 
 	@Autowired
-	public ProdottoController(ProdottoService prodottoService, ProdottoConverter prodottoConverter) {
+	public ProdottoController(ProdottoService prodottoService, ProdottoConverter prodottoConverter, ProdottoCanaleConverter prodottoCanaleConverter, CanaleService canaleService) {
 		this.prodottoService = prodottoService;
 		this.prodottoConverter = prodottoConverter;
+		this.prodottoCanaleConverter = prodottoCanaleConverter;
+		this.canaleService = canaleService;
 	}
 	
-	//Cosa significa ritornaProdotti ?!?
-	//Perchè è una post ?!?
-	@RequestMapping(value = "/ritornaProdotti", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/listaProdotti", method = RequestMethod.GET)
 	public GenericResponse<List<ProdottoDTO>> ritornaProdotti() {
 
 		List<Prodotto> prodotti = new ArrayList<Prodotto>();
@@ -104,5 +113,6 @@ public class ProdottoController {
 		}
 		return new GenericResponse<>(1, prodottifiltratiDTO);
 	}
-
+	
+	
 }

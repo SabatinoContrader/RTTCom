@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rttCom.dao.ProdottoRepository;
+import com.rttCom.model.Canale;
 import com.rttCom.model.Prodotto;
+import com.rttCom.model.ProdottoCanale;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -113,6 +115,9 @@ public class ProdottoService {
 		listProdotti = prodottoRepository.searchPriceforInterval(priceMin, priceMax);
 		return listProdotti;
 	}
+	
+	
+	
 /*	
     public List<Prodotto> getProdottiDaFornitori(){
         List<Prodotto> prodotti = new LinkedList<Prodotto>();

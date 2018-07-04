@@ -30,7 +30,7 @@ public class ProdottoOrdineAcquisto {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "id_ordineacquisto")
+	@JoinColumn(name = "id_ordineacquisto", nullable = false, insertable = false, updatable = false)
 	private OrdineAcquisto ordineAcquisto;
 	
 	@ManyToOne

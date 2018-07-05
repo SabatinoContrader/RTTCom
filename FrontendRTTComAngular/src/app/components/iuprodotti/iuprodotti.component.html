@@ -1,0 +1,28 @@
+<form action="/prodotto/insertProdotto" method="post">
+	<h2>
+		EAN<input type="text" name="ean" [(ngModel)]=ean>
+	</h2>
+	<h2>
+		Category<input type="text" name="category" [(ngModel)]=category>
+	</h2>
+	<h2>
+		Model<input type="text" name="model" [(ngModel)]=model>
+	</h2>
+	<h2>
+		Manufacturer<input type="text" name="manufacturer"
+			[(ngModel)]=manufacturer>
+	</h2>
+	<h2>
+		Descrizione<input type="text" name="description"
+			[(ngModel)]=description>
+	</h2>
+	<h2>
+		Descrizione lunga<input type="text" name="longDescription"
+			[(ngModel)]=longDescription>
+	</h2>
+	<h2>
+		Prezzo di Vendita<input type="text" name="sellPrice"
+			[(ngModel)]=sellPrice>
+	</h2>
+	<input type="submit" (click)="insertProdotto()">
+</form>

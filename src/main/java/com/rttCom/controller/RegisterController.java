@@ -34,15 +34,16 @@ public class RegisterController {
     }
 
 	@RequestMapping(value="/registerControl", method = RequestMethod.POST)
-    public GenericResponse<UtenteDTO> RegisterController (@RequestBody UtenteDTO utenteDTO) {
-		
+    public boolean /*GenericResponse<UtenteDTO>*/ RegisterController (@RequestBody UtenteDTO utenteDTO) {
 		Utente utenteRegister = utenteConverter.convertToEntity(utenteDTO);	
 		if (utenteRegister.getUsername() != null || utenteRegister.getPassword() != null || utenteRegister.getNome() != null || utenteRegister.getCognome() != null) {
             Utente utente = (loginService.insert(new Utente(0, utenteRegister.getUsername(),utenteRegister.getPassword(), utenteRegister.getNome(), utenteRegister.getCognome())));
             UtenteDTO newDTOutente = utenteConverter.convertToDTO(utente);
-            return new GenericResponse<>(1, newDTOutente);
+            //return new GenericResponse<>(1, newDTOutente);
+            return true;
 		}else
-          return new GenericResponse<>(0, null);
+          //return new GenericResponse<>(0, null);
+			return false;
     }
 
 }

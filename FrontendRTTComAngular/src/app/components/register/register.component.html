@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+	<form>
+		<h2>Registrazione Utente</h2>
+		<input type="text" name="username" [(ngModel)]=username placeholder="Inserisci Username" required /><br>
+		<input type="password" name="password" [(ngModel)]=password placeholder="Inserisci Password" required /><br>
+		<input type="text" name="nome" [(ngModel)]=nome placeholder="Inserisci nome" required /><br>
+		<input type="text" name="cognome" [(ngModel)]=cognome placeholder="Inserisci cognome" required /><br>		
+		<input type="submit" (click)="insertUtente()" value="Register"> <a href="/#/" >Back Login</a>
+		
+	</form>
+</body>
+</html>

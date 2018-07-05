@@ -28,19 +28,17 @@ public class LoginTraderController {
 	}
 
 	@RequestMapping(value = "/logintraderControl", method = RequestMethod.POST)
-	public GenericResponse<UtenteDTO> loginController(@RequestBody UtenteDTO utenteDTO) {
-		
+	public /*GenericResponse<UtenteDTO>*/ UtenteDTO loginController(@RequestBody UtenteDTO utenteDTO) {
 		Utente utenteLogin = utenteConverter.convertToEntity(utenteDTO);
 		Utente utente = loginService.login(utenteLogin.getUsername(),utenteLogin.getPassword());
-
 		if (utente != null) {
 			UtenteDTO Dutente = utenteConverter.convertToDTO(utente);
-			return new GenericResponse<>(1, Dutente);
+			return Dutente;
+			//return new GenericResponse<>(1, Dutente);
 		}
 		else {
-			return new GenericResponse<>(0, null);
+			return null;
+			//return new GenericResponse<>(0, null);
 		}
 	}
-
-
 }

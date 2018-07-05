@@ -1,0 +1,41 @@
+<!--begin: Datatable -->
+<div *ngIf="listaProdotti" class="table-responsive">
+	<table datatable class="row-border hover" id="myTable">
+		<thead>
+			<tr>
+				<th></th>
+				<th>ID</th>
+				<th>EAN</th>
+				<th>CATEGORY</th>
+				<th>MODEL</th>
+				<th>MANUFACTURER</th>
+				<th>DESCRIPTION</th>
+				<th>LONGDESCRIPTION</th>
+				<th>SELLPRICE</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let prodotto of listaProdotti">
+				<td><input type="checkbox" name="html" value="html"></td>
+				<td>{{prodotto.id}}</td>
+				<td>{{prodotto.ean}}</td>
+				<td>{{prodotto.category}}</td>
+				<td>{{prodotto.model}}</td>
+				<td>{{prodotto.manufacturer}}</td>
+				<td>{{prodotto.description}}</td>
+				<td>{{prodotto.longDescription}}</td>
+				<td>{{prodotto.sellPrice}}</td>
+				<td><input type="submit" (click)="modify()" value="modify">
+					<input type="submit" (click)="deleteProduct(2)" value="delete"></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<td><a href="/#/iuprodotti">Insert</a><a href="/#/home">
+					Home</a></td>
+			<td></td>
+		</tbody>
+	</table>
+
+</div>
+<!--end: Datatable -->
+

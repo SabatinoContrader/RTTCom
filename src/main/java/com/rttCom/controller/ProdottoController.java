@@ -51,7 +51,7 @@ public class ProdottoController {
 	}
 	
 	
-	@RequestMapping(value = "/listaProdotti", method = RequestMethod.GET)
+	@RequestMapping(value = "/ritornaProdotti", method = RequestMethod.GET)
 	public GenericResponse<List<ProdottoDTO>> ritornaProdotti() {
 
 		List<Prodotto> prodotti = new ArrayList<Prodotto>();
@@ -66,8 +66,7 @@ public class ProdottoController {
 	}
 
 	@RequestMapping(value = "/insertProdotto", method = RequestMethod.POST)
-	public GenericResponse<List<ProdottoDTO>> insertProdotti(@RequestBody ProdottoDTO prodottoDTO) {
-
+	public /*GenericResponse<List<ProdottoDTO>>*/ List<ProdottoDTO> insertProdotti(@RequestBody ProdottoDTO prodottoDTO) {
 		boolean result;
 		int id;
 		// id=prodottoDTO.getId()
@@ -81,14 +80,15 @@ public class ProdottoController {
 				ProdottoDTO prodotto1DTO = prodottoConverter.convertToDTO(prodotto1);
 				prodottiDTO.add(prodotto1DTO);
 			}
-			return new GenericResponse<>(1, prodottiDTO);
+			return prodottiDTO;
+			//return new GenericResponse<>(1, prodottiDTO);
 		} else
-			return new GenericResponse<>(0, null);
+			return null;
+			//return new GenericResponse<>(0, null);
 	}
 
 	@RequestMapping(value = "/EliminaProdotto", method = RequestMethod.GET)
-	public GenericResponse<List<ProdottoDTO>> cancellaprodotto(@RequestParam("id") int id) {
-
+	public /*GenericResponse<List<ProdottoDTO>>*/ List<ProdottoDTO> cancellaprodotto(@RequestParam("id") int id) {
 		prodottoService.delete(id);
 		List<Prodotto> prodotti = new ArrayList<Prodotto>();
 		List<ProdottoDTO> prodottiDTO = new ArrayList<>();
@@ -97,8 +97,8 @@ public class ProdottoController {
 			ProdottoDTO prodotto1DTO = prodottoConverter.convertToDTO(prodotto1);
 			prodottiDTO.add(prodotto1DTO);
 		}
-		return new GenericResponse<>(1, prodottiDTO);
-
+		//return new GenericResponse<>(1, prodottiDTO);
+		return prodottiDTO;
 	}
 
 	@RequestMapping(value = "/SearchProdotto", method = RequestMethod.GET)

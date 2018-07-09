@@ -37,7 +37,6 @@ export class ProdottiService {
 
   deleteProduct(idDelete: number): Observable<any> {
     return this.http.get<any>('http://localhost:8080/prodotto/EliminaProdotto?id=' + idDelete)
-      //return this.http.get<any>('http://localhost:8080/prodotto/ritornaProdotti', null)
       .pipe(tap((response) => console.log("deleteProduct"), catchError(this.handleError("delete error", {})))
       );
   }

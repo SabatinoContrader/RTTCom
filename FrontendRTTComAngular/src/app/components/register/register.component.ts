@@ -1,4 +1,4 @@
-import {Utente} from '../../models/utente.model';
+ import {Utente} from '../../models/utente.model';
 import {RegisterService} from '../../services/register.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';

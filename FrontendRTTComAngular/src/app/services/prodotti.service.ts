@@ -34,11 +34,11 @@ export class ProdottiService {
       .pipe(tap((response) => console.log("insert"), catchError(this.handleError("insert prodotto error", {})))
       );
   }
-  
-  deleteProduct(id: number): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/prodotto/EliminaProdotto')
+
+  deleteProduct(idDelete: number): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/prodotto/EliminaProdotto?id=' + idDelete)
       //return this.http.get<any>('http://localhost:8080/prodotto/ritornaProdotti', null)
-      .pipe(tap((response) => console.log("deleteProduct"), catchError(this.handleError(" error", {})))
+      .pipe(tap((response) => console.log("deleteProduct"), catchError(this.handleError("delete error", {})))
       );
   }
 

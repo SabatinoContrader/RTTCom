@@ -12,14 +12,17 @@ export class ProdottiComponent implements OnInit {
   listaProdotti: Prodotto[];
   idProdotto: number;
 
-  constructor(private prodottiService: ProdottiService) {}
+  constructor(private prodottiService: ProdottiService, private router: Router) {}
 
   ngOnInit() {
     this.prodottiService.listaprodotti().subscribe(response => {this.listaProdotti = response.data});
   }
 
-  deleteProduct() {
-    this.prodottiService.deleteProduct(this.idProdotto).subscribe(response => {this.listaProdotti = response.data});
+  deleteProduct(id: number) {
+    this.prodottiService.deleteProduct(id).subscribe(response => {
+      this.listaProdotti = response.data
+      this.router.navigateByUrl("/prodotti");
+    });
   }
 
 

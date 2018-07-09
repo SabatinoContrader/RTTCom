@@ -26,11 +26,14 @@
 				<td>{{prodotto.longDescription}}</td>
 				<td>{{prodotto.sellPrice}}</td>
 				<td><input type="submit" (click)="modify()" value="modify">
-					<input type="submit" (click)="deleteProduct(2)" value="delete"></td>
+					<input type="button" onclick="location.href='/#/iuprodotti'" value="Modifica" />
+					<input type="submit" (click)="deleteProduct([prodotto.id])" value="Delete"></td>
 			</tr>
 		</tbody>
 		<tbody>
-			<td><a href="/#/iuprodotti">Insert</a><a href="/#/home">
+			<td><a href="/#/iuprodotti">Insert</a>
+				<div></div>
+				<a href="/#/home">
 					Home</a></td>
 			<td></td>
 		</tbody>
